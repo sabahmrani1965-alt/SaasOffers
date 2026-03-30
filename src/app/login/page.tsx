@@ -20,11 +20,11 @@ export default function LoginPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
-      redirect: 'follow',
     })
 
+    const data = await res.json()
+
     if (!res.ok) {
-      const data = await res.json()
       setError(data.error || 'Login failed')
       setLoading(false)
     } else {

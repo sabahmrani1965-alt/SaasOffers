@@ -11,5 +11,5 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 400 })
   }
 
-  return NextResponse.redirect(new URL('/dashboard', request.url), { status: 303 })
+  return NextResponse.json({ ok: true })
 }
