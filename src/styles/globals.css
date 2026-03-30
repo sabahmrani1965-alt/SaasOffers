@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  --font-geist-sans: 'DM Sans', sans-serif;
+  --font-instrument: 'Instrument Serif', serif;
+  --background: #0a0a0f;
+  --foreground: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111117;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Prose for blog */
+.prose {
+  color: #d4d4d8;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #fafafa;
+  font-family: var(--font-instrument);
+}
+.prose a {
+  color: #818cf8;
+  text-decoration: underline;
+}
+.prose strong {
+  color: #fafafa;
+}
+.prose code {
+  background: #1c1c25;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+.prose pre {
+  background: #1c1c25;
+  border: 1px solid #252530;
+  border-radius: 8px;
+  padding: 16px;
+}
+.prose blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 16px;
+  color: #a1a1aa;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.prose th, .prose td {
+  padding: 8px 12px;
+  border: 1px solid #252530;
+  text-align: left;
+}
+.prose th {
+  background: #1c1c25;
+  color: #fafafa;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Glow effect */
+.glow-accent {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+/* Animate in */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeSlideUp 0.5s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
