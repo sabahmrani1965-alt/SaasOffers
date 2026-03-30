@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Zap, Mail, Lock } from 'lucide-react'
 
@@ -16,20 +17,28 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
+    const supabase = createClient()
+    const { data, error: err } = await supabase.auth.signInWithPassword({ email, password })
 
-    const data = await res.json()
-
-    if (!res.ok) {
-      setError(data.error || 'Login failed')
+    if (err) {
+      setError(err.message)
       setLoading(false)
-    } else {
-      window.location.href = '/dashboard'
+      return
     }
+
+    if (data.session) {
+      // Hand session tokens to server so it can set cookies
+      await fetch('/api/auth/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+        }),
+      })
+    }
+
+    window.location.href = '/dashboard'
   }
 
   return (
