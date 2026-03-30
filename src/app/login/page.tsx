@@ -38,7 +38,9 @@ export default function LoginPage() {
       })
     }
 
-    window.location.href = '/dashboard'
+    // Small delay to ensure cookies are committed before navigation
+    await new Promise(resolve => setTimeout(resolve, 100))
+    window.location.replace('/dashboard')
   }
 
   return (
