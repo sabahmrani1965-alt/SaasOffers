@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SEED_BLOG_POSTS } from '@/lib/seed-data'
 import { BlogPost } from '@/types'
 import { format } from 'date-fns'
-import { ChevronRight, Clock, ArrowLeft, ArrowRight, Twitter, Linkedin, Link2, Zap } from 'lucide-react'
+import { ChevronRight, Clock, ArrowLeft, ArrowRight, Zap } from 'lucide-react'
 import { ShareButtons } from '@/components/blog/ShareButtons'
 
 interface PageProps {
@@ -234,26 +234,27 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── Cover ── */}
-      <div className={`bg-gradient-to-br ${gradient} pt-24 pb-0`}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 pb-12">
+      {/* ── Hero — moderate height, not full screen ── */}
+      <div className={`bg-gradient-to-br ${gradient} pt-20`}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-white/70 mb-8">
+          <nav className="flex items-center gap-2 text-sm text-white/70 mb-6">
             <Link href="/blog" className="flex items-center gap-1.5 hover:text-white transition-colors font-medium">
               <ArrowLeft className="w-3.5 h-3.5" /> Blog
             </Link>
             <ChevronRight className="w-4 h-4 opacity-50" />
-            {post.category && <span className="text-white/70 truncate max-w-xs">{post.category}</span>}
+            {post.category && <span className="text-white/70">{post.category}</span>}
           </nav>
 
-          {/* Meta */}
-          <div className="flex flex-wrap items-center gap-3 mb-5">
+          {/* Meta row */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             {post.category && (
-              <span className="inline-flex items-center text-xs font-semibold px-3 py-1 bg-white/20 text-white border border-white/30 rounded-full backdrop-blur-sm">
+              <span className="text-xs font-semibold px-3 py-1 bg-white/20 text-white border border-white/30 rounded-full">
                 {post.category}
               </span>
             )}
-            <span className="flex items-center gap-1.5 text-xs text-white/80">
+            <span className="flex items-center gap-1.5 text-xs text-white/75">
               <Clock className="w-3.5 h-3.5" /> {readTime} min read
             </span>
             <span className="text-xs text-white/60">
@@ -262,37 +263,38 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 max-w-3xl">
             {post.title}
           </h1>
 
           {/* Excerpt */}
-          <p className="text-white/80 text-lg leading-relaxed max-w-2xl">
+          <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
             {post.excerpt}
           </p>
 
           {/* Author */}
           {post.author && (
-            <div className="flex items-center gap-3 mt-8">
-              <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-xs font-bold text-white">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">
                 {post.author.slice(0, 2).toUpperCase()}
               </div>
-              <div>
-                <div className="text-sm font-semibold text-white">{post.author}</div>
-                <div className="text-xs text-white/60">SaaSOffers</div>
+              <div className="text-sm font-medium text-white">{post.author}
+                <span className="text-white/50 font-normal"> · SaaSOffers</span>
               </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* ── Article body ── */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-        <div className="flex gap-10 items-start">
+      {/* ── Body: 2-col grid ── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-          {/* Main content */}
-          <article className="flex-1 min-w-0">
-            {renderContent(post.content)}
+          {/* ── Article: 2/3 width ── */}
+          <article className="lg:col-span-2 min-w-0">
+            <div className="text-[17px] leading-7 text-gray-700">
+              {renderContent(post.content)}
+            </div>
 
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (
@@ -306,19 +308,19 @@ export default async function BlogPostPage({ params }: PageProps) {
             )}
 
             {/* Share */}
-            <div className="flex items-center justify-between flex-wrap gap-4 mt-8 pt-8 border-t border-gray-100">
-              <p className="text-sm text-gray-500 font-medium">Share this article</p>
+            <div className="flex items-center justify-between flex-wrap gap-4 mt-8 pt-6 border-t border-gray-100">
+              <p className="text-sm font-medium text-gray-500">Share this article</p>
               <ShareButtons url={postUrl} title={post.title} />
             </div>
 
             {/* Author card */}
             {post.author && (
-              <div className="mt-10 bg-gray-50 border border-gray-100 rounded-2xl p-6 flex items-start gap-5">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0">
+              <div className="mt-8 bg-gray-50 border border-gray-100 rounded-2xl p-5 flex items-start gap-4">
+                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                   {post.author.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <div className="font-semibold text-gray-900 mb-0.5">{post.author}</div>
+                  <div className="font-semibold text-gray-900 text-sm">{post.author}</div>
                   <div className="text-xs text-gray-400 mb-2">SaaSOffers Team · {format(new Date(post.created_at), 'MMMM yyyy')}</div>
                   <p className="text-sm text-gray-500 leading-relaxed">
                     Helping startups unlock exclusive SaaS deals and save thousands on their software stack.
@@ -326,62 +328,80 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
               </div>
             )}
+
+            {/* In-article CTA */}
+            <div className="mt-10 bg-gradient-to-br from-violet-50 to-pink-50 border border-violet-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Ready to unlock these deals?</h3>
+                <p className="text-gray-500 text-sm">Free account. No credit card required.</p>
+              </div>
+              <Link
+                href="/signup"
+                className="flex-shrink-0 inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white font-semibold px-5 py-2.5 rounded-xl transition-all text-sm shadow-sm shadow-violet-200 hover:-translate-y-0.5 whitespace-nowrap"
+              >
+                Get free access <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </article>
 
-          {/* ── Sticky sidebar (desktop only) ── */}
-          <aside className="hidden lg:block w-56 flex-shrink-0 sticky top-24 space-y-5">
-            {/* CTA */}
+          {/* ── Sidebar: 1/3 width, sticky ── */}
+          <aside className="lg:col-span-1 lg:sticky lg:top-24 space-y-4">
+
+            {/* CTA widget */}
             <div className="bg-gradient-to-br from-violet-600 to-pink-500 rounded-2xl p-5 text-white text-center">
-              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-3">
-                <Zap className="w-5 h-5 text-white" fill="white" />
+              <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-3">
+                <Zap className="w-4 h-4 text-white" fill="white" />
               </div>
               <p className="font-bold text-sm mb-1">Get free SaaS deals</p>
-              <p className="text-white/75 text-xs mb-4 leading-relaxed">$500,000+ in startup credits</p>
+              <p className="text-white/70 text-xs mb-4 leading-relaxed">$500,000+ in startup credits waiting for you</p>
               <Link href="/signup" className="block bg-white text-violet-600 font-bold text-xs py-2.5 rounded-xl hover:bg-violet-50 transition-colors">
                 Get free access →
               </Link>
             </div>
 
             {/* Article meta */}
-            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 space-y-3">
-              <div>
-                <div className="text-xs text-gray-400 mb-0.5">Read time</div>
-                <div className="text-sm font-semibold text-gray-800">{readTime} minutes</div>
+            <div className="bg-white border border-gray-100 rounded-xl p-4 space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-gray-400">Read time</span>
+                <span className="text-sm font-semibold text-gray-800">{readTime} min</span>
               </div>
-              <div>
-                <div className="text-xs text-gray-400 mb-0.5">Published</div>
-                <div className="text-sm font-semibold text-gray-800">{format(new Date(post.created_at), 'MMM d, yyyy')}</div>
+              <div className="flex justify-between items-center border-t border-gray-50 pt-3">
+                <span className="text-xs text-gray-400">Published</span>
+                <span className="text-sm font-semibold text-gray-800">{format(new Date(post.created_at), 'MMM d, yyyy')}</span>
               </div>
               {post.category && (
-                <div>
-                  <div className="text-xs text-gray-400 mb-1">Category</div>
-                  <span className={`inline-flex text-xs font-semibold px-2.5 py-1 rounded-full border ${categoryStyle}`}>
+                <div className="flex justify-between items-center border-t border-gray-50 pt-3">
+                  <span className="text-xs text-gray-400">Category</span>
+                  <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${categoryStyle}`}>
                     {post.category}
                   </span>
                 </div>
               )}
             </div>
+
+            {/* Share — sidebar version */}
+            <div className="bg-white border border-gray-100 rounded-xl p-4">
+              <p className="text-xs text-gray-400 font-medium mb-3">Share</p>
+              <div className="flex flex-col gap-2">
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors border border-gray-100">
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  Share on X
+                </a>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors border border-blue-100">
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  Share on LinkedIn
+                </a>
+              </div>
+            </div>
           </aside>
         </div>
 
-        {/* ── In-article CTA ── */}
-        <div className="mt-14 bg-gradient-to-br from-violet-50 to-pink-50 border border-violet-100 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-1">Ready to unlock these deals?</h3>
-            <p className="text-gray-500 text-sm">Create a free account and start saving today. No credit card required.</p>
-          </div>
-          <Link
-            href="/signup"
-            className="flex-shrink-0 inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white font-semibold px-6 py-3 rounded-xl transition-all text-sm shadow-sm shadow-violet-200 hover:shadow-md hover:-translate-y-0.5 whitespace-nowrap"
-          >
-            Get free access <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* ── Related posts ── */}
+        {/* ── Related posts — full width below grid ── */}
         {relatedPosts.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">More articles</h2>
+          <section className="mt-14 pt-10 border-t border-gray-100">
+            <h2 className="text-xl font-bold text-gray-900 mb-6">More articles</h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {relatedPosts.map(rp => (
                 <Link
