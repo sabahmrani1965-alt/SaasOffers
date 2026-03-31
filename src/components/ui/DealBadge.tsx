@@ -11,32 +11,25 @@ const BADGE_CONFIG: Record<DealType, { label: string; icon: React.ElementType; c
   free: {
     label: 'Free',
     icon: Star,
-    className: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+    className: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
   },
   premium: {
     label: 'Premium',
     icon: Lock,
-    className: 'bg-accent/10 text-accent-300 border border-accent/20',
+    className: 'bg-violet-50 text-violet-600 border border-violet-100',
   },
   apply: {
     label: 'Apply',
     icon: FileText,
-    className: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
+    className: 'bg-amber-50 text-amber-600 border border-amber-100',
   },
 }
 
 export function DealBadge({ type, className }: DealBadgeProps) {
   const config = BADGE_CONFIG[type]
   const Icon = config.icon
-
   return (
-    <span
-      className={cn(
-        'inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full',
-        config.className,
-        className
-      )}
-    >
+    <span className={cn('inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full', config.className, className)}>
       <Icon className="w-3 h-3" />
       {config.label}
     </span>

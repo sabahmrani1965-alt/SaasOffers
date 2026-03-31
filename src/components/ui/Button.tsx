@@ -14,12 +14,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled || loading}
         className={cn(
-          'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-surface disabled:opacity-50 disabled:cursor-not-allowed',
+          'inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-violet-400/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed',
           {
-            'bg-accent hover:bg-accent-600 text-white shadow-lg shadow-accent/20 hover:shadow-accent/30': variant === 'primary',
-            'bg-surface-200 hover:bg-surface-300 text-zinc-200 border border-white/5': variant === 'secondary',
-            'bg-transparent hover:bg-white/5 text-zinc-400 hover:text-white': variant === 'ghost',
-            'bg-transparent border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white': variant === 'outline',
+            'bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white shadow-md shadow-violet-200 hover:shadow-lg hover:shadow-violet-200 hover:-translate-y-0.5': variant === 'primary',
+            'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200': variant === 'secondary',
+            'bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900': variant === 'ghost',
+            'bg-transparent border border-gray-200 hover:border-violet-300 text-gray-700 hover:text-violet-600': variant === 'outline',
           },
           {
             'text-xs px-3 py-1.5 gap-1.5': size === 'sm',
