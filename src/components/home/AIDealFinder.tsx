@@ -49,8 +49,9 @@ export function AIDealFinder() {
     }
 
     setTimeout(() => {
-      if (matched.size === 1) {
-        router.push(`/offers/category/${[...matched][0]}`)
+      const matchedArray = Array.from(matched)
+      if (matchedArray.length === 1) {
+        router.push(`/offers/category/${matchedArray[0]}`)
       } else {
         router.push(`/offers?q=${encodeURIComponent(query.trim())}`)
       }
