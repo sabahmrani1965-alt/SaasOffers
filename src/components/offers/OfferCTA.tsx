@@ -6,8 +6,9 @@ import { User } from '@supabase/supabase-js'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { DollarSign, Lock, CheckCircle2, ArrowRight, FileText } from 'lucide-react'
+import { DollarSign, Lock, CheckCircle2, ArrowRight, FileText, Shield, Zap } from 'lucide-react'
 import { trackEvent } from '@/components/Analytics'
+import { ApplyForm } from '@/components/offers/ApplyForm'
 
 interface OfferCTAProps {
   deal: Deal
@@ -19,7 +20,7 @@ interface OfferCTAProps {
 export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }: OfferCTAProps) {
   const [isUnlocked, setIsUnlocked] = useState(initialUnlocked)
   const [loading, setLoading] = useState(false)
-  const [applied, setApplied] = useState(false)
+  const [showApplyForm, setShowApplyForm] = useState(false)
   const [error, setError] = useState('')
 
   const handleUnlock = async () => {
@@ -56,13 +57,8 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
     }
   }
 
-  const handleApply = () => {
-    setApplied(true)
-    trackEvent('apply_offer', 'offers', deal.slug)
-  }
-
   return (
-    <div className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 space-y-5 shadow-card">
+    <div id="offer-cta" className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 space-y-5 shadow-card">
       {/* Value */}
       <div className="flex items-center justify-between">
         <span className="text-sm text-gray-500 font-medium">Deal value</span>
@@ -89,17 +85,13 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
         </div>
       )}
 
-      {/* Applied state */}
-      {applied && (
-        <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
-          <FileText className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-          <p className="text-gray-900 font-semibold text-sm">Application Submitted</p>
-          <p className="text-gray-500 text-xs mt-1">We'll review your request and get back to you within 48 hours.</p>
-        </div>
+      {/* Apply form (inline) */}
+      {showApplyForm && user && !isUnlocked && (
+        <ApplyForm deal={deal} user={user} />
       )}
 
       {/* CTA logic */}
-      {!isUnlocked && !applied && (
+      {!isUnlocked && !showApplyForm && (
         <>
           {/* Not logged in */}
           {!user && (
@@ -107,6 +99,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
               <Link
                 href={`/signup?redirect=/offers/${deal.slug}`}
                 className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
               >
                 Sign up to unlock
                 <ArrowRight className="w-4 h-4" />
@@ -118,7 +111,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
             </div>
           )}
 
-          {/* Free deal — any logged-in user */}
+          {/* Free deal */}
           {user && deal.type === 'free' && (
             <Button
               onClick={handleUnlock}
@@ -126,7 +119,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
               className="w-full justify-center"
               size="lg"
             >
-              Unlock Offer
+              <Zap className="w-4 h-4 mr-1" fill="white" /> Unlock Free Deal
             </Button>
           )}
 
@@ -166,16 +159,17 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-xs text-gray-600 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
                 <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                This deal requires manual review before approval.
+                This deal requires a short application — reviewed within 48h.
               </div>
-              <Button
-                onClick={handleApply}
-                loading={loading}
-                className="w-full justify-center bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-md shadow-amber-200"
-                size="lg"
+              <button
+                onClick={() => {
+                  setShowApplyForm(true)
+                  trackEvent('offer_cta_click', 'offers', deal.slug)
+                }}
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
               >
-                Apply for Access
-              </Button>
+                Apply for {deal.name} <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           )}
         </>
@@ -187,10 +181,14 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
 
       {/* Trust signals */}
       <div className="pt-2 border-t border-gray-100 space-y-2">
-        {['Verified deal', 'No spam, ever', 'Instant unlock'].map(item => (
-          <div key={item} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-            {item}
+        {[
+          { icon: CheckCircle2, text: 'Verified deal' },
+          { icon: Shield, text: 'No spam, ever' },
+          { icon: Zap, text: 'Fast approval' },
+        ].map(({ icon: Icon, text }) => (
+          <div key={text} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
+            <Icon className="w-3.5 h-3.5 text-emerald-500" />
+            {text}
           </div>
         ))}
       </div>

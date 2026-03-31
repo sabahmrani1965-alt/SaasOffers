@@ -30,9 +30,9 @@ export function Tbody({ children }: { children: React.ReactNode }) {
   return <tbody className="divide-y divide-white/[0.04]">{children}</tbody>
 }
 
-export function Tr({ children, className }: { children: React.ReactNode; className?: string }) {
+export function Tr({ children, className, onClick }: { children: React.ReactNode; className?: string; onClick?: () => void }) {
   return (
-    <tr className={cn('hover:bg-white/[0.02] transition-colors group', className)}>
+    <tr className={cn('hover:bg-white/[0.02] transition-colors group', className)} onClick={onClick}>
       {children}
     </tr>
   )
