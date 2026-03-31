@@ -43,8 +43,8 @@ function SignupForm() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 pt-16">
-        <div className="w-full max-w-sm text-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50/30 flex items-center justify-center px-4 pt-16">
+        <div className="w-full max-w-md text-center">
           <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-8 h-8 text-emerald-500" />
           </div>
@@ -57,22 +57,29 @@ function SignupForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 pt-16">
-      <div className="w-full max-w-sm">
-        <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-card">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-violet-50/30 flex items-center justify-center px-4 pt-16 pb-8">
+      <div className="w-full max-w-md sm:max-w-lg">
+        <div className="bg-white border border-gray-100 rounded-2xl p-8 sm:p-10 shadow-xl shadow-gray-100/80">
+
+          {/* Header */}
           <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-2 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-200">
+            <Link href="/" className="inline-flex items-center gap-2 mb-6 group">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-200 group-hover:shadow-violet-300 transition-all">
                 <Zap className="w-5 h-5 text-white" fill="white" />
               </div>
             </Link>
-            <h1 className="text-2xl font-bold text-gray-900">{plan === 'premium' ? 'Start Premium' : 'Get free access'}</h1>
-            <p className="text-gray-500 text-sm mt-1">{plan === 'premium' ? 'Create your account, then upgrade to Premium' : 'Create your account in 30 seconds'}</p>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+              {plan === 'premium' ? 'Start Premium' : 'Get free access'}
+            </h1>
+            <p className="text-gray-500 text-base mt-2">
+              {plan === 'premium' ? 'Create your account, then upgrade to Premium' : 'Join 1,000+ startups saving on top SaaS tools'}
+            </p>
           </div>
 
+          {/* Google */}
           <GoogleButton label="Sign up with Google" />
 
-          <div className="relative my-5">
+          <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-100" />
             </div>
@@ -81,31 +88,33 @@ function SignupForm() {
             </div>
           </div>
 
+          {/* Trust badges */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {['Free forever', 'No spam', '50+ deals'].map(b => (
-              <span key={b} className="text-xs text-gray-600 font-medium bg-gray-100 border border-gray-200 px-2.5 py-1 rounded-full">✓ {b}</span>
+              <span key={b} className="text-xs text-gray-600 font-medium bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full">✓ {b}</span>
             ))}
           </div>
 
-          <form onSubmit={handleSignup} className="space-y-4">
+          {/* Form */}
+          <form onSubmit={handleSignup} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1.5">Email</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
                   placeholder="you@startup.com"
-                  className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
+                  className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1.5">Password</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="password"
                   value={password}
@@ -113,25 +122,27 @@ function SignupForm() {
                   required
                   minLength={8}
                   placeholder="Min. 8 characters"
-                  className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
+                  className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
                 />
               </div>
             </div>
+
             {error && (
-              <p className="text-xs text-red-600 font-medium bg-red-50 border border-red-100 rounded-lg px-3 py-2">{error}</p>
+              <p className="text-sm text-red-600 font-medium bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
             )}
-            <Button type="submit" loading={loading} className="w-full justify-center" size="lg">
+
+            <Button type="submit" loading={loading} className="w-full justify-center py-3 text-base" size="lg">
               {plan === 'premium' ? 'Create Account & Upgrade' : 'Create Free Account'}
             </Button>
           </form>
 
-          <p className="text-center text-xs text-gray-500 mt-4">
+          <p className="text-center text-xs text-gray-400 mt-5">
             By signing up, you agree to our{' '}
-            <Link href="/terms" className="text-gray-700 font-medium hover:text-gray-900 transition-colors">Terms</Link>
+            <Link href="/terms" className="text-gray-600 font-medium hover:text-gray-900 transition-colors">Terms</Link>
             {' '}and{' '}
-            <Link href="/privacy" className="text-gray-700 font-medium hover:text-gray-900 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="text-gray-600 font-medium hover:text-gray-900 transition-colors">Privacy Policy</Link>
           </p>
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-gray-500 mt-3">
             Already have an account?{' '}
             <Link href="/login" className="text-violet-600 font-semibold hover:text-violet-700 transition-colors">Sign in</Link>
           </p>
