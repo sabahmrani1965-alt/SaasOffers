@@ -21,7 +21,6 @@ async function getDeal(slug: string): Promise<Deal | null> {
     .single()
 
   if (data) return data as Deal
-  // Fallback to seed
   return (SEED_DEALS.find(d => d.slug === slug) as Deal) || null
 }
 
@@ -54,35 +53,35 @@ export default async function OfferPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6">
+    <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-zinc-500 mb-8">
-          <Link href="/offers" className="hover:text-white transition-colors">Offers</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-zinc-300">{deal.name}</span>
+        <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">Offers</Link>
+          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <span className="text-gray-900 font-medium">{deal.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6">
             {/* Header */}
-            <div>
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card">
               <div className="flex items-center gap-3 mb-4">
                 <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-xl"
-                  style={{ backgroundColor: deal.logo_bg || '#6366f1' }}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-md"
+                  style={{ backgroundColor: deal.logo_bg || '#7C3AED' }}
                 >
                   {deal.name.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-white">{deal.name}</h1>
-                  {deal.category && <p className="text-sm text-zinc-500">{deal.category}</p>}
+                  <h1 className="text-2xl font-bold text-gray-900">{deal.name}</h1>
+                  {deal.category && <p className="text-sm text-gray-500 mt-0.5">{deal.category}</p>}
                 </div>
               </div>
               <div className="flex items-center gap-3 flex-wrap">
                 <DealBadge type={deal.type} />
-                <div className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-lg">
                   <DollarSign className="w-4 h-4" />
                   {deal.value_label}
                 </div>
@@ -90,46 +89,47 @@ export default async function OfferPage({ params }: PageProps) {
             </div>
 
             {/* Description */}
-            <div className="bg-surface-50 border border-white/5 rounded-2xl p-6">
-              <div className="prose prose-sm max-w-none">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card">
+              <h2 className="text-base font-semibold text-gray-900 mb-4">About this deal</h2>
+              <div className="space-y-2">
                 {deal.long_description
                   ? deal.long_description.split('\n').map((para, i) => {
                       if (para.startsWith('**') && para.endsWith('**')) {
-                        return <h3 key={i} className="text-white font-semibold text-base mt-4 mb-2">{para.replace(/\*\*/g, '')}</h3>
+                        return <h3 key={i} className="text-gray-900 font-semibold text-sm mt-5 mb-2">{para.replace(/\*\*/g, '')}</h3>
                       }
                       if (para.startsWith('- ')) {
                         return (
-                          <div key={i} className="flex items-start gap-2 mb-1">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
-                            <span className="text-zinc-300 text-sm">{para.replace(/^- /, '')}</span>
+                          <div key={i} className="flex items-start gap-2.5 py-0.5">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm leading-relaxed">{para.replace(/^- /, '')}</span>
                           </div>
                         )
                       }
-                      if (!para.trim()) return <br key={i} />
-                      return <p key={i} className="text-zinc-400 text-sm leading-relaxed">{para}</p>
+                      if (!para.trim()) return <div key={i} className="h-2" />
+                      return <p key={i} className="text-gray-600 text-sm leading-relaxed">{para}</p>
                     })
-                  : <p className="text-zinc-400">{deal.description}</p>
+                  : <p className="text-gray-600 text-sm leading-relaxed">{deal.description}</p>
                 }
               </div>
             </div>
 
             {/* Requirements */}
             {deal.requirements && (
-              <div className="bg-amber-500/5 border border-amber-500/10 rounded-2xl p-6">
-                <h3 className="text-white font-semibold text-sm mb-2">Requirements</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">{deal.requirements}</p>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6">
+                <h3 className="text-gray-900 font-semibold text-sm mb-2">Requirements</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{deal.requirements}</p>
               </div>
             )}
 
             {/* FAQ */}
             {deal.faq && deal.faq.length > 0 && (
               <div>
-                <h2 className="text-white font-semibold text-lg mb-4">Frequently Asked Questions</h2>
+                <h2 className="text-gray-900 font-semibold text-lg mb-4">Frequently Asked Questions</h2>
                 <div className="space-y-3">
                   {deal.faq.map((item, i) => (
-                    <div key={i} className="bg-surface-50 border border-white/5 rounded-xl p-5">
-                      <h3 className="text-white font-medium text-sm mb-2">{item.question}</h3>
-                      <p className="text-zinc-400 text-sm leading-relaxed">{item.answer}</p>
+                    <div key={i} className="bg-white border border-gray-100 rounded-xl p-5 shadow-card">
+                      <h3 className="text-gray-900 font-semibold text-sm mb-2">{item.question}</h3>
+                      <p className="text-gray-600 text-sm leading-relaxed">{item.answer}</p>
                     </div>
                   ))}
                 </div>

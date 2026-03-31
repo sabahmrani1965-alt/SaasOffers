@@ -32,7 +32,6 @@ export default async function DashboardPage() {
     .select('*, deal:deals(*)')
     .eq('user_id', user.id)
 
-  // Fallback: if no DB deals exist yet, show seed data that match unlocked ids
   const unlockedDeals = unlockedRows ?? []
 
   // Recommended deals (not yet unlocked)
@@ -42,23 +41,23 @@ export default async function DashboardPage() {
   const recommended = deals.filter((d: any) => !unlockedIds.has(d.id)).slice(0, 3)
 
   return (
-    <div className="min-h-screen pt-24 pb-20 px-4 sm:px-6">
+    <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-            <p className="text-zinc-500 text-sm mt-1">{user.email}</p>
+            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+            <p className="text-gray-500 text-sm mt-1">{user.email}</p>
           </div>
           {isPremium ? (
-            <div className="flex items-center gap-2 bg-accent/10 border border-accent/20 text-accent-300 text-sm font-medium px-4 py-2 rounded-full">
+            <div className="flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-700 text-sm font-semibold px-4 py-2 rounded-full">
               <Crown className="w-4 h-4 fill-current" />
               Premium Member
             </div>
           ) : (
             <Link
               href="/api/stripe/checkout"
-              className="flex items-center gap-2 bg-accent hover:bg-accent-600 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-lg shadow-accent/20"
+              className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-violet-200"
             >
               <Zap className="w-4 h-4" fill="white" />
               Upgrade to Premium
@@ -73,33 +72,33 @@ export default async function DashboardPage() {
               label: 'Deals Unlocked',
               value: unlockedDeals.length,
               icon: Zap,
-              color: 'text-accent-300',
-              bg: 'bg-accent/10',
+              color: 'text-violet-600',
+              bg: 'bg-violet-50',
             },
             {
               label: 'Total Saved',
               value: `$${unlockedDeals.reduce((sum: number, u: any) => sum + (u.deal?.value || 0), 0).toLocaleString()}`,
               icon: DollarSign,
-              color: 'text-emerald-400',
-              bg: 'bg-emerald-500/10',
+              color: 'text-emerald-600',
+              bg: 'bg-emerald-50',
             },
             {
               label: 'Plan',
               value: isPremium ? 'Premium' : 'Free',
               icon: Crown,
-              color: isPremium ? 'text-amber-400' : 'text-zinc-400',
-              bg: isPremium ? 'bg-amber-500/10' : 'bg-white/5',
+              color: isPremium ? 'text-amber-600' : 'text-gray-500',
+              bg: isPremium ? 'bg-amber-50' : 'bg-gray-100',
             },
           ].map(stat => {
             const Icon = stat.icon
             return (
-              <div key={stat.label} className="bg-surface-50 border border-white/5 rounded-xl p-5 flex items-center gap-4">
+              <div key={stat.label} className="bg-white border border-gray-100 rounded-xl p-5 flex items-center gap-4 shadow-card">
                 <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center flex-shrink-0`}>
                   <Icon className={`w-5 h-5 ${stat.color}`} />
                 </div>
                 <div>
-                  <div className="text-xl font-bold text-white">{stat.value}</div>
-                  <div className="text-xs text-zinc-500">{stat.label}</div>
+                  <div className="text-xl font-bold text-gray-900">{stat.value}</div>
+                  <div className="text-xs text-gray-500 font-medium">{stat.label}</div>
                 </div>
               </div>
             )
@@ -108,16 +107,16 @@ export default async function DashboardPage() {
 
         {/* Unlocked Deals */}
         <div className="mb-10">
-          <h2 className="text-lg font-semibold text-white mb-4">Your Unlocked Deals</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Your Unlocked Deals</h2>
           {unlockedDeals.length === 0 ? (
-            <div className="bg-surface-50 border border-white/5 rounded-2xl p-10 text-center">
-              <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3">
-                <Zap className="w-6 h-6 text-zinc-500" />
+            <div className="bg-white border border-gray-100 rounded-2xl p-10 text-center shadow-card">
+              <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                <Zap className="w-6 h-6 text-gray-400" />
               </div>
-              <p className="text-zinc-400 text-sm mb-4">You haven't unlocked any deals yet.</p>
+              <p className="text-gray-500 text-sm mb-4 font-medium">You haven't unlocked any deals yet.</p>
               <Link
                 href="/offers"
-                className="inline-flex items-center gap-1.5 text-sm text-accent-300 hover:text-accent-200 font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm text-violet-600 hover:text-violet-700 font-semibold transition-colors"
               >
                 Browse all deals <ArrowRight className="w-4 h-4" />
               </Link>
@@ -128,24 +127,24 @@ export default async function DashboardPage() {
                 const deal = unlocked.deal
                 if (!deal) return null
                 return (
-                  <div key={unlocked.deal_id} className="flex items-center justify-between bg-surface-50 border border-white/5 rounded-xl px-5 py-4">
+                  <div key={unlocked.deal_id} className="flex items-center justify-between bg-white border border-gray-100 rounded-xl px-5 py-4 shadow-card">
                     <div className="flex items-center gap-3">
                       <div
                         className="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center text-white font-bold text-xs"
-                        style={{ backgroundColor: deal.logo_bg || '#6366f1' }}
+                        style={{ backgroundColor: deal.logo_bg || '#7C3AED' }}
                       >
                         {deal.name?.slice(0, 2).toUpperCase()}
                       </div>
                       <div>
-                        <div className="font-medium text-white text-sm">{deal.name}</div>
-                        <div className="text-xs text-emerald-400">{deal.value_label}</div>
+                        <div className="font-semibold text-gray-900 text-sm">{deal.name}</div>
+                        <div className="text-xs text-emerald-600 font-medium">{deal.value_label}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <DealBadge type={deal.type} />
                       <Link
                         href={`/offers/${deal.slug}`}
-                        className="text-xs text-zinc-500 hover:text-white transition-colors"
+                        className="text-gray-400 hover:text-violet-600 transition-colors"
                       >
                         <ArrowRight className="w-4 h-4" />
                       </Link>
@@ -161,32 +160,32 @@ export default async function DashboardPage() {
         {recommended.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white">Recommended Deals</h2>
-              <Link href="/offers" className="text-sm text-accent-300 hover:text-accent-200 transition-colors">
+              <h2 className="text-lg font-semibold text-gray-900">Recommended Deals</h2>
+              <Link href="/offers" className="text-sm text-violet-600 hover:text-violet-700 font-semibold transition-colors">
                 View all
               </Link>
             </div>
             <div className="space-y-3">
               {recommended.map((deal: any) => (
-                <div key={deal.slug} className="flex items-center justify-between bg-surface-50 border border-white/5 rounded-xl px-5 py-4">
+                <div key={deal.slug} className="flex items-center justify-between bg-white border border-gray-100 rounded-xl px-5 py-4 shadow-card">
                   <div className="flex items-center gap-3">
                     <div
                       className="w-9 h-9 rounded-xl flex-shrink-0 flex items-center justify-center text-white font-bold text-xs"
-                      style={{ backgroundColor: deal.logo_bg || '#6366f1' }}
+                      style={{ backgroundColor: deal.logo_bg || '#7C3AED' }}
                     >
                       {deal.name?.slice(0, 2).toUpperCase()}
                     </div>
                     <div>
-                      <div className="font-medium text-white text-sm">{deal.name}</div>
-                      <div className="text-xs text-emerald-400">{deal.value_label}</div>
+                      <div className="font-semibold text-gray-900 text-sm">{deal.name}</div>
+                      <div className="text-xs text-emerald-600 font-medium">{deal.value_label}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <DealBadge type={deal.type} />
                     {deal.type === 'premium' && !isPremium ? (
-                      <Lock className="w-4 h-4 text-zinc-600" />
+                      <Lock className="w-4 h-4 text-gray-400" />
                     ) : (
-                      <Link href={`/offers/${deal.slug}`} className="text-xs text-zinc-500 hover:text-white transition-colors">
+                      <Link href={`/offers/${deal.slug}`} className="text-gray-400 hover:text-violet-600 transition-colors">
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     )}
@@ -199,19 +198,19 @@ export default async function DashboardPage() {
 
         {/* Premium upsell */}
         {!isPremium && (
-          <div className="mt-10 relative bg-accent/5 border border-accent/20 rounded-2xl p-8 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-radial from-accent/10 via-transparent to-transparent pointer-events-none" />
+          <div className="mt-10 relative bg-gradient-to-br from-violet-600 to-pink-500 rounded-2xl p-8 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-radial from-white/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <h3 className="font-semibold text-white mb-1 flex items-center gap-2">
-                  <Crown className="w-4 h-4 text-accent-300" />
+                <h3 className="font-bold text-white mb-1 flex items-center gap-2">
+                  <Crown className="w-4 h-4 fill-current" />
                   Upgrade to Premium
                 </h3>
-                <p className="text-zinc-400 text-sm">Unlock AWS ($5,000), Deel ($1,500) and all premium deals for just $79/year.</p>
+                <p className="text-white/80 text-sm">Unlock AWS ($5,000), Deel ($1,500) and all premium deals for just $79/year.</p>
               </div>
               <Link
                 href="/api/stripe/checkout"
-                className="flex-shrink-0 flex items-center gap-2 bg-accent hover:bg-accent-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-accent/25"
+                className="flex-shrink-0 flex items-center gap-2 bg-white text-violet-700 hover:bg-violet-50 text-sm font-bold px-5 py-2.5 rounded-xl transition-all shadow-lg"
               >
                 Upgrade — $79/yr <ArrowRight className="w-4 h-4" />
               </Link>

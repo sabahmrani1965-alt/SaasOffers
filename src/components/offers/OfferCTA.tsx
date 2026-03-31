@@ -62,27 +62,27 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
   }
 
   return (
-    <div className="sticky top-24 bg-surface-50 border border-white/5 rounded-2xl p-6 space-y-5">
+    <div className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 space-y-5 shadow-card">
       {/* Value */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-zinc-400">Deal value</span>
-        <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xl">
+        <span className="text-sm text-gray-500 font-medium">Deal value</span>
+        <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-xl">
           <DollarSign className="w-5 h-5" />
           {deal.value_label}
         </div>
       </div>
 
-      <div className="h-px bg-white/5" />
+      <div className="h-px bg-gray-100" />
 
       {/* Unlocked state */}
       {isUnlocked && (
-        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
-          <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
-          <p className="text-white font-semibold text-sm">Offer Unlocked!</p>
-          <p className="text-zinc-400 text-xs mt-1">Check your dashboard to access your deal details.</p>
+        <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+          <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
+          <p className="text-gray-900 font-semibold text-sm">Offer Unlocked!</p>
+          <p className="text-gray-500 text-xs mt-1">Check your dashboard to access your deal details.</p>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-1.5 mt-3 text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-medium"
+            className="inline-flex items-center gap-1.5 mt-3 text-xs text-emerald-600 hover:text-emerald-700 transition-colors font-semibold"
           >
             Go to Dashboard <ArrowRight className="w-3 h-3" />
           </Link>
@@ -91,10 +91,10 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
 
       {/* Applied state */}
       {applied && (
-        <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
-          <FileText className="w-8 h-8 text-amber-400 mx-auto mb-2" />
-          <p className="text-white font-semibold text-sm">Application Submitted</p>
-          <p className="text-zinc-400 text-xs mt-1">We'll review your request and get back to you within 48 hours.</p>
+        <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+          <FileText className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+          <p className="text-gray-900 font-semibold text-sm">Application Submitted</p>
+          <p className="text-gray-500 text-xs mt-1">We'll review your request and get back to you within 48 hours.</p>
         </div>
       )}
 
@@ -106,14 +106,14 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
             <div className="space-y-3">
               <Link
                 href={`/signup?redirect=/offers/${deal.slug}`}
-                className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-lg shadow-accent/20"
+                className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
               >
                 Sign up to unlock
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <p className="text-center text-xs text-zinc-500">
+              <p className="text-center text-xs text-gray-500">
                 Already have an account?{' '}
-                <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-accent-300 hover:underline">Log in</Link>
+                <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
               </p>
             </div>
           )}
@@ -133,8 +133,8 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
           {/* Premium deal — not subscribed */}
           {user && deal.type === 'premium' && !isPremium && (
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-zinc-400 bg-surface-200 rounded-lg px-3 py-2">
-                <Lock className="w-3.5 h-3.5 text-accent-300 flex-shrink-0" />
+              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
+                <Lock className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />
                 This is a Premium deal. Upgrade to unlock.
               </div>
               <Button
@@ -145,7 +145,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
               >
                 Upgrade to Premium
               </Button>
-              <p className="text-center text-xs text-zinc-500">$79/year — unlimited deals</p>
+              <p className="text-center text-xs text-gray-500 font-medium">$79/year — unlimited deals</p>
             </div>
           )}
 
@@ -164,14 +164,14 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
           {/* Apply deal */}
           {user && deal.type === 'apply' && (
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-zinc-400 bg-surface-200 rounded-lg px-3 py-2">
-                <FileText className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
+                <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                 This deal requires manual review before approval.
               </div>
               <Button
                 onClick={handleApply}
                 loading={loading}
-                className="w-full justify-center bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/20 shadow-none"
+                className="w-full justify-center bg-amber-500 hover:bg-amber-600 text-white border-0 shadow-md shadow-amber-200"
                 size="lg"
               >
                 Apply for Access
@@ -182,14 +182,14 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
       )}
 
       {error && (
-        <p className="text-xs text-red-400 text-center">{error}</p>
+        <p className="text-xs text-red-500 font-medium text-center">{error}</p>
       )}
 
       {/* Trust signals */}
-      <div className="pt-2 border-t border-white/5 space-y-2">
+      <div className="pt-2 border-t border-gray-100 space-y-2">
         {['Verified deal', 'No spam, ever', 'Instant unlock'].map(item => (
-          <div key={item} className="flex items-center gap-2 text-xs text-zinc-500">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500/70" />
+          <div key={item} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
             {item}
           </div>
         ))}

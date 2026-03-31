@@ -187,7 +187,7 @@ export default async function HomePage() {
                   <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center mb-5 shadow-sm`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-xs font-bold text-gray-200 mb-2 font-mono tracking-widest">{step.step}</div>
+                  <div className="text-xs font-bold text-gray-400 mb-2 font-mono tracking-widest">{step.step}</div>
                   <h3 className="font-bold text-gray-900 text-lg mb-2">{step.title}</h3>
                   <p className="text-sm text-gray-500 leading-relaxed">{step.description}</p>
                   {i < STEPS.length - 1 && (
