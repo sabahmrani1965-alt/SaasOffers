@@ -86,7 +86,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-3 tracking-tight">
             {activeCategory_ ? activeCategory_.name : 'All Deals'}
           </h1>
-          <p className="text-gray-500 text-lg max-w-2xl">
+          <p className="text-gray-700 text-lg max-w-2xl">
             {activeCategory_
               ? activeCategory_.description
               : 'Hand-picked SaaS deals and startup credits, updated weekly.'}
@@ -122,7 +122,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
                         {cat.name}
                       </div>
                       {cat.count > 0 && (
-                        <div className="text-xs text-gray-400 mt-0.5">{cat.count} deals</div>
+                        <div className="text-xs text-gray-600 mt-0.5">{cat.count} deals</div>
                       )}
                     </div>
                   </Link>
@@ -134,7 +134,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
 
         {/* ── Active Category breadcrumb ── */}
         {activeCategory_ && (
-          <nav className="flex items-center gap-2 text-sm text-gray-500 -mb-4">
+          <nav className="flex items-center gap-2 text-sm text-gray-700 -mb-4">
             <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">All Deals</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
             <span className="text-gray-900 font-semibold">{activeCategory_.name}</span>
@@ -158,7 +158,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
                 className={`inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-xl border font-medium transition-all shadow-sm ${
                   isActive
                     ? 'bg-violet-600 border-violet-600 text-white shadow-violet-200'
-                    : 'border-gray-200 text-gray-500 hover:text-gray-900 hover:border-gray-300 bg-white'
+                    : 'border-gray-200 text-gray-700 hover:text-gray-900 hover:border-gray-300 bg-white'
                 }`}
               >
                 {Icon && <Icon className="w-3.5 h-3.5" />}
@@ -166,16 +166,16 @@ export default async function OffersPage({ searchParams }: PageProps) {
               </Link>
             )
           })}
-          <span className="text-xs text-gray-400 ml-2">{filtered.length} results</span>
+          <span className="text-xs text-gray-600 ml-2">{filtered.length} results</span>
         </div>
 
         {/* ── Deals Grid ── */}
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mb-4">
-              <Zap className="w-6 h-6 text-gray-400" />
+              <Zap className="w-6 h-6 text-gray-600" />
             </div>
-            <p className="text-gray-500 font-medium">No deals found</p>
+            <p className="text-gray-700 font-medium">No deals found</p>
             <Link href="/offers" className="text-violet-600 text-sm font-semibold mt-3 hover:underline">
               Clear filters
             </Link>

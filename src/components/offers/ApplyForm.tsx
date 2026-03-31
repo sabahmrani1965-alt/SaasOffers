@@ -100,13 +100,13 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
         </div>
         <div>
           <p className="text-gray-900 font-bold text-base">Application Submitted!</p>
-          <p className="text-gray-500 text-sm mt-1 leading-relaxed">
+          <p className="text-gray-700 text-sm mt-1 leading-relaxed">
             We'll verify your eligibility and send you a discount link within <strong className="text-gray-700">24–48 hours</strong>.
           </p>
         </div>
         <div className="pt-2 space-y-2 text-left">
           {['Check your inbox for a confirmation email', 'Our team will review your application', 'You\'ll receive the discount link directly'].map((s, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+            <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
               <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 text-xs font-bold text-emerald-600">{i + 1}</div>
               {s}
             </div>
@@ -127,7 +127,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
           Company Name <span className="text-red-400">*</span>
         </label>
         <div className="relative">
-          <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
           <input
             value={form.company_name}
             onChange={e => set('company_name', e.target.value)}
@@ -143,7 +143,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
           Company Website <span className="text-red-400">*</span>
         </label>
         <div className="relative">
-          <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
           <input
             value={form.website}
             onChange={e => set('website', e.target.value)}
@@ -160,7 +160,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
           Business Email <span className="text-red-400">*</span>
         </label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
           <input
             value={form.company_email}
             onChange={e => set('company_email', e.target.value)}
@@ -169,7 +169,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
             className="w-full bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 rounded-xl pl-9 pr-3 py-2.5 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
           />
         </div>
-        <p className="text-xs text-gray-400 mt-1">Business email required — no Gmail/Yahoo.</p>
+        <p className="text-xs text-gray-600 mt-1">Business email required — no Gmail/Yahoo.</p>
       </div>
 
       {/* Funding stage + team size side by side */}
@@ -205,7 +205,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
       {/* Use case (optional) */}
       <div>
         <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-          How will you use {deal.name}? <span className="text-gray-400 font-normal">(optional)</span>
+          How will you use {deal.name}? <span className="text-gray-600 font-normal">(optional)</span>
         </label>
         <textarea
           value={form.use_case}
@@ -234,7 +234,7 @@ export function ApplyForm({ deal, user }: ApplyFormProps) {
         )}
       </button>
 
-      <p className="text-center text-xs text-gray-400">
+      <p className="text-center text-xs text-gray-600">
         Takes 2 min · Reviewed within 48 hours · No spam
       </p>
     </form>

@@ -109,7 +109,7 @@ export default async function OfferPage({ params }: PageProps) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-500 mb-5">
+          <nav className="flex items-center gap-2 text-sm text-gray-700 mb-5">
             <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">Offers</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
             {deal.category && (
@@ -136,7 +136,7 @@ export default async function OfferPage({ params }: PageProps) {
                   </div>
                   <div className="flex items-center gap-2">
                     <DealBadge type={deal.type} />
-                    {deal.category && <span className="text-xs text-gray-400 font-medium">{deal.category}</span>}
+                    {deal.category && <span className="text-xs text-gray-600 font-medium">{deal.category}</span>}
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default async function OfferPage({ params }: PageProps) {
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-base leading-relaxed max-w-xl mb-4">
+              <p className="text-gray-700 text-base leading-relaxed max-w-xl mb-4">
                 {deal.description}
               </p>
 
@@ -168,13 +168,13 @@ export default async function OfferPage({ params }: PageProps) {
                   {deal.type === 'free' ? 'Unlock Free Deal' : deal.type === 'apply' ? `Apply for ${deal.name}` : 'Unlock Deal'}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <p className="text-center text-xs text-gray-400 mt-2">
+                <p className="text-center text-xs text-gray-600 mt-2">
                   {deal.type === 'free' ? 'Free · No credit card required' : deal.type === 'apply' ? 'Reviewed within 48 hours' : 'Premium · $79/year, unlimited deals'}
                 </p>
               </div>
 
               {/* Trust row */}
-              <div className="flex flex-wrap gap-3 text-xs text-gray-400">
+              <div className="flex flex-wrap gap-3 text-xs text-gray-600">
                 {['✓ Verified deal', '✓ No spam, ever', '✓ 2,000+ startups'].map(t => (
                   <span key={t} className="font-medium">{t}</span>
                 ))}
@@ -205,7 +205,7 @@ export default async function OfferPage({ params }: PageProps) {
                 <h2 className="text-xl font-bold text-gray-900 mb-4">About {deal.name}</h2>
                 <div className="space-y-3">
                   {sections.overview.map((line, i) => (
-                    <p key={i} className="text-gray-600 text-base leading-7">{line}</p>
+                    <p key={i} className="text-gray-700 text-base leading-7">{line}</p>
                   ))}
                 </div>
               </div>
@@ -232,7 +232,7 @@ export default async function OfferPage({ params }: PageProps) {
             {sections.steps.length > 0 && (
               <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">How to Claim This Deal</h2>
-                <p className="text-gray-500 text-sm mb-6">3 simple steps — takes less than 2 minutes</p>
+                <p className="text-gray-700 text-sm mb-6">3 simple steps — takes less than 2 minutes</p>
                 <div className="space-y-5">
                   {sections.steps.map((step, i) => (
                     <div key={i} className="flex items-start gap-4">
@@ -262,7 +262,7 @@ export default async function OfferPage({ params }: PageProps) {
                       <Icon className="w-4 h-4 text-violet-600" />
                     </div>
                     <h3 className="text-sm font-bold text-gray-900 mb-1">{title}</h3>
-                    <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>
+                    <p className="text-xs text-gray-700 leading-relaxed">{desc}</p>
                   </div>
                 ))}
               </div>
@@ -301,7 +301,7 @@ export default async function OfferPage({ params }: PageProps) {
             {deal.faq && deal.faq.length > 0 && (
               <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
-                <p className="text-gray-500 text-sm mb-6">Everything you need to know about this startup deal.</p>
+                <p className="text-gray-700 text-sm mb-6">Everything you need to know about this startup deal.</p>
                 <FAQAccordion items={deal.faq} />
               </div>
             )}
@@ -320,22 +320,22 @@ export default async function OfferPage({ params }: PageProps) {
               <h3 className="text-sm font-bold text-gray-900">Deal Summary</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-500">Value</span>
+                  <span className="text-gray-700">Value</span>
                   <span className="font-bold text-emerald-600">{deal.value_label}</span>
                 </div>
                 <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                  <span className="text-gray-500">Access</span>
+                  <span className="text-gray-700">Access</span>
                   <span className="font-semibold text-gray-800 capitalize">{deal.type}</span>
                 </div>
                 {deal.category && (
                   <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                    <span className="text-gray-500">Category</span>
+                    <span className="text-gray-700">Category</span>
                     <span className="font-semibold text-gray-800">{deal.category}</span>
                   </div>
                 )}
                 {deal.expires_at && (
                   <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                    <span className="text-gray-500">Expires</span>
+                    <span className="text-gray-700">Expires</span>
                     <span className="font-semibold text-red-500 text-xs">
                       {new Date(deal.expires_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
@@ -346,7 +346,7 @@ export default async function OfferPage({ params }: PageProps) {
 
             {/* Browse more */}
             <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-500 font-medium mb-3">Looking for more startup deals?</p>
+              <p className="text-xs text-gray-700 font-medium mb-3">Looking for more startup deals?</p>
               <Link href="/offers" className="inline-flex items-center gap-1.5 text-violet-600 text-sm font-semibold hover:underline">
                 Browse all offers <ArrowRight className="w-3.5 h-3.5" />
               </Link>

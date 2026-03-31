@@ -88,7 +88,7 @@ export default async function HomePage() {
             <br className="hidden sm:block" /> Credits for Your Startup
           </h1>
 
-          <p className="text-gray-500 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-in delay-200">
+          <p className="text-gray-700 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10 animate-in delay-200">
             Access exclusive deals from top SaaS tools like AWS, Notion, and Deel.
             Stop overpaying — start building with the stack the best startups use.
           </p>
@@ -110,7 +110,7 @@ export default async function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-1.5 text-sm text-gray-500">
+            <div className="flex items-center gap-1.5 text-sm text-gray-700">
               <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}</div>
               <span className="font-semibold text-gray-700">4.9</span>
               <span>from 200+ reviews</span>
@@ -122,14 +122,14 @@ export default async function HomePage() {
       {/* ── TRUST BAR ── */}
       <section className="py-12 bg-gray-50 border-y border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <p className="text-center text-xs text-gray-400 uppercase tracking-widest font-semibold mb-8">
+          <p className="text-center text-xs text-gray-600 uppercase tracking-widest font-semibold mb-8">
             Exclusive deals from industry-leading tools
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
             {LOGOS.map(logo => (
               <div key={logo.name} className="flex items-center gap-2.5 opacity-50 hover:opacity-90 transition-opacity cursor-default">
                 <div className="w-6 h-6 rounded-lg flex-shrink-0" style={{ backgroundColor: logo.color }} />
-                <span className="text-sm font-semibold text-gray-600">{logo.name}</span>
+                <span className="text-sm font-semibold text-gray-700">{logo.name}</span>
               </div>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default async function HomePage() {
             ].map(stat => (
               <div key={stat.label} className="text-center">
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
+                <div className="text-sm text-gray-700 mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -156,7 +156,7 @@ export default async function HomePage() {
               <Zap className="w-3 h-3 fill-current" /> Top Deals
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 tracking-tight">Featured Deals</h2>
-            <p className="text-gray-500 text-lg">Hand-picked offers to accelerate your startup</p>
+            <p className="text-gray-700 text-lg">Hand-picked offers to accelerate your startup</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featuredDeals.map((deal: any) => <DealCard key={deal.slug} deal={deal} />)}
@@ -173,11 +173,11 @@ export default async function HomePage() {
       <section className="py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-500 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 shadow-sm">
               Simple Process
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 tracking-tight">How It Works</h2>
-            <p className="text-gray-500 text-lg">Three steps to thousands in savings</p>
+            <p className="text-gray-700 text-lg">Three steps to thousands in savings</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {STEPS.map((step, i) => {
@@ -187,12 +187,12 @@ export default async function HomePage() {
                   <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center mb-5 shadow-sm`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-xs font-bold text-gray-400 mb-2 font-mono tracking-widest">{step.step}</div>
+                  <div className="text-xs font-bold text-gray-600 mb-2 font-mono tracking-widest">{step.step}</div>
                   <h3 className="font-bold text-gray-900 text-lg mb-2">{step.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{step.description}</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">{step.description}</p>
                   {i < STEPS.length - 1 && (
                     <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-white border border-gray-100 rounded-full items-center justify-center shadow-sm z-10">
-                      <ArrowRight className="w-3 h-3 text-gray-400" />
+                      <ArrowRight className="w-3 h-3 text-gray-600" />
                     </div>
                   )}
                 </div>
@@ -210,7 +210,7 @@ export default async function HomePage() {
               Pricing
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 tracking-tight">Simple Pricing</h2>
-            <p className="text-gray-500 text-lg">Start free. Upgrade when the math makes sense.</p>
+            <p className="text-gray-700 text-lg">Start free. Upgrade when the math makes sense.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PRICING.map(plan => (
@@ -228,15 +228,15 @@ export default async function HomePage() {
                   <h3 className={`text-lg font-bold mb-1 ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-2">
                     <span className={`text-4xl font-bold ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>{plan.price}</span>
-                    <span className={`text-sm ${plan.highlight ? 'text-white/70' : 'text-gray-400'}`}>/ {plan.period}</span>
+                    <span className={`text-sm ${plan.highlight ? 'text-white/70' : 'text-gray-600'}`}>/ {plan.period}</span>
                   </div>
-                  <p className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-gray-500'}`}>{plan.description}</p>
+                  <p className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-gray-700'}`}>{plan.description}</p>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {plan.features.map(f => (
                     <li key={f} className="flex items-start gap-2.5 text-sm">
                       <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.highlight ? 'text-white/90' : 'text-violet-500'}`} />
-                      <span className={plan.highlight ? 'text-white/90' : 'text-gray-600'}>{f}</span>
+                      <span className={plan.highlight ? 'text-white/90' : 'text-gray-700'}>{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -250,7 +250,7 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-xs text-gray-400 mt-6 flex items-center justify-center gap-1.5">
+          <p className="text-center text-xs text-gray-600 mt-6 flex items-center justify-center gap-1.5">
             <Shield className="w-3.5 h-3.5" /> Secure payment via Stripe. Cancel anytime.
           </p>
         </div>
@@ -261,7 +261,7 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 tracking-tight">What Founders Say</h2>
-            <p className="text-gray-500 text-lg">Join thousands of founders saving on their stack</p>
+            <p className="text-gray-700 text-lg">Join thousands of founders saving on their stack</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {TESTIMONIALS.map(t => (
@@ -269,14 +269,14 @@ export default async function HomePage() {
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed mb-5">"{t.quote}"</p>
+                <p className="text-sm text-gray-700 leading-relaxed mb-5">"{t.quote}"</p>
                 <div className="flex items-center gap-3">
                   <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold text-white shadow-sm`}>
                     {t.avatar}
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-gray-900">{t.author}</div>
-                    <div className="text-xs text-gray-400">{t.role}</div>
+                    <div className="text-xs text-gray-600">{t.role}</div>
                   </div>
                 </div>
               </div>

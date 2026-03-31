@@ -17,7 +17,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   'Case Studies': 'bg-blue-50 text-blue-600 border-blue-100',
   'Comparisons':  'bg-amber-50 text-amber-600 border-amber-100',
   'News':         'bg-emerald-50 text-emerald-600 border-emerald-100',
-  'default':      'bg-gray-100 text-gray-600 border-gray-200',
+  'default':      'bg-gray-100 text-gray-700 border-gray-200',
 }
 
 const COVER_GRADIENTS: Record<string, string> = {
@@ -165,7 +165,7 @@ function renderContent(content: string) {
             <tbody className="divide-y divide-gray-50">
               {rows.slice(1).map((row, j) => (
                 <tr key={j} className="hover:bg-gray-50/50">
-                  {row.map((cell, k) => <td key={k} className="px-4 py-3 text-gray-600">{cell}</td>)}
+                  {row.map((cell, k) => <td key={k} className="px-4 py-3 text-gray-700">{cell}</td>)}
                 </tr>
               ))}
             </tbody>
@@ -300,7 +300,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.tags && post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-gray-100">
                 {post.tags.map(tag => (
-                  <span key={tag} className="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
+                  <span key={tag} className="text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
                     #{tag}
                   </span>
                 ))}
@@ -309,7 +309,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Share */}
             <div className="flex items-center justify-between flex-wrap gap-4 mt-8 pt-6 border-t border-gray-100">
-              <p className="text-sm font-medium text-gray-500">Share this article</p>
+              <p className="text-sm font-medium text-gray-700">Share this article</p>
               <ShareButtons url={postUrl} title={post.title} />
             </div>
 
@@ -321,8 +321,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900 text-sm">{post.author}</div>
-                  <div className="text-xs text-gray-400 mb-2">SaaSOffers Team · {format(new Date(post.created_at), 'MMMM yyyy')}</div>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <div className="text-xs text-gray-600 mb-2">SaaSOffers Team · {format(new Date(post.created_at), 'MMMM yyyy')}</div>
+                  <p className="text-sm text-gray-700 leading-relaxed">
                     Helping startups unlock exclusive SaaS deals and save thousands on their software stack.
                   </p>
                 </div>
@@ -333,7 +333,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="mt-10 bg-gradient-to-br from-violet-50 to-pink-50 border border-violet-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
               <div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1">Ready to unlock these deals?</h3>
-                <p className="text-gray-500 text-sm">Free account. No credit card required.</p>
+                <p className="text-gray-700 text-sm">Free account. No credit card required.</p>
               </div>
               <Link
                 href="/signup"
@@ -362,16 +362,16 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Article meta */}
             <div className="bg-white border border-gray-100 rounded-xl p-4 space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-400">Read time</span>
+                <span className="text-xs text-gray-600">Read time</span>
                 <span className="text-sm font-semibold text-gray-800">{readTime} min</span>
               </div>
               <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                <span className="text-xs text-gray-400">Published</span>
+                <span className="text-xs text-gray-600">Published</span>
                 <span className="text-sm font-semibold text-gray-800">{format(new Date(post.created_at), 'MMM d, yyyy')}</span>
               </div>
               {post.category && (
                 <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                  <span className="text-xs text-gray-400">Category</span>
+                  <span className="text-xs text-gray-600">Category</span>
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${categoryStyle}`}>
                     {post.category}
                   </span>
@@ -381,7 +381,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Share — sidebar version */}
             <div className="bg-white border border-gray-100 rounded-xl p-4">
-              <p className="text-xs text-gray-400 font-medium mb-3">Share</p>
+              <p className="text-xs text-gray-600 font-medium mb-3">Share</p>
               <div className="flex flex-col gap-2">
                 <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(postUrl)}`} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-gray-50 text-gray-700 hover:bg-gray-100 transition-colors border border-gray-100">
@@ -419,7 +419,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-violet-600 transition-colors leading-snug">
                       {rp.title}
                     </h3>
-                    <p className="text-xs text-gray-400 mt-2">{format(new Date(rp.created_at), 'MMM d, yyyy')}</p>
+                    <p className="text-xs text-gray-600 mt-2">{format(new Date(rp.created_at), 'MMM d, yyyy')}</p>
                   </div>
                 </Link>
               ))}

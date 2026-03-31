@@ -34,7 +34,7 @@ export default async function BlogPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-4">
             The Startup SaaS Blog
           </h1>
-          <p className="text-gray-500 text-lg max-w-xl leading-relaxed">
+          <p className="text-gray-700 text-lg max-w-xl leading-relaxed">
             Guides, case studies, and strategies to help founders save money, unlock credits, and build smarter companies.
           </p>
 
@@ -50,7 +50,7 @@ export default async function BlogPage() {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-gray-900">{value}</div>
-                  <div className="text-xs text-gray-400">{label}</div>
+                  <div className="text-xs text-gray-600">{label}</div>
                 </div>
               </div>
             ))}

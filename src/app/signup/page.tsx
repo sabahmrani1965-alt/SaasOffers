@@ -49,7 +49,7 @@ function SignupForm() {
             <CheckCircle2 className="w-8 h-8 text-emerald-500" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Check your email</h1>
-          <p className="text-gray-500 text-sm mb-6">We sent a confirmation link to <strong className="text-gray-900">{email}</strong>.</p>
+          <p className="text-gray-700 text-sm mb-6">We sent a confirmation link to <strong className="text-gray-900">{email}</strong>.</p>
           <Link href="/login" className="text-violet-600 font-semibold hover:text-violet-700 text-sm transition-colors">Back to login</Link>
         </div>
       </div>
@@ -71,7 +71,7 @@ function SignupForm() {
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
               {plan === 'premium' ? 'Start Premium' : 'Get free access'}
             </h1>
-            <p className="text-gray-500 text-base mt-2">
+            <p className="text-gray-700 text-base mt-2">
               {plan === 'premium' ? 'Create your account, then upgrade to Premium' : 'Join 1,000+ startups saving on top SaaS tools'}
             </p>
           </div>
@@ -83,7 +83,7 @@ function SignupForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-100" />
             </div>
-            <div className="relative flex justify-center text-xs text-gray-400">
+            <div className="relative flex justify-center text-xs text-gray-600">
               <span className="bg-white px-3">or sign up with email</span>
             </div>
           </div>
@@ -91,7 +91,7 @@ function SignupForm() {
           {/* Trust badges */}
           <div className="flex flex-wrap gap-2 justify-center mb-6">
             {['Free forever', 'No spam', '50+ deals'].map(b => (
-              <span key={b} className="text-xs text-gray-600 font-medium bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full">✓ {b}</span>
+              <span key={b} className="text-xs text-gray-700 font-medium bg-gray-100 border border-gray-200 px-3 py-1.5 rounded-full">✓ {b}</span>
             ))}
           </div>
 
@@ -100,7 +100,7 @@ function SignupForm() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <input
                   type="email"
                   value={email}
@@ -114,7 +114,7 @@ function SignupForm() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <input
                   type="password"
                   value={password}
@@ -136,13 +136,13 @@ function SignupForm() {
             </Button>
           </form>
 
-          <p className="text-center text-xs text-gray-400 mt-5">
+          <p className="text-center text-xs text-gray-600 mt-5">
             By signing up, you agree to our{' '}
-            <Link href="/terms" className="text-gray-600 font-medium hover:text-gray-900 transition-colors">Terms</Link>
+            <Link href="/terms" className="text-gray-700 font-medium hover:text-gray-900 transition-colors">Terms</Link>
             {' '}and{' '}
-            <Link href="/privacy" className="text-gray-600 font-medium hover:text-gray-900 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="text-gray-700 font-medium hover:text-gray-900 transition-colors">Privacy Policy</Link>
           </p>
-          <p className="text-center text-sm text-gray-500 mt-3">
+          <p className="text-center text-sm text-gray-700 mt-3">
             Already have an account?{' '}
             <Link href="/login" className="text-violet-600 font-semibold hover:text-violet-700 transition-colors">Sign in</Link>
           </p>

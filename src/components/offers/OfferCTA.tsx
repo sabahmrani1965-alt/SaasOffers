@@ -61,7 +61,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
     <div id="offer-cta" className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 space-y-5 shadow-card">
       {/* Value */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-gray-500 font-medium">Deal value</span>
+        <span className="text-sm text-gray-700 font-medium">Deal value</span>
         <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-xl">
           <DollarSign className="w-5 h-5" />
           {deal.value_label}
@@ -75,7 +75,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
         <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
           <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
           <p className="text-gray-900 font-semibold text-sm">Offer Unlocked!</p>
-          <p className="text-gray-500 text-xs mt-1">Check your dashboard to access your deal details.</p>
+          <p className="text-gray-700 text-xs mt-1">Check your dashboard to access your deal details.</p>
           <Link
             href="/dashboard"
             className="inline-flex items-center gap-1.5 mt-3 text-xs text-emerald-600 hover:text-emerald-700 transition-colors font-semibold"
@@ -104,7 +104,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
                 Sign up to unlock
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <p className="text-center text-xs text-gray-500">
+              <p className="text-center text-xs text-gray-700">
                 Already have an account?{' '}
                 <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
               </p>
@@ -126,7 +126,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
           {/* Premium deal — not subscribed */}
           {user && deal.type === 'premium' && !isPremium && (
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
+              <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
                 <Lock className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />
                 This is a Premium deal. Upgrade to unlock.
               </div>
@@ -138,7 +138,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
               >
                 Upgrade to Premium
               </Button>
-              <p className="text-center text-xs text-gray-500 font-medium">$79/year — unlimited deals</p>
+              <p className="text-center text-xs text-gray-700 font-medium">$79/year — unlimited deals</p>
             </div>
           )}
 
@@ -157,7 +157,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
           {/* Apply deal */}
           {user && deal.type === 'apply' && (
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-gray-600 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
+              <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
                 <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
                 This deal requires a short application — reviewed within 48h.
               </div>
@@ -186,7 +186,7 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
           { icon: Shield, text: 'No spam, ever' },
           { icon: Zap, text: 'Fast approval' },
         ].map(({ icon: Icon, text }) => (
-          <div key={text} className="flex items-center gap-2 text-xs text-gray-500 font-medium">
+          <div key={text} className="flex items-center gap-2 text-xs text-gray-700 font-medium">
             <Icon className="w-3.5 h-3.5 text-emerald-500" />
             {text}
           </div>

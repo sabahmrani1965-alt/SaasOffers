@@ -40,7 +40,7 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 shadow-lg px-4 py-3 flex items-center gap-3">
       <div className="flex-1 min-w-0">
-        <div className="text-xs text-gray-500 font-medium">Deal value</div>
+        <div className="text-xs text-gray-700 font-medium">Deal value</div>
         <div className="flex items-center gap-1 text-emerald-600 font-bold text-sm">
           <DollarSign className="w-3.5 h-3.5" />
           {deal.value_label}

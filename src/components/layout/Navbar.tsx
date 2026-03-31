@@ -71,7 +71,7 @@ export function Navbar() {
           {user ? (
             <>
               <Link href="/dashboard" className="text-[15px] text-gray-700 hover:text-gray-900 font-medium transition-colors">Dashboard</Link>
-              <button onClick={handleSignOut} className="text-[15px] text-gray-500 hover:text-gray-700 transition-colors">Sign out</button>
+              <button onClick={handleSignOut} className="text-[15px] text-gray-700 hover:text-gray-700 transition-colors">Sign out</button>
             </>
           ) : (
             <>
@@ -102,7 +102,7 @@ export function Navbar() {
             {user ? (
               <>
                 <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block text-[15px] text-gray-700 py-2 font-medium">Dashboard</Link>
-                <button onClick={handleSignOut} className="text-left text-[15px] text-gray-500 py-2">Sign out</button>
+                <button onClick={handleSignOut} className="text-left text-[15px] text-gray-700 py-2">Sign out</button>
               </>
             ) : (
               <>

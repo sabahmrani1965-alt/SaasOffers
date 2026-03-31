@@ -43,7 +43,7 @@ export function DealHighlights({ deal }: DealHighlightsProps) {
 
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-card">
-      <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">Deal Highlights</h2>
+      <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Deal Highlights</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {highlights.map((h, i) => {
           const Icon = h.icon
@@ -54,7 +54,7 @@ export function DealHighlights({ deal }: DealHighlightsProps) {
               </div>
               <div>
                 <div className={`text-sm font-bold ${h.color} leading-tight`}>{h.value}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{h.label}</div>
+                <div className="text-xs text-gray-700 mt-0.5">{h.label}</div>
               </div>
             </div>
           )

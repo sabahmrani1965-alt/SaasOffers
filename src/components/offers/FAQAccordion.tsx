@@ -30,12 +30,12 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
               {item.question}
             </span>
             <ChevronDown
-              className={cn('w-4 h-4 flex-shrink-0 transition-transform duration-200', open === i ? 'rotate-180 text-violet-500' : 'text-gray-400')}
+              className={cn('w-4 h-4 flex-shrink-0 transition-transform duration-200', open === i ? 'rotate-180 text-violet-500' : 'text-gray-600')}
             />
           </button>
           {open === i && (
             <div className="px-5 pb-4">
-              <p className="text-sm text-gray-600 leading-relaxed">{item.answer}</p>
+              <p className="text-sm text-gray-700 leading-relaxed">{item.answer}</p>
             </div>
           )}
         </div>

@@ -15,7 +15,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   'Case Studies': 'bg-blue-50 text-blue-600 border-blue-100',
   'Comparisons':  'bg-amber-50 text-amber-600 border-amber-100',
   'News':         'bg-emerald-50 text-emerald-600 border-emerald-100',
-  'default':      'bg-gray-100 text-gray-600 border-gray-200',
+  'default':      'bg-gray-100 text-gray-700 border-gray-200',
 }
 
 const COVER_GRADIENTS: Record<string, string> = {
@@ -66,7 +66,7 @@ export function BlogList({ posts }: Props) {
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
           <input
             type="text"
             placeholder="Search articles…"
@@ -84,7 +84,7 @@ export function BlogList({ posts }: Props) {
               className={`text-sm px-4 py-2 rounded-xl border font-medium transition-all ${
                 activeCategory === cat
                   ? 'bg-violet-600 border-violet-600 text-white shadow-sm shadow-violet-200'
-                  : 'bg-white border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-800'
+                  : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-800'
               }`}
             >
               {cat}
@@ -94,7 +94,7 @@ export function BlogList({ posts }: Props) {
       </div>
 
       {filtered.length === 0 && (
-        <div className="py-20 text-center text-gray-400">
+        <div className="py-20 text-center text-gray-600">
           <Search className="w-8 h-8 mx-auto mb-3 opacity-50" />
           <p className="font-medium">No articles found</p>
           <button onClick={() => { setSearch(''); setActiveCategory('All') }} className="text-violet-600 text-sm mt-2 hover:underline">Clear filters</button>
@@ -119,7 +119,7 @@ export function BlogList({ posts }: Props) {
           </div>
           {/* Body */}
           <div className="p-7">
-            <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
+            <div className="flex items-center gap-3 text-xs text-gray-600 mb-3">
               <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{readTime(featured.content)} min read</span>
               <span>·</span>
               <span>{format(new Date(featured.created_at), 'MMM d, yyyy')}</span>
@@ -128,7 +128,7 @@ export function BlogList({ posts }: Props) {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-violet-600 transition-colors">
               {featured.title}
             </h2>
-            <p className="text-gray-500 text-base leading-relaxed line-clamp-2 mb-5">
+            <p className="text-gray-700 text-base leading-relaxed line-clamp-2 mb-5">
               {featured.excerpt}
             </p>
             <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-600 group-hover:gap-2.5 transition-all">
@@ -156,18 +156,18 @@ export function BlogList({ posts }: Props) {
                       {post.category}
                     </span>
                   )}
-                  <span className="text-xs text-gray-400 flex items-center gap-1">
+                  <span className="text-xs text-gray-600 flex items-center gap-1">
                     <Clock className="w-3 h-3" />{readTime(post.content)} min
                   </span>
                 </div>
                 <h3 className="font-bold text-gray-900 text-base leading-snug mb-2 group-hover:text-violet-600 transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2 mb-4 flex-1">
+                <p className="text-sm text-gray-700 leading-relaxed line-clamp-2 mb-4 flex-1">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-50">
-                  <span className="text-xs text-gray-400">{format(new Date(post.created_at), 'MMM d, yyyy')}</span>
+                  <span className="text-xs text-gray-600">{format(new Date(post.created_at), 'MMM d, yyyy')}</span>
                   <span className="text-xs font-semibold text-violet-600 flex items-center gap-1 group-hover:gap-2 transition-all">
                     Read <ArrowRight className="w-3 h-3" />
                   </span>

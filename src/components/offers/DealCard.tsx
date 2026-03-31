@@ -26,13 +26,13 @@ export function DealCard({ deal, className }: DealCardProps) {
             <h3 className="font-semibold text-gray-900 text-sm group-hover:text-violet-600 transition-colors">
               {deal.name}
             </h3>
-            {deal.category && <p className="text-xs text-gray-400 mt-0.5">{deal.category}</p>}
+            {deal.category && <p className="text-xs text-gray-600 mt-0.5">{deal.category}</p>}
           </div>
         </div>
         <DealBadge type={deal.type} />
       </div>
 
-      <p className="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-2">{deal.description}</p>
+      <p className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-2">{deal.description}</p>
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
@@ -41,7 +41,7 @@ export function DealCard({ deal, className }: DealCardProps) {
           </div>
           <span className="text-sm font-semibold text-emerald-600">{deal.value_label}</span>
         </div>
-        <span className="flex items-center gap-1 text-xs text-gray-400 group-hover:text-violet-500 transition-colors font-medium">
+        <span className="flex items-center gap-1 text-xs text-gray-600 group-hover:text-violet-500 transition-colors font-medium">
           View offer <ArrowRight className="w-3 h-3" />
         </span>
       </div>
