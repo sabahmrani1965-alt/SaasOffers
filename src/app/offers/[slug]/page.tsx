@@ -41,12 +41,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description,
-      url: `https://saasoffers.tech/offers/${deal.slug}`,
+      url: `https://saas-offers.vercel.app/offers/${deal.slug}`,
       siteName: 'SaaSOffers',
       type: 'website',
     },
     twitter: { card: 'summary_large_image', title, description },
-    alternates: { canonical: `https://saasoffers.tech/offers/${deal.slug}` },
+    alternates: { canonical: `https://saas-offers.vercel.app/offers/${deal.slug}` },
   }
 }
 
@@ -78,8 +78,8 @@ export default async function OfferPage({ params }: PageProps) {
     price: '0',
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    url: `https://saasoffers.tech/offers/${deal.slug}`,
-    seller: { '@type': 'Organization', name: 'SaaSOffers', url: 'https://saasoffers.tech' },
+    url: `https://saas-offers.vercel.app/offers/${deal.slug}`,
+    seller: { '@type': 'Organization', name: 'SaaSOffers', url: 'https://saas-offers.vercel.app' },
     ...(deal.expires_at ? { priceValidUntil: deal.expires_at.slice(0, 10) } : {}),
   }
 

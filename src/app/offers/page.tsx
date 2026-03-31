@@ -10,7 +10,7 @@ import { Zap, Star, Lock, FileText, Sparkles, ChevronRight } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Browse SaaS Deals & Startup Credits | SaaSOffers',
   description: 'Explore $500,000+ in exclusive SaaS deals for startups. AI tools, CRM, DevOps, Marketing, Finance and more. Free and premium offers available.',
-  alternates: { canonical: 'https://saasoffers.tech/offers' },
+  alternates: { canonical: 'https://saas-offers.vercel.app/offers' },
 }
 
 const SPECIAL_FILTERS = [

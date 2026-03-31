@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       authors: post.author ? [post.author] : undefined,
     },
     twitter: { card: 'summary_large_image', title: post.title, description: post.excerpt },
-    alternates: { canonical: `https://saasoffers.tech/blog/${params.slug}` },
+    alternates: { canonical: `https://saas-offers.vercel.app/blog/${params.slug}` },
   }
 }
 
@@ -229,7 +229,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? (COVER_GRADIENTS[post.category] || COVER_GRADIENTS.default)
     : COVER_GRADIENTS.default
 
-  const postUrl = `https://saasoffers.tech/blog/${post.slug}`
+  const postUrl = `https://saas-offers.vercel.app/blog/${post.slug}`
 
   return (
     <div className="min-h-screen bg-white">

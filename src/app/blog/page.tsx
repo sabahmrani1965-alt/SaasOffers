@@ -8,7 +8,7 @@ import { BookOpen, Zap } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Blog — Startup SaaS Guides & Resources | SaaSOffers',
   description: 'Guides, case studies, and resources to help founders save money on their SaaS stack, unlock startup credits, and build smarter companies.',
-  alternates: { canonical: 'https://saasoffers.tech/blog' },
+  alternates: { canonical: 'https://saas-offers.vercel.app/blog' },
 }
 
 export default async function BlogPage() {
