@@ -314,7 +314,6 @@ export default async function OfferPage({ params }: PageProps) {
 
           {/* ── SIDEBAR (desktop) ── */}
           <div className="hidden lg:block lg:col-span-1 space-y-5">
-            <OfferCTA deal={deal} user={user} isPremium={isPremium} isUnlocked={isUnlocked} />
 
             {/* Quick summary card */}
             <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm space-y-4">
@@ -356,10 +355,6 @@ export default async function OfferPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* ── Mobile CTA ── */}
-      <div className="lg:hidden px-4 pb-10">
-        <OfferCTA deal={deal} user={user} isPremium={isPremium} isUnlocked={isUnlocked} />
-      </div>
     </div>
   )
 }
