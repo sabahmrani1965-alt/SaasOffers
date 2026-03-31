@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { Deal } from '@/types'
 import { DealBadge } from '@/components/ui/DealBadge'
+import { DealLogo } from '@/components/ui/DealLogo'
 import { OfferCTA } from '@/components/offers/OfferCTA'
 import { DealHighlights } from '@/components/offers/DealHighlights'
 import { FAQAccordion } from '@/components/offers/FAQAccordion'
@@ -115,13 +116,7 @@ export default async function OfferPage({ params }: PageProps) {
               <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card">
                 <div className="flex items-start gap-4 mb-5">
                   {/* Logo */}
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-md flex-shrink-0"
-                    style={{ backgroundColor: deal.logo_bg || '#7C3AED' }}
-                    aria-label={`${deal.name} logo`}
-                  >
-                    {deal.name.slice(0, 2).toUpperCase()}
-                  </div>
+                  <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="xl" />
                   <div className="flex-1 min-w-0">
                     {/* Verified badge */}
                     <div className="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">

@@ -7,6 +7,7 @@ import { ConfirmModal } from './ConfirmModal'
 import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 import { Field, inputClass, selectClass, textareaClass } from './FormField'
+import { DealLogo } from '@/components/ui/DealLogo'
 
 interface Offer {
   id: string
@@ -19,6 +20,7 @@ interface Offer {
   type: 'free' | 'premium' | 'apply'
   category?: string
   logo_bg?: string
+  logo_url?: string
   requirements?: string
   affiliate_link?: string
   featured?: boolean
@@ -28,7 +30,7 @@ interface Offer {
 
 const EMPTY: Partial<Offer> = {
   name: '', slug: '', description: '', long_description: '', value: 0,
-  value_label: '', type: 'free', category: '', logo_bg: '#7C3AED',
+  value_label: '', type: 'free', category: '', logo_bg: '#7C3AED', logo_url: '',
   requirements: '', affiliate_link: '', featured: false,
 }
 
@@ -209,12 +211,7 @@ export function OffersManager() {
                 <Tr key={offer.id}>
                   <Td>
                     <div className="flex items-center gap-3">
-                      <div
-                        className="w-8 h-8 rounded-xl flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
-                        style={{ backgroundColor: offer.logo_bg || '#7C3AED' }}
-                      >
-                        {offer.name.slice(0, 2).toUpperCase()}
-                      </div>
+                      <DealLogo name={offer.name} logo_url={offer.logo_url} logo_bg={offer.logo_bg} size="sm" />
                       <div>
                         <div className="text-gray-100 font-semibold text-sm">{offer.name}</div>
                         <div className="text-gray-600 text-xs font-mono">{offer.slug}</div>
@@ -306,7 +303,15 @@ export function OffersManager() {
           <Field label="Category">
             <input value={form.category || ''} onChange={e => handleFieldChange('category', e.target.value)} placeholder="Cloud Infrastructure" className={inputClass} />
           </Field>
-          <Field label="Logo Background Color">
+          <Field label="Logo URL" hint="e.g. https://logo.clearbit.com/notion.so — leave blank to use colored initials">
+            <div className="flex items-center gap-2">
+              <input value={form.logo_url || ''} onChange={e => handleFieldChange('logo_url', e.target.value)} placeholder="https://logo.clearbit.com/company.com" className={`${inputClass} flex-1`} />
+              {form.logo_url && (
+                <img src={form.logo_url} alt="" className="w-8 h-8 rounded-lg object-contain bg-white p-0.5 border border-white/10 flex-shrink-0" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
+              )}
+            </div>
+          </Field>
+          <Field label="Logo Background Color" hint="Used as fallback when no Logo URL is set">
             <div className="flex items-center gap-2">
               <input type="color" value={form.logo_bg || '#7C3AED'} onChange={e => handleFieldChange('logo_bg', e.target.value)} className="w-10 h-10 rounded-lg bg-gray-800 border border-white/10 cursor-pointer p-1" />
               <input value={form.logo_bg || ''} onChange={e => handleFieldChange('logo_bg', e.target.value)} placeholder="#7C3AED" className={`${inputClass} flex-1`} />

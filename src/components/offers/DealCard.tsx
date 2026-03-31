@@ -1,34 +1,13 @@
 import Link from 'next/link'
 import { Deal } from '@/types'
 import { DealBadge } from '@/components/ui/DealBadge'
+import { DealLogo } from '@/components/ui/DealLogo'
 import { ArrowRight, DollarSign } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface DealCardProps {
   deal: Deal
   className?: string
-}
-
-const LOGO_COLORS: Record<string, string> = {
-  aws: '#FF9900',
-  notion: '#000000',
-  deel: '#15CCAE',
-  stripe: '#635BFF',
-  linear: '#5E6AD2',
-  figma: '#F24E1E',
-  default: '#7C3AED',
-}
-
-function LogoPlaceholder({ name, bg }: { name: string; bg?: string }) {
-  const color = bg || LOGO_COLORS[name.toLowerCase().split(' ')[0]] || LOGO_COLORS.default
-  return (
-    <div
-      className="w-11 h-11 rounded-2xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-sm"
-      style={{ backgroundColor: color }}
-    >
-      {name.slice(0, 2).toUpperCase()}
-    </div>
-  )
 }
 
 export function DealCard({ deal, className }: DealCardProps) {
@@ -42,7 +21,7 @@ export function DealCard({ deal, className }: DealCardProps) {
     >
       <div className="flex items-start justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          <LogoPlaceholder name={deal.name} bg={deal.logo_bg} />
+          <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="md" />
           <div>
             <h3 className="font-semibold text-gray-900 text-sm group-hover:text-violet-600 transition-colors">
               {deal.name}

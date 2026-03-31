@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Check, X, Clock, Building2, Globe, Mail, Users, ChevronDown, ChevronUp } from 'lucide-react'
 import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
+import { DealLogo } from '@/components/ui/DealLogo'
 
 interface Application {
   id: string
@@ -16,7 +17,7 @@ interface Application {
   status: 'pending' | 'approved' | 'rejected'
   created_at: string
   user: { email: string }
-  deal: { name: string; slug: string; logo_bg: string }
+  deal: { name: string; slug: string; logo_bg: string; logo_url?: string }
 }
 
 export function ApplicationsManager() {
@@ -108,10 +109,7 @@ export function ApplicationsManager() {
                     </Td>
                     <Td>
                       <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center text-white text-[10px] font-bold"
-                          style={{ backgroundColor: app.deal?.logo_bg || '#7C3AED' }}>
-                          {app.deal?.name?.slice(0, 2).toUpperCase()}
-                        </div>
+                        <DealLogo name={app.deal?.name || ''} logo_url={app.deal?.logo_url} logo_bg={app.deal?.logo_bg} size="sm" />
                         <span className="text-gray-300 text-sm">{app.deal?.name}</span>
                       </div>
                     </Td>
