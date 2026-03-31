@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
+import { GoogleButton } from '@/components/auth/GoogleButton'
 import { Zap, Mail, Lock, CheckCircle2 } from 'lucide-react'
 
 function SignupForm() {
@@ -67,6 +68,17 @@ function SignupForm() {
             </Link>
             <h1 className="text-2xl font-bold text-gray-900">{plan === 'premium' ? 'Start Premium' : 'Get free access'}</h1>
             <p className="text-gray-500 text-sm mt-1">{plan === 'premium' ? 'Create your account, then upgrade to Premium' : 'Create your account in 30 seconds'}</p>
+          </div>
+
+          <GoogleButton label="Sign up with Google" />
+
+          <div className="relative my-5">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-100" />
+            </div>
+            <div className="relative flex justify-center text-xs text-gray-400">
+              <span className="bg-white px-3">or sign up with email</span>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2 justify-center mb-6">

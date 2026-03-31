@@ -5,9 +5,8 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import {
   LayoutDashboard, Package, FileText, Users,
-  Settings, ChevronRight, ExternalLink, ClipboardList
+  Settings, ChevronRight, ExternalLink, ClipboardList, Zap
 } from 'lucide-react'
-import { Logo } from '@/components/ui/Logo'
 
 const NAV = [
   { href: '/admin', label: 'Overview', icon: LayoutDashboard, exact: true },
@@ -25,9 +24,14 @@ export function AdminSidebar() {
     <aside className="w-60 flex-shrink-0 bg-gray-950 border-r border-white/5 flex flex-col">
       {/* Logo */}
       <div className="h-16 flex items-center px-5 border-b border-white/5">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <Logo variant="light" size="sm" />
-          <div className="text-[10px] text-gray-500 font-medium border-l border-white/10 pl-2.5 ml-1">Admin</div>
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-800/30 group-hover:shadow-violet-700/40 transition-all">
+            <Zap className="w-4 h-4 text-white" fill="white" />
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="font-bold text-white text-sm tracking-tight">SaaSOffers</span>
+            <span className="text-[10px] text-gray-500 mt-0.5">Admin Panel</span>
+          </div>
         </Link>
       </div>
 
