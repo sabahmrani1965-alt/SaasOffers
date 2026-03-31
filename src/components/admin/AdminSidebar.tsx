@@ -27,7 +27,7 @@ export function AdminSidebar() {
       <div className="h-16 flex items-center px-5 border-b border-white/5">
         <Link href="/" className="flex items-center gap-2.5 group">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="SaaSOffers"
             width={110}
             height={32}

@@ -48,7 +48,7 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png"
+            src="/logo.svg"
             alt="SaaSOffers"
             width={140}
             height={40}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Infinity symbol -->
+  <g transform="translate(8, 8)">
+    <path d="M32 32C32 32 22 18 12 18C4 18 0 24 0 32C0 40 4 46 12 46C22 46 32 32 32 32Z" fill="url(#grad1)" stroke="none"/>
+    <path d="M32 32C32 32 42 18 52 18C60 18 64 24 64 32C64 40 60 46 52 46C42 46 32 32 32 32Z" fill="url(#grad2)" stroke="none"/>
+    <path d="M32 32C32 32 22 18 12 18C4 18 0 24 0 32C0 40 4 46 12 46C22 46 32 32 32 32Z" fill="none" stroke="url(#grad3)" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M32 32C32 32 42 18 52 18C60 18 64 24 64 32C64 40 60 46 52 46C42 46 32 32 32 32Z" fill="none" stroke="url(#grad4)" stroke-width="3.5" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="18" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#ec4899" stop-opacity="0.15"/>
+      </linearGradient>
+      <linearGradient id="grad2" x1="32" y1="18" x2="64" y2="46" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#6366f1" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.25"/>
+      </linearGradient>
+      <linearGradient id="grad3" x1="0" y1="18" x2="32" y2="46" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#ec4899"/>
+        <stop offset="100%" stop-color="#a855f7"/>
+      </linearGradient>
+      <linearGradient id="grad4" x1="32" y1="18" x2="64" y2="46" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#a855f7"/>
+        <stop offset="100%" stop-color="#6366f1"/>
+      </linearGradient>
+    </defs>
+  </g>
+  <!-- SAAS text -->
+  <text x="88" y="34" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-weight="800" font-size="22" fill="#111827" letter-spacing="3">SAAS</text>
+  <!-- OFFERS text -->
+  <text x="88" y="58" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-weight="400" font-size="16" fill="#374151" letter-spacing="5">OFFERS</text>
+</svg>
