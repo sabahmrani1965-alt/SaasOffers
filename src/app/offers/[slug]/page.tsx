@@ -11,6 +11,7 @@ import { RelatedOffers } from '@/components/offers/RelatedOffers'
 import { MobileCTABar } from '@/components/offers/MobileCTABar'
 import { CheckCircle2, ChevronRight, DollarSign, Zap } from 'lucide-react'
 import Link from 'next/link'
+import { getCategoryByDbValue } from '@/lib/categories'
 
 interface PageProps {
   params: { slug: string }
@@ -92,12 +93,16 @@ export default async function OfferPage({ params }: PageProps) {
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
             <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">Offers</Link>
             <ChevronRight className="w-4 h-4 text-gray-400" />
-            {deal.category && (
-              <>
-                <Link href={`/offers?category=${deal.category}`} className="hover:text-gray-900 transition-colors">{deal.category}</Link>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
-              </>
-            )}
+            {deal.category && (() => {
+              const cat = getCategoryByDbValue(deal.category)
+              const href = cat ? `/offers/category/${cat.slug}` : `/offers?category=${deal.category}`
+              return (
+                <>
+                  <Link href={href} className="hover:text-gray-900 transition-colors">{deal.category}</Link>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </>
+              )
+            })()}
             <span className="text-gray-900 font-semibold">{deal.name}</span>
           </nav>
 
