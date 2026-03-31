@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Menu, X } from 'lucide-react'
-import Image from 'next/image'
+import { Logo } from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -46,15 +46,8 @@ export function Navbar() {
       scrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm'
     )}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo.svg"
-            alt="SaaSOffers"
-            width={140}
-            height={40}
-            className="h-9 w-auto object-contain"
-            priority
-          />
+        <Link href="/">
+          <Logo variant="dark" size="md" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

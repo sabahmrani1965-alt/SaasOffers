@@ -7,7 +7,7 @@ import {
   LayoutDashboard, Package, FileText, Users,
   Settings, ChevronRight, ExternalLink, ClipboardList
 } from 'lucide-react'
-import Image from 'next/image'
+import { Logo } from '@/components/ui/Logo'
 
 const NAV = [
   { href: '/admin', label: 'Overview', icon: LayoutDashboard, exact: true },
@@ -26,14 +26,8 @@ export function AdminSidebar() {
       {/* Logo */}
       <div className="h-16 flex items-center px-5 border-b border-white/5">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <Image
-            src="/logo.svg"
-            alt="SaaSOffers"
-            width={110}
-            height={32}
-            className="h-7 w-auto object-contain brightness-0 invert"
-          />
-          <div className="text-[10px] text-gray-500 font-medium border-l border-white/10 pl-2.5">Admin</div>
+          <Logo variant="light" size="sm" />
+          <div className="text-[10px] text-gray-500 font-medium border-l border-white/10 pl-2.5 ml-1">Admin</div>
         </Link>
       </div>
 
