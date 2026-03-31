@@ -1,0 +1,399 @@
+{
+  "generated": "2026-03-31",
+  "platform": "SaaSOffers",
+  "offers": [
+    {
+      "slug": "pipedrive-crm",
+      "name": "Pipedrive",
+      "type": "free",
+      "category": "Marketing",
+      "logo_bg": "#1A1F71",
+      "value": 2160,
+      "value_label": "30% off for 12 months",
+      "featured": false,
+      "ai_recommendation": {
+        "stages": ["seed", "series-a"],
+        "company_types": ["b2b-saas", "agency", "service"],
+        "team_sizes": ["1-10", "10-50"]
+      },
+      "tags": ["crm", "sales", "pipeline", "startup crm", "sales software", "founder perks"],
+      "seo": {
+        "meta_title": "Pipedrive CRM Startup Discount — 30% Off for 12 Months | SaaSOffers",
+        "meta_description": "Get 30% off Pipedrive CRM for 12 months through SaaSOffers. The visual sales CRM that helps startups close deals faster. No credit card required.",
+        "h1": "Get 30% Off Pipedrive CRM for Your Startup",
+        "h2": [
+          "What's Included in the Pipedrive Startup Deal",
+          "Why Startups Choose Pipedrive Over Other CRMs",
+          "How to Claim Your 30% Pipedrive Discount",
+          "Pipedrive Features That Drive Startup Sales"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Pipedrive CRM — 30% Startup Discount",
+          "description": "Get 30% off Pipedrive CRM for 12 months. Sales pipeline management built for startups.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/pipedrive-crm",
+          "seller": {
+            "@type": "Organization",
+            "name": "SaaSOffers"
+          }
+        },
+        "og_image_alt": "Pipedrive CRM 30% startup discount - SaaSOffers"
+      }
+    },
+    {
+      "slug": "hubspot-startups",
+      "name": "HubSpot for Startups",
+      "type": "apply",
+      "category": "Marketing",
+      "logo_bg": "#FF7A59",
+      "value": 8640,
+      "value_label": "Up to 90% off Year 1",
+      "featured": true,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed", "series-a"],
+        "company_types": ["b2b-saas", "marketplace", "e-commerce"],
+        "team_sizes": ["1-10", "10-50"]
+      },
+      "tags": ["crm", "hubspot", "marketing automation", "sales hub", "startup perks", "inbound marketing"],
+      "seo": {
+        "meta_title": "HubSpot for Startups — Up to 90% Off | SaaSOffers",
+        "meta_description": "Apply for HubSpot's startup program and get up to 90% off the full CRM, Marketing, Sales, and Service platform. Pre-seed to Series A eligible.",
+        "h1": "HubSpot for Startups: Up to 90% Off the Full Platform",
+        "h2": [
+          "What's in the HubSpot Startup Program",
+          "Discount Tiers by Funding Stage",
+          "How to Apply for HubSpot for Startups",
+          "What Makes HubSpot Different for Early-Stage Companies",
+          "HubSpot vs. Building Point Solutions"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "HubSpot for Startups — Up to 90% Off",
+          "description": "Qualifying startups get up to 90% off HubSpot CRM, Marketing Hub, Sales Hub, and Service Hub in Year 1.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://saasoffers.tech/offers/hubspot-startups"
+        },
+        "og_image_alt": "HubSpot for Startups 90% discount - SaaSOffers"
+      }
+    },
+    {
+      "slug": "intercom-early-stage",
+      "name": "Intercom Early Stage",
+      "type": "apply",
+      "category": "Marketing",
+      "logo_bg": "#286EFA",
+      "value": 6000,
+      "value_label": "Free for 12 months",
+      "featured": true,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed"],
+        "company_types": ["b2b-saas", "consumer-app"],
+        "team_sizes": ["1-10"]
+      },
+      "tags": ["customer support", "live chat", "intercom", "user onboarding", "startup perks", "customer messaging"],
+      "seo": {
+        "meta_title": "Intercom Free for 12 Months — Early Stage Startup Program | SaaSOffers",
+        "meta_description": "Get Intercom free for your first year through the Early Stage program. Live chat, onboarding, and customer support — up to $6,000 in value.",
+        "h1": "Intercom Early Stage: Free for 12 Months for Qualifying Startups",
+        "h2": [
+          "What's Included in Intercom's Early Stage Program",
+          "Why Customer Messaging Matters at the Early Stage",
+          "How to Apply for Intercom Early Stage",
+          "Intercom Features That Drive User Retention",
+          "Intercom AI: How Fin Changes Support Economics"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Intercom Early Stage — Free for 12 Months",
+          "description": "Startups under 2 years old with less than $1M raised get Intercom Starter free for 12 months.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://saasoffers.tech/offers/intercom-early-stage"
+        },
+        "og_image_alt": "Intercom Early Stage free startup program - SaaSOffers"
+      }
+    },
+    {
+      "slug": "brex-startup",
+      "name": "Brex Business Account",
+      "type": "free",
+      "category": "Finance",
+      "logo_bg": "#FF6F4A",
+      "value": 500,
+      "value_label": "$500 Rewards",
+      "featured": true,
+      "ai_recommendation": {
+        "stages": ["seed", "series-a", "series-b"],
+        "company_types": ["b2b-saas", "marketplace", "deeptech"],
+        "team_sizes": ["1-10", "10-50", "50+"]
+      },
+      "tags": ["corporate card", "brex", "startup banking", "expense management", "no personal guarantee", "fintech"],
+      "seo": {
+        "meta_title": "Brex Corporate Card for Startups — $500 Rewards + No Personal Guarantee | SaaSOffers",
+        "meta_description": "Get $500 in Brex rewards and a corporate card with no personal guarantee. Built for startups — approved based on your company, not your personal credit.",
+        "h1": "Brex for Startups: $500 Rewards and No Personal Guarantee",
+        "h2": [
+          "What You Get with Brex Through SaaSOffers",
+          "Why Founders Choose Brex Over Traditional Business Credit Cards",
+          "How Brex Approval Works for Startups",
+          "Brex Rewards: How to Maximize Points on SaaS Spending",
+          "Brex vs. Ramp vs. Mercury — Which Is Right for Your Startup?"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Brex Startup Corporate Card — $500 Rewards",
+          "description": "Corporate card for startups with no personal guarantee. Get $500 in rewards when you sign up via SaaSOffers.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/brex-startup"
+        },
+        "og_image_alt": "Brex corporate card startup rewards - SaaSOffers"
+      }
+    },
+    {
+      "slug": "mongodb-atlas-startups",
+      "name": "MongoDB for Startups",
+      "type": "free",
+      "category": "Dev Tools",
+      "logo_bg": "#00ED64",
+      "value": 500,
+      "value_label": "$500 Atlas Credits",
+      "featured": false,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed"],
+        "company_types": ["b2b-saas", "consumer-app", "ai-ml"],
+        "team_sizes": ["1-10"]
+      },
+      "tags": ["mongodb", "database", "nosql", "atlas", "cloud database", "developer tools", "startup credits"],
+      "seo": {
+        "meta_title": "MongoDB for Startups — $500 Atlas Credits | SaaSOffers",
+        "meta_description": "Get $500 in MongoDB Atlas credits through the Startups program. Build on the world's most popular NoSQL database with free cloud hosting credits.",
+        "h1": "MongoDB for Startups: $500 in Atlas Database Credits",
+        "h2": [
+          "What MongoDB Atlas Credits Cover",
+          "Why Modern Startups Build on MongoDB",
+          "MongoDB vs. PostgreSQL: Choosing the Right Database",
+          "How to Redeem Your MongoDB Startup Credits",
+          "MongoDB Atlas Features for Production Workloads"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "MongoDB for Startups — $500 Atlas Credits",
+          "description": "New MongoDB Atlas customers from qualifying startups get $500 in cloud database credits.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/mongodb-atlas-startups"
+        },
+        "og_image_alt": "MongoDB Atlas startup credits - SaaSOffers"
+      }
+    },
+    {
+      "slug": "mixpanel-analytics",
+      "name": "Mixpanel Startup Program",
+      "type": "free",
+      "category": "Analytics",
+      "logo_bg": "#7856FF",
+      "value": 2400,
+      "value_label": "Free for 12 months",
+      "featured": false,
+      "ai_recommendation": {
+        "stages": ["seed", "series-a"],
+        "company_types": ["b2b-saas", "consumer-app", "marketplace"],
+        "team_sizes": ["1-10", "10-50"]
+      },
+      "tags": ["analytics", "mixpanel", "product analytics", "user behavior", "funnel analysis", "retention", "startup tools"],
+      "seo": {
+        "meta_title": "Mixpanel Free for Startups — 12 Months Product Analytics | SaaSOffers",
+        "meta_description": "Get Mixpanel Growth free for 12 months through the Startup Program. Event-based product analytics for understanding user behavior and improving retention.",
+        "h1": "Mixpanel Startup Program: Free Product Analytics for 12 Months",
+        "h2": [
+          "What's Included in Mixpanel Growth",
+          "Event-Based Analytics: Why It Matters for Product Teams",
+          "How to Set Up Mixpanel in Under an Hour",
+          "Key Mixpanel Reports Every Startup Should Track",
+          "Mixpanel vs. Google Analytics vs. Amplitude"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Mixpanel Startup Program — Free for 12 Months",
+          "description": "Qualifying startups get Mixpanel Growth free for 12 months — event analytics, funnels, retention, and cohort analysis.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/mixpanel-analytics"
+        },
+        "og_image_alt": "Mixpanel free startup program analytics - SaaSOffers"
+      }
+    },
+    {
+      "slug": "loom-startups",
+      "name": "Loom for Startups",
+      "type": "free",
+      "category": "Productivity",
+      "logo_bg": "#625DF5",
+      "value": 900,
+      "value_label": "6 Months Free",
+      "featured": false,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed"],
+        "company_types": ["b2b-saas", "remote-team", "agency"],
+        "team_sizes": ["1-10", "10-50"]
+      },
+      "tags": ["loom", "async video", "screen recording", "remote work", "productivity", "team collaboration", "startup tools"],
+      "seo": {
+        "meta_title": "Loom Business Free for Startups — 6 Months | SaaSOffers",
+        "meta_description": "Get Loom Business free for 6 months through SaaSOffers. Async video messaging for remote startup teams — replace meetings with quick screen recordings.",
+        "h1": "Loom for Startups: 6 Months Free Business Plan",
+        "h2": [
+          "What's Included in Loom Business",
+          "How Async Video Saves Remote Teams 5+ Hours Per Week",
+          "Best Startup Use Cases for Loom",
+          "Loom AI: Automatic Transcripts and Action Items",
+          "How to Claim Your Loom Startup Discount"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Loom Business — 6 Months Free for Startups",
+          "description": "Qualifying startups get Loom Business free for 6 months. Unlimited async video recording for remote teams.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/loom-startups"
+        },
+        "og_image_alt": "Loom Business free startup offer - SaaSOffers"
+      }
+    },
+    {
+      "slug": "ahrefs-seo",
+      "name": "Ahrefs Webmaster Tools",
+      "type": "free",
+      "category": "Marketing",
+      "logo_bg": "#FF6200",
+      "value": 1200,
+      "value_label": "Free Forever",
+      "featured": false,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed", "series-a"],
+        "company_types": ["b2b-saas", "content", "e-commerce", "marketplace"],
+        "team_sizes": ["1-10", "10-50"]
+      },
+      "tags": ["seo", "ahrefs", "backlinks", "keyword tracking", "site audit", "content marketing", "organic growth"],
+      "seo": {
+        "meta_title": "Ahrefs Webmaster Tools — Free SEO Platform for Startups | SaaSOffers",
+        "meta_description": "Get Ahrefs Webmaster Tools completely free — backlink monitoring, site audits, and keyword tracking for your startup website. No subscription required.",
+        "h1": "Ahrefs Webmaster Tools: Free SEO Suite for Your Startup",
+        "h2": [
+          "What Ahrefs Webmaster Tools Includes",
+          "Why Organic SEO Is the Best ROI Channel for Startups",
+          "How to Set Up Ahrefs for Your Startup Website",
+          "Key Ahrefs Reports to Run in Your First Week",
+          "When to Upgrade to a Full Ahrefs Subscription"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Ahrefs Webmaster Tools — Free Forever",
+          "description": "Free website SEO monitoring, backlink tracking, and site audit for any website owner.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/ahrefs-seo"
+        },
+        "og_image_alt": "Ahrefs free SEO tools for startups - SaaSOffers"
+      }
+    },
+    {
+      "slug": "anthropic-api-credits",
+      "name": "Anthropic API Credits",
+      "type": "free",
+      "category": "AI Tools",
+      "logo_bg": "#CC785C",
+      "value": 50,
+      "value_label": "$50 API Credits",
+      "featured": true,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed", "series-a"],
+        "company_types": ["ai-ml", "b2b-saas", "developer-tool"],
+        "team_sizes": ["1-10"]
+      },
+      "tags": ["anthropic", "claude api", "ai credits", "llm", "ai tools", "developer tools", "claude"],
+      "seo": {
+        "meta_title": "Anthropic Claude API Credits — $50 Free for New Users | SaaSOffers",
+        "meta_description": "Get $50 in free Anthropic API credits to build with Claude. Access Claude 3.5 Sonnet, Haiku, and Opus with a 200K context window for AI-powered products.",
+        "h1": "Anthropic API Credits: $50 Free to Build AI Features with Claude",
+        "h2": [
+          "What You Can Build with Anthropic's Claude API",
+          "Claude 3.5 Sonnet vs. Haiku vs. Opus: Which Model to Use",
+          "How to Get Started with the Anthropic API",
+          "Claude's 200K Context Window: What It Enables",
+          "Anthropic API Pricing After Free Credits"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Anthropic Claude API — $50 Free Credits",
+          "description": "$50 in free Anthropic API credits for new users. Access Claude 3.5 Sonnet, Haiku, and Opus to build AI-powered applications.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://saasoffers.tech/offers/anthropic-api-credits"
+        },
+        "og_image_alt": "Anthropic Claude API free credits for developers - SaaSOffers"
+      }
+    },
+    {
+      "slug": "vercel-pro-startups",
+      "name": "Vercel Pro for Startups",
+      "type": "apply",
+      "category": "Dev Tools",
+      "logo_bg": "#000000",
+      "value": 240,
+      "value_label": "1 Year Free Pro",
+      "featured": true,
+      "ai_recommendation": {
+        "stages": ["pre-seed", "seed"],
+        "company_types": ["b2b-saas", "consumer-app", "developer-tool"],
+        "team_sizes": ["1-10"]
+      },
+      "tags": ["vercel", "deployment", "nextjs", "frontend", "hosting", "ci cd", "developer tools", "startup perks"],
+      "seo": {
+        "meta_title": "Vercel Pro Free for Startups — 1 Year | SaaSOffers",
+        "meta_description": "Apply for Vercel Pro free for 12 months. Instant deployments, branch previews, and global CDN for Next.js and React startups. Up to $240 in value.",
+        "h1": "Vercel Pro for Startups: Free for 1 Year",
+        "h2": [
+          "What's Included in Vercel Pro",
+          "How Vercel Deployment Previews Speed Up Your Team",
+          "Vercel + Next.js: The Modern Startup Stack",
+          "How to Apply for the Vercel Startup Program",
+          "Vercel vs. Netlify vs. Render: Which Platform for Startups?"
+        ],
+        "structured_data": {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          "name": "Vercel Pro for Startups — 1 Year Free",
+          "description": "Qualifying startups under 3 years old get Vercel Pro free for 12 months. Unlimited deployments, preview URLs, and team collaboration.",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/LimitedAvailability",
+          "url": "https://saasoffers.tech/offers/vercel-pro-startups"
+        },
+        "og_image_alt": "Vercel Pro free startup program - SaaSOffers"
+      }
+    }
+  ]
+}

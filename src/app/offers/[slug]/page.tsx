@@ -5,7 +5,7 @@ import { SEED_DEALS } from '@/lib/seed-data'
 import { Deal } from '@/types'
 import { DealBadge } from '@/components/ui/DealBadge'
 import { OfferCTA } from '@/components/offers/OfferCTA'
-import { CheckCircle2, ChevronRight, DollarSign } from 'lucide-react'
+import { CheckCircle2, ChevronRight, DollarSign, Clock, ExternalLink, Tag } from 'lucide-react'
 import Link from 'next/link'
 
 interface PageProps {
@@ -27,9 +27,26 @@ async function getDeal(slug: string): Promise<Deal | null> {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const deal = await getDeal(params.slug)
   if (!deal) return { title: 'Offer Not Found' }
+  const title = `${deal.name} — ${deal.value_label} | SaaSOffers`
+  const description = deal.description
   return {
-    title: `${deal.name} — ${deal.value_label}`,
-    description: deal.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://saasoffers.tech/offers/${deal.slug}`,
+      siteName: 'SaaSOffers',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `https://saasoffers.tech/offers/${deal.slug}`,
+    },
   }
 }
 
@@ -52,8 +69,27 @@ export default async function OfferPage({ params }: PageProps) {
     isUnlocked = !!unlocked
   }
 
+  // JSON-LD structured data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Offer',
+    name: `${deal.name} — ${deal.value_label}`,
+    description: deal.description,
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: `https://saasoffers.tech/offers/${deal.slug}`,
+    seller: { '@type': 'Organization', name: 'SaaSOffers', url: 'https://saasoffers.tech' },
+    ...(deal.expires_at ? { priceValidUntil: deal.expires_at.slice(0, 10) } : {}),
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">
+      {/* JSON-LD structured data for Google */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-4xl mx-auto">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
@@ -85,6 +121,17 @@ export default async function OfferPage({ params }: PageProps) {
                   <DollarSign className="w-4 h-4" />
                   {deal.value_label}
                 </div>
+                {deal.category && (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
+                    <Tag className="w-3 h-3" />{deal.category}
+                  </span>
+                )}
+                {deal.expires_at && (
+                  <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-600 bg-amber-50 border border-amber-100 px-2.5 py-1 rounded-full">
+                    <Clock className="w-3 h-3" />
+                    Expires {new Date(deal.expires_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </span>
+                )}
               </div>
             </div>
 

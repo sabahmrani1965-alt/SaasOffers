@@ -14,6 +14,10 @@ export interface Deal {
   category?: string
   requirements?: string
   faq?: { question: string; answer: string }[]
+  affiliate_link?: string
+  featured?: boolean
+  expires_at?: string
+  benefits?: string[]
   created_at: string
 }
 
