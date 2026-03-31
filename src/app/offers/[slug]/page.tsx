@@ -106,10 +106,10 @@ export default async function OfferPage({ params }: PageProps) {
 
       {/* ── HERO ── */}
       <div className="bg-white border-b border-gray-100 pt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
+          <nav className="flex items-center gap-2 text-sm text-gray-500 mb-5">
             <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">Offers</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
             {deal.category && (
@@ -128,7 +128,7 @@ export default async function OfferPage({ params }: PageProps) {
             {/* Left: Hero content */}
             <div className="lg:col-span-2">
               {/* Logo + verified */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 mb-4">
                 <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="xl" />
                 <div>
                   <div className="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-1.5">
@@ -141,34 +141,47 @@ export default async function OfferPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* H1 — keyword-rich */}
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-3">
+              {/* H1 */}
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-2">
                 {deal.name} — {deal.value_label} for Startups
               </h1>
 
               {/* Deal value pill */}
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-3">
                 <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-base px-4 py-1.5 rounded-full">
                   <DollarSign className="w-4 h-4" />{deal.value_label}
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 text-lg leading-relaxed max-w-xl mb-6">
+              <p className="text-gray-600 text-base leading-relaxed max-w-xl mb-4">
                 {deal.description}
               </p>
 
+              {/* ── Mobile inline CTA (hidden on lg+) ── */}
+              <div className="lg:hidden mb-4">
+                <Link
+                  href={user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`}
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold py-3.5 rounded-xl shadow-md shadow-violet-200 text-sm"
+                >
+                  <Zap className="w-4 h-4" fill="white" />
+                  {deal.type === 'free' ? 'Unlock Free Deal' : deal.type === 'apply' ? `Apply for ${deal.name}` : 'Unlock Deal'}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-center text-xs text-gray-400 mt-2">
+                  {deal.type === 'free' ? 'Free · No credit card required' : deal.type === 'apply' ? 'Reviewed within 48 hours' : 'Premium · $79/year, unlimited deals'}
+                </p>
+              </div>
+
               {/* Trust row */}
-              <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-                {[
-                  '✓ Verified deal',
-                  '✓ No spam, ever',
-                  '✓ 2,000+ startups trust SaaSOffers',
-                ].map(t => <span key={t} className="font-medium">{t}</span>)}
+              <div className="flex flex-wrap gap-3 text-xs text-gray-400">
+                {['✓ Verified deal', '✓ No spam, ever', '✓ 2,000+ startups'].map(t => (
+                  <span key={t} className="font-medium">{t}</span>
+                ))}
               </div>
             </div>
 
-            {/* Right: Sidebar CTA (desktop) */}
+            {/* Right: Sidebar CTA (desktop only) */}
             <div className="hidden lg:block lg:col-span-1">
               <OfferCTA deal={deal} user={user} isPremium={isPremium} isUnlocked={isUnlocked} />
             </div>
@@ -177,7 +190,7 @@ export default async function OfferPage({ params }: PageProps) {
       </div>
 
       {/* ── BODY ── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
           {/* ── MAIN CONTENT col ── */}
