@@ -313,44 +313,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS + TRUST ── */}
-      <section className="py-20 px-4 sm:px-6 bg-white border-y border-gray-100">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Trusted by thousands of startups</h2>
-            <p className="text-gray-700">Real numbers from real founders saving on their SaaS stack</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
-            {STATS.map(stat => (
-              <div key={stat.label} className="text-center bg-gray-50 border border-gray-100 rounded-2xl py-8 px-4">
-                <div className="text-3xl sm:text-4xl font-bold gradient-text mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-700 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-          {/* Testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map(t => (
-              <div key={t.author} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-shadow">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
-                </div>
-                <p className="text-sm text-gray-700 leading-relaxed mb-5">"{t.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold text-white shadow-sm`}>
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-gray-900">{t.author}</div>
-                    <div className="text-xs text-gray-700">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PRICING ── */}
       <section id="pricing" className="py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto">
@@ -402,6 +364,43 @@ export default async function HomePage() {
           <p className="text-center text-xs text-gray-700 mt-6 flex items-center justify-center gap-1.5">
             <Shield className="w-3.5 h-3.5" /> Secure payment via Stripe. Cancel anytime.
           </p>
+        </div>
+      </section>
+
+      {/* ── STATS + TRUST ── */}
+      <section className="py-20 px-4 sm:px-6 bg-white border-y border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Trusted by thousands of startups</h2>
+            <p className="text-gray-700">Real numbers from real founders saving on their SaaS stack</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+            {STATS.map(stat => (
+              <div key={stat.label} className="text-center bg-gray-50 border border-gray-100 rounded-2xl py-8 px-4">
+                <div className="text-3xl sm:text-4xl font-bold gradient-text mb-2">{stat.value}</div>
+                <div className="text-sm text-gray-700 font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map(t => (
+              <div key={t.author} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-shadow">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
+                </div>
+                <p className="text-sm text-gray-700 leading-relaxed mb-5">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold text-white shadow-sm`}>
+                    {t.avatar}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">{t.author}</div>
+                    <div className="text-xs text-gray-700">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
