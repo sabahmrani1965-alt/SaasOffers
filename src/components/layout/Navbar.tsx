@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -45,11 +46,15 @@ export function Navbar() {
       scrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100' : 'bg-white/80 backdrop-blur-sm'
     )}>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-200 group-hover:shadow-violet-300 transition-all">
-            <Zap className="w-4 h-4 text-white" fill="white" />
-          </div>
-          <span className="font-bold text-gray-900 text-lg tracking-tight">SaaSOffers</span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="SaaSOffers"
+            width={140}
+            height={40}
+            className="h-9 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
