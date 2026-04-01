@@ -9,7 +9,7 @@ interface ModalProps {
   onClose: () => void
   title: string
   children: React.ReactNode
-  size?: 'md' | 'lg' | 'xl'
+  size?: 'md' | 'lg' | 'xl' | '2xl'
 }
 
 export function Modal({ open, onClose, title, children, size = 'lg' }: ModalProps) {
@@ -29,6 +29,7 @@ export function Modal({ open, onClose, title, children, size = 'lg' }: ModalProp
         size === 'md' && 'max-w-md',
         size === 'lg' && 'max-w-2xl',
         size === 'xl' && 'max-w-4xl',
+        size === '2xl' && 'max-w-6xl',
       )}>
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 flex-shrink-0">
           <h2 className="text-base font-semibold text-white">{title}</h2>

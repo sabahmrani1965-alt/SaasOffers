@@ -7,6 +7,7 @@ import { ConfirmModal } from './ConfirmModal'
 import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 import { Field, inputClass, selectClass, textareaClass } from './FormField'
+import { MarkdownEditor, DEFAULT_TEMPLATE } from './MarkdownEditor'
 import { DealLogo } from '@/components/ui/DealLogo'
 
 interface Offer {
@@ -29,7 +30,7 @@ interface Offer {
 }
 
 const EMPTY: Partial<Offer> = {
-  name: '', slug: '', description: '', long_description: '', value: 0,
+  name: '', slug: '', description: '', long_description: DEFAULT_TEMPLATE, value: 0,
   value_label: '', type: 'free', category: '', logo_bg: '#7C3AED', logo_url: '',
   requirements: '', affiliate_link: '', featured: false,
 }
@@ -279,7 +280,7 @@ export function OffersManager() {
       )}
 
       {/* Create/Edit Modal */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editId ? 'Edit Offer' : 'New Offer'} size="xl">
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editId ? 'Edit Offer' : 'New Offer'} size="2xl">
         <div className="grid grid-cols-2 gap-4">
           <Field label="Name" required>
             <input value={form.name || ''} onChange={e => handleFieldChange('name', e.target.value)} placeholder="e.g. AWS Activate" className={inputClass} />
@@ -337,8 +338,11 @@ export function OffersManager() {
           <Field label="Short Description" required className="col-span-2">
             <textarea value={form.description || ''} onChange={e => handleFieldChange('description', e.target.value)} placeholder="One line description…" rows={2} className={textareaClass} />
           </Field>
-          <Field label="Full Description (Markdown-style)" className="col-span-2">
-            <textarea value={form.long_description || ''} onChange={e => handleFieldChange('long_description', e.target.value)} placeholder={'**What You Get:**\n- Benefit 1\n- Benefit 2'} rows={6} className={textareaClass} />
+          <Field label="Full Description" className="col-span-2">
+            <MarkdownEditor
+              value={form.long_description || ''}
+              onChange={v => handleFieldChange('long_description', v)}
+            />
           </Field>
           <Field label="Requirements" className="col-span-2">
             <textarea value={form.requirements || ''} onChange={e => handleFieldChange('requirements', e.target.value)} placeholder="Eligibility requirements…" rows={2} className={textareaClass} />
