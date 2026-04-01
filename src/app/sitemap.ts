@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SEED_DEALS, SEED_BLOG_POSTS } from '@/lib/seed-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://saasoffers.com'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://saasoffers.tech'
 
   const supabase = createClient()
 

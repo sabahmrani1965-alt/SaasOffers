@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/dashboard/', '/api/'],
     },
-    sitemap: `${process.env.NEXT_PUBLIC_APP_URL || 'https://saasoffers.com'}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_APP_URL || 'https://saasoffers.tech'}/sitemap.xml`,
   }
 }
