@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Plus, Search, Pencil, Trash2, Star, ToggleLeft, ToggleRight, ExternalLink, Filter } from 'lucide-react'
+import { Plus, Search, Pencil, Trash2, Star, ToggleLeft, ToggleRight, ExternalLink, Filter, RefreshCw } from 'lucide-react'
 import { Modal } from './Modal'
 import { ConfirmModal } from './ConfirmModal'
 import { Badge } from './Badge'
@@ -51,6 +51,8 @@ export function OffersManager() {
   const [saving, setSaving] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
+  const [syncing, setSyncing] = useState(false)
+  const [syncResult, setSyncResult] = useState<string>('')
   const [modalOpen, setModalOpen] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)
   const [form, setForm] = useState<Partial<Offer>>(EMPTY)
@@ -113,6 +115,22 @@ export function OffersManager() {
     }
   }
 
+  async function handleSync() {
+    setSyncing(true)
+    setSyncResult('')
+    try {
+      const res = await fetch('/api/admin/sync-partnerstack', { method: 'POST' })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error)
+      setSyncResult(`✓ Synced ${json.total} active deals — ${json.inserted} new, ${json.updated} updated`)
+      fetch_()
+    } catch (e: any) {
+      setSyncResult(`✗ Sync failed: ${e.message}`)
+    } finally {
+      setSyncing(false)
+    }
+  }
+
   async function handleDelete() {
     if (!deleteTarget) return
     setDeleting(true)
@@ -168,7 +186,15 @@ export function OffersManager() {
             {t === '' ? 'All' : t.charAt(0).toUpperCase() + t.slice(1)}
           </button>
         ))}
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-2">
+          <button
+            onClick={handleSync}
+            disabled={syncing}
+            className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-white/10 text-gray-300 text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors disabled:opacity-50"
+          >
+            <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+            {syncing ? 'Syncing…' : 'Sync PartnerStack'}
+          </button>
           <button
             onClick={openCreate}
             className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-lg shadow-violet-500/20"
@@ -179,6 +205,11 @@ export function OffersManager() {
       </div>
 
       {/* Stats */}
+      {syncResult && (
+        <p className={`text-xs px-4 py-2 rounded-xl border ${syncResult.startsWith('✓') ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-red-400 bg-red-500/10 border-red-500/20'}`}>
+          {syncResult}
+        </p>
+      )}
       <p className="text-xs text-gray-600">{total} offer{total !== 1 ? 's' : ''} total</p>
 
       {/* Table */}
