@@ -6,7 +6,7 @@ interface DealLogoProps {
   name: string
   logo_url?: string
   logo_bg?: string
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 }
 
 const SIZE: Record<string, { wrapper: string; img: number; text: string; padding: string }> = {
@@ -14,6 +14,7 @@ const SIZE: Record<string, { wrapper: string; img: number; text: string; padding
   md:  { wrapper: 'w-11 h-11 rounded-2xl', img: 26, text: 'text-sm',   padding: 'p-1.5' },
   lg:  { wrapper: 'w-14 h-14 rounded-2xl', img: 32, text: 'text-lg',   padding: 'p-2'   },
   xl:  { wrapper: 'w-16 h-16 rounded-2xl', img: 36, text: 'text-xl',   padding: 'p-2.5' },
+  '2xl': { wrapper: 'w-24 h-24 rounded-3xl', img: 64, text: 'text-3xl', padding: 'p-3' },
 }
 
 export function DealLogo({ name, logo_url, logo_bg, size = 'md' }: DealLogoProps) {

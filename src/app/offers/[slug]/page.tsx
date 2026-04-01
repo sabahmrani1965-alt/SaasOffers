@@ -131,7 +131,7 @@ export default async function OfferPage({ params }: PageProps) {
             <div className="lg:col-span-2">
               {/* Logo + verified */}
               <div className="flex items-center gap-4 mb-5">
-                <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="xl" />
+                <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="2xl" />
                 <div>
                   <div className="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-2">
                     <Zap className="w-3 h-3 fill-current" /> Verified by SaaSOffers
