@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 24" fill="none">
+  <rect width="24" height="24" rx="6" fill="#5E6AD2"/>
+  <path d="M6 18L6 6L9 6L9 15L16 15L16 18L6 18Z" fill="white"/>
+  <text x="30" y="17.5" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="600" fill="#111827">Linear</text>
+</svg>

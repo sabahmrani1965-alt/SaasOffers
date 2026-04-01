@@ -11,14 +11,14 @@ import {
 } from 'lucide-react'
 
 const LOGOS = [
-  { name: 'AWS',      src: 'https://cdn.simpleicons.org/amazonaws/FF9900' },
-  { name: 'Notion',   src: 'https://cdn.simpleicons.org/notion/000000' },
-  { name: 'Deel',     src: 'https://cdn.simpleicons.org/deel/15CCAE' },
-  { name: 'Linear',   src: 'https://cdn.simpleicons.org/linear/5E6AD2' },
-  { name: 'Figma',    src: 'https://cdn.simpleicons.org/figma/F24E1E' },
-  { name: 'Stripe',   src: 'https://cdn.simpleicons.org/stripe/635BFF' },
-  { name: 'HubSpot',  src: 'https://cdn.simpleicons.org/hubspot/FF7A59' },
-  { name: 'Vercel',   src: 'https://cdn.simpleicons.org/vercel/000000' },
+  { name: 'AWS',     src: '/logos/aws.svg' },
+  { name: 'Notion',  src: '/logos/notion.png' },
+  { name: 'Figma',   src: '/logos/figma.svg' },
+  { name: 'Stripe',  src: '/logos/stripe.svg' },
+  { name: 'HubSpot', src: '/logos/hubspot.svg' },
+  { name: 'Vercel',  src: '/logos/vercel.png' },
+  { name: 'Linear',  src: '/logos/linear.svg' },
+  { name: 'Deel',    src: '/logos/deel.svg' },
 ]
 
 const BENEFITS = [
@@ -185,10 +185,9 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
             {LOGOS.map(logo => (
-              <div key={logo.name} className="flex items-center gap-2.5 opacity-50 hover:opacity-100 transition-opacity cursor-default group">
+              <div key={logo.name} className="flex items-center gap-2.5 opacity-60 hover:opacity-100 transition-opacity cursor-default">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logo.src} alt={logo.name} width={22} height={22} className="flex-shrink-0" />
-                <span className="text-sm font-semibold text-gray-700">{logo.name}</span>
+                <img src={logo.src} alt={logo.name} height={28} className="h-7 w-auto flex-shrink-0 object-contain" />
               </div>
             ))}
           </div>
