@@ -1,69 +1,167 @@
 'use client'
 
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
+
+// Parse FAQ block: lines like "**Q: ...** A: ..."  or  "**Q: ...**\nA: ..."
+function parseFAQ(content: string): { question: string; answer: string }[] {
+  const items: { question: string; answer: string }[] = []
+  // Match pattern: **Q: <question>**\nA: <answer> (up to next **Q: or end)
+  const regex = /\*\*Q:\s*(.+?)\*\*\s*\n?A:\s*([\s\S]+?)(?=\n\*\*Q:|$)/g
+  let match
+  while ((match = regex.exec(content)) !== null) {
+    items.push({
+      question: match[1].trim(),
+      answer: match[2].trim(),
+    })
+  }
+  return items
+}
+
+// Strip FAQ section from content so it doesn't double-render
+function stripFAQSection(content: string): string {
+  // Remove everything from "## Frequently Asked Questions" heading to next "## " or end
+  return content.replace(
+    /## Frequently Asked Questions[\s\S]*?(?=\n## |\n---\s*\n## |$)/,
+    ''
+  )
+}
+
+function FAQAccordion({ items }: { items: { question: string; answer: string }[] }) {
+  const [open, setOpen] = useState<number | null>(null)
+  return (
+    <div className="divide-y divide-gray-100">
+      {items.map((item, i) => (
+        <div key={i}>
+          <button
+            onClick={() => setOpen(open === i ? null : i)}
+            className="w-full flex items-center justify-between gap-4 py-4 text-left group"
+          >
+            <span className="text-base font-semibold text-gray-900 group-hover:text-violet-600 transition-colors">
+              {item.question}
+            </span>
+            <ChevronDown
+              className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${open === i ? 'rotate-180 text-violet-500' : ''}`}
+            />
+          </button>
+          {open === i && (
+            <div className="pb-4 text-gray-700 text-sm leading-relaxed">
+              {item.answer}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export function MarkdownContent({ content }: { content: string }) {
+  const faqItems = parseFAQ(content)
+  const hasFAQ = faqItems.length > 0
+  const bodyContent = hasFAQ ? stripFAQSection(content) : content
+
+  // JSON-LD FAQ schema
+  const faqSchema = hasFAQ ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  } : null
+
   return (
-    <ReactMarkdown
-      components={{
-        h2: ({ children }) => (
-          <h2 className="text-xl font-bold text-gray-900 mt-8 mb-3 first:mt-0">{children}</h2>
-        ),
-        h3: ({ children }) => (
-          <h3 className="text-base font-bold text-gray-900 mt-5 mb-2">{children}</h3>
-        ),
-        p: ({ children }) => (
-          <p className="text-gray-700 text-base leading-7 mb-3">{children}</p>
-        ),
-        ul: ({ children }) => (
-          <ul className="space-y-2 mb-4 pl-1">{children}</ul>
-        ),
-        ol: ({ children }) => (
-          <ol className="space-y-2 mb-4 pl-1 list-decimal list-inside">{children}</ol>
-        ),
-        li: ({ children }) => (
-          <li className="flex items-start gap-2 text-gray-700 text-base leading-relaxed">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-500 flex-shrink-0 mt-2.5" />
-            <span>{children}</span>
-          </li>
-        ),
-        strong: ({ children }) => (
-          <strong className="font-semibold text-gray-900">{children}</strong>
-        ),
-        hr: () => <hr className="border-gray-100 my-6" />,
-        table: ({ children }) => (
-          <div className="overflow-x-auto mb-4">
-            <table className="w-full text-sm border-collapse">{children}</table>
-          </div>
-        ),
-        thead: ({ children }) => (
-          <thead className="bg-gray-50">{children}</thead>
-        ),
-        th: ({ children }) => (
-          <th className="text-left text-xs font-semibold text-gray-700 uppercase tracking-wider px-4 py-2.5 border border-gray-100">
-            {children}
-          </th>
-        ),
-        td: ({ children }) => (
-          <td className="px-4 py-2.5 border border-gray-100 text-gray-700 text-sm">{children}</td>
-        ),
-        tr: ({ children }) => (
-          <tr className="even:bg-gray-50/50">{children}</tr>
-        ),
-        blockquote: ({ children }) => (
-          <blockquote className="border-l-4 border-violet-200 pl-4 italic text-gray-600 mb-4">{children}</blockquote>
-        ),
-        a: ({ href, children }) => (
-          <a href={href} className="text-violet-600 font-medium hover:underline" target="_blank" rel="noopener noreferrer">
-            {children}
-          </a>
-        ),
-        code: ({ children }) => (
-          <code className="bg-gray-100 text-violet-700 px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
-        ),
-      }}
-    >
-      {content}
-    </ReactMarkdown>
+    <>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          h2: ({ children }) => (
+            <h2 className="text-xl font-bold text-gray-900 mt-8 mb-3 first:mt-0 pb-2 border-b border-gray-100">
+              {children}
+            </h2>
+          ),
+          h3: ({ children }) => (
+            <h3 className="text-base font-bold text-gray-900 mt-5 mb-2">{children}</h3>
+          ),
+          p: ({ children }) => (
+            <p className="text-gray-700 text-base leading-7 mb-3">{children}</p>
+          ),
+          ul: ({ children }) => (
+            <ul className="space-y-2 mb-4 pl-1">{children}</ul>
+          ),
+          ol: ({ children }) => (
+            <ol className="space-y-2 mb-4">{children}</ol>
+          ),
+          li: ({ children, ...props }) => {
+            // Check if inside ordered list
+            return (
+              <li className="flex items-start gap-2 text-gray-700 text-base leading-relaxed">
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-500 flex-shrink-0 mt-2.5" />
+                <span>{children}</span>
+              </li>
+            )
+          },
+          strong: ({ children }) => (
+            <strong className="font-semibold text-gray-900">{children}</strong>
+          ),
+          hr: () => <hr className="border-gray-100 my-6" />,
+          table: ({ children }) => (
+            <div className="overflow-x-auto mb-6 rounded-xl border border-gray-100 shadow-sm">
+              <table className="w-full text-sm border-collapse">{children}</table>
+            </div>
+          ),
+          thead: ({ children }) => (
+            <thead className="bg-violet-50">{children}</thead>
+          ),
+          th: ({ children }) => (
+            <th className="text-left text-xs font-bold text-violet-700 uppercase tracking-wider px-4 py-3 border-b border-gray-100">
+              {children}
+            </th>
+          ),
+          td: ({ children }) => (
+            <td className="px-4 py-3 border-b border-gray-50 text-gray-700 text-sm">{children}</td>
+          ),
+          tr: ({ children }) => (
+            <tr className="even:bg-gray-50/60 hover:bg-violet-50/30 transition-colors">{children}</tr>
+          ),
+          blockquote: ({ children }) => (
+            <blockquote className="border-l-4 border-violet-200 pl-4 italic text-gray-600 mb-4 bg-violet-50/30 py-2 rounded-r-lg">
+              {children}
+            </blockquote>
+          ),
+          a: ({ href, children }) => (
+            <a href={href} className="text-violet-600 font-medium hover:underline" target="_blank" rel="noopener noreferrer">
+              {children}
+            </a>
+          ),
+          code: ({ children }) => (
+            <code className="bg-gray-100 text-violet-700 px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
+          ),
+        }}
+      >
+        {bodyContent}
+      </ReactMarkdown>
+
+      {/* FAQ Accordion */}
+      {hasFAQ && (
+        <div className="mt-8 pt-6 border-t border-gray-100">
+          <h2 className="text-xl font-bold text-gray-900 mb-1 pb-2 border-b border-gray-100">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-sm text-gray-500 mt-2 mb-4">Click a question to expand the answer</p>
+          <FAQAccordion items={faqItems} />
+        </div>
+      )}
+    </>
   )
 }
