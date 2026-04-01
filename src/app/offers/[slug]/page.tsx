@@ -13,6 +13,7 @@ import { MobileCTABar } from '@/components/offers/MobileCTABar'
 import { CheckCircle2, ChevronRight, DollarSign, Zap, ArrowRight, Building2, Rocket, Users } from 'lucide-react'
 import Link from 'next/link'
 import { getCategoryByDbValue } from '@/lib/categories'
+import { MarkdownContent } from '@/components/offers/MarkdownContent'
 
 interface PageProps {
   params: { slug: string }
@@ -93,7 +94,8 @@ export default async function OfferPage({ params }: PageProps) {
     })),
   } : null
 
-  const sections = parseSections(deal.long_description || '')
+  const isRichMarkdown = (deal.long_description || '').includes('## ')
+  const sections = isRichMarkdown ? null : parseSections(deal.long_description || '')
   const cat = deal.category ? getCategoryByDbValue(deal.category) : null
 
   return (
@@ -199,53 +201,62 @@ export default async function OfferPage({ params }: PageProps) {
             {/* Highlights */}
             <DealHighlights deal={deal} />
 
-            {/* About */}
-            {sections.overview.length > 0 && (
+            {/* Rich markdown content (long-form SEO pages) */}
+            {isRichMarkdown && deal.long_description && (
               <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">About {deal.name}</h2>
-                <div className="space-y-3">
-                  {sections.overview.map((line, i) => (
-                    <p key={i} className="text-gray-700 text-base leading-7">{line}</p>
-                  ))}
-                </div>
+                <MarkdownContent content={deal.long_description} />
               </div>
             )}
 
-            {/* What You Get */}
-            {sections.benefits.length > 0 && (
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-gray-900 mb-5">What's Included</h2>
-                <div className="space-y-3">
-                  {sections.benefits.map((b, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      </div>
-                      <span className="text-gray-700 text-base leading-relaxed">{b}</span>
+            {/* Simple parsed sections (legacy / short descriptions) */}
+            {!isRichMarkdown && sections && (
+              <>
+                {sections.overview.length > 0 && (
+                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                    <h2 className="text-xl font-bold text-gray-900 mb-4">About {deal.name}</h2>
+                    <div className="space-y-3">
+                      {sections.overview.map((line, i) => (
+                        <p key={i} className="text-gray-700 text-base leading-7">{line}</p>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </div>
+                )}
 
-            {/* How to Claim */}
-            {sections.steps.length > 0 && (
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-gray-900 mb-2">How to Claim This Deal</h2>
-                <p className="text-gray-700 text-sm mb-6">3 simple steps — takes less than 2 minutes</p>
-                <div className="space-y-5">
-                  {sections.steps.map((step, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div className="w-8 h-8 rounded-xl bg-violet-600 text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
-                        {i + 1}
-                      </div>
-                      <div className="flex-1 pt-0.5">
-                        <p className="text-gray-800 text-base font-medium leading-relaxed">{step}</p>
-                      </div>
+                {sections.benefits.length > 0 && (
+                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                    <h2 className="text-xl font-bold text-gray-900 mb-5">What's Included</h2>
+                    <div className="space-y-3">
+                      {sections.benefits.map((b, i) => (
+                        <div key={i} className="flex items-start gap-3">
+                          <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                          </div>
+                          <span className="text-gray-700 text-base leading-relaxed">{b}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                )}
+
+                {sections.steps.length > 0 && (
+                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                    <h2 className="text-xl font-bold text-gray-900 mb-2">How to Claim This Deal</h2>
+                    <p className="text-gray-700 text-sm mb-6">3 simple steps — takes less than 2 minutes</p>
+                    <div className="space-y-5">
+                      {sections.steps.map((step, i) => (
+                        <div key={i} className="flex items-start gap-4">
+                          <div className="w-8 h-8 rounded-xl bg-violet-600 text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                            {i + 1}
+                          </div>
+                          <div className="flex-1 pt-0.5">
+                            <p className="text-gray-800 text-base font-medium leading-relaxed">{step}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Who is this for */}
