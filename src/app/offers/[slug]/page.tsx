@@ -107,7 +107,7 @@ export default async function OfferPage({ params }: PageProps) {
       <MobileCTABar deal={deal} user={user} isUnlocked={isUnlocked} />
 
       {/* ── HERO ── */}
-      <div className="bg-white border-b border-gray-100 pt-[76px]">
+      <div className="bg-white border-b border-gray-100 pt-[68px]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12">
 
           {/* Breadcrumb */}

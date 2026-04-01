@@ -44,21 +44,21 @@ export function Navbar() {
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       scrolled ? 'bg-white/97 backdrop-blur-xl shadow-sm border-b border-gray-150' : 'bg-white/85 backdrop-blur-sm'
     )}>
-      <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-[76px]">
+      <nav className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between h-[68px]">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-200 group-hover:shadow-violet-300 transition-all">
-            <Zap className="w-5 h-5 text-white" fill="white" />
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-pink-500 flex items-center justify-center shadow-md shadow-violet-200 group-hover:shadow-violet-300 transition-all">
+            <Zap className="w-4.5 h-4.5 text-white" fill="white" />
           </div>
-          <span className="font-bold text-gray-900 text-[22px] tracking-tight">SaaSOffers</span>
+          <span className="font-bold text-gray-900 text-xl tracking-tight">SaaSOffers</span>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-9">
           {NAV_LINKS.map(link => (
             <Link key={link.href} href={link.href}
-              className={cn('text-base font-medium transition-colors',
+              className={cn('text-[15px] font-medium transition-colors',
                 pathname === link.href ? 'text-violet-600' : 'text-gray-700 hover:text-gray-900'
               )}>
               {link.label}
@@ -67,16 +67,16 @@ export function Navbar() {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-4">
           {user ? (
             <>
-              <Link href="/dashboard" className="text-base text-gray-700 hover:text-gray-900 font-medium transition-colors">Dashboard</Link>
-              <button onClick={handleSignOut} className="text-base text-gray-600 hover:text-gray-800 transition-colors">Sign out</button>
+              <Link href="/dashboard" className="text-[15px] text-gray-700 hover:text-gray-900 font-medium transition-colors">Dashboard</Link>
+              <button onClick={handleSignOut} className="text-[15px] text-gray-600 hover:text-gray-800 transition-colors">Sign out</button>
             </>
           ) : (
             <>
-              <Link href="/login" className="text-base text-gray-700 hover:text-gray-900 font-medium transition-colors">Log in</Link>
-              <Link href="/signup" className="text-base font-semibold bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white px-6 py-2.5 rounded-xl transition-all duration-200 shadow-md shadow-violet-200 hover:shadow-lg hover:-translate-y-0.5">
+              <Link href="/login" className="text-[15px] text-gray-700 hover:text-gray-900 font-medium transition-colors">Log in</Link>
+              <Link href="/signup" className="text-[15px] font-semibold bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white px-5 py-2.5 rounded-xl transition-all duration-200 shadow-md shadow-violet-200 hover:shadow-lg hover:-translate-y-0.5">
                 Get Access
               </Link>
             </>
@@ -85,7 +85,7 @@ export function Navbar() {
 
         {/* Mobile hamburger */}
         <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-gray-700 hover:text-gray-900 transition-colors p-1">
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
 
