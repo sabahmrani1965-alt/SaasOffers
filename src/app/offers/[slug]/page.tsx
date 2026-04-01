@@ -108,10 +108,10 @@ export default async function OfferPage({ params }: PageProps) {
 
       {/* ── HERO ── */}
       <div className="bg-white border-b border-gray-100 pt-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12">
 
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-700 mb-5">
+          <nav className="flex items-center gap-2 text-sm text-gray-600 mb-7">
             <Link href="/offers" className="hover:text-gray-900 transition-colors font-medium">Offers</Link>
             <ChevronRight className="w-4 h-4 text-gray-300" />
             {deal.category && (
@@ -125,15 +125,15 @@ export default async function OfferPage({ params }: PageProps) {
             <span className="text-gray-900 font-semibold truncate">{deal.name}</span>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
 
             {/* Left: Hero content */}
             <div className="lg:col-span-2">
               {/* Logo + verified */}
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-4 mb-5">
                 <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="xl" />
                 <div>
-                  <div className="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-2.5 py-1 rounded-full mb-1.5">
+                  <div className="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-2">
                     <Zap className="w-3 h-3 fill-current" /> Verified by SaaSOffers
                   </div>
                   <div className="flex items-center gap-2">
@@ -144,39 +144,39 @@ export default async function OfferPage({ params }: PageProps) {
               </div>
 
               {/* H1 */}
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-2">
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-4">
                 {deal.name} — {deal.value_label} for Startups
               </h1>
 
               {/* Deal value pill */}
-              <div className="flex items-center gap-2 mb-3">
-                <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-base px-4 py-1.5 rounded-full">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-base px-5 py-2 rounded-full">
                   <DollarSign className="w-4 h-4" />{deal.value_label}
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-gray-700 text-base leading-relaxed max-w-xl mb-4">
+              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mb-6">
                 {deal.description}
               </p>
 
               {/* ── Mobile inline CTA (hidden on lg+) ── */}
-              <div className="lg:hidden mb-4">
+              <div className="lg:hidden mb-5">
                 <Link
                   href={user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`}
-                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold py-3.5 rounded-xl shadow-md shadow-violet-200 text-sm"
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold py-4 rounded-2xl shadow-md shadow-violet-200 text-sm"
                 >
                   <Zap className="w-4 h-4" fill="white" />
                   {deal.type === 'free' ? 'Unlock Free Deal' : deal.type === 'apply' ? `Apply for ${deal.name}` : 'Unlock Deal'}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <p className="text-center text-xs text-gray-600 mt-2">
+                <p className="text-center text-xs text-gray-500 mt-2">
                   {deal.type === 'free' ? 'Free · No credit card required' : deal.type === 'apply' ? 'Reviewed within 48 hours' : 'Premium · $79/year, unlimited deals'}
                 </p>
               </div>
 
               {/* Trust row */}
-              <div className="flex flex-wrap gap-3 text-xs text-gray-600">
+              <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                 {['✓ Verified deal', '✓ No spam, ever', '✓ 2,000+ startups'].map(t => (
                   <span key={t} className="font-medium">{t}</span>
                 ))}
@@ -192,18 +192,18 @@ export default async function OfferPage({ params }: PageProps) {
       </div>
 
       {/* ── BODY ── */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-10 sm:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
 
           {/* ── MAIN CONTENT col ── */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-8">
 
             {/* Highlights */}
             <DealHighlights deal={deal} />
 
             {/* Rich markdown content (long-form SEO pages) */}
             {isRichMarkdown && deal.long_description && (
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+              <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
                 <MarkdownContent content={deal.long_description} />
               </div>
             )}
@@ -212,20 +212,20 @@ export default async function OfferPage({ params }: PageProps) {
             {!isRichMarkdown && sections && (
               <>
                 {sections.overview.length > 0 && (
-                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                    <h2 className="text-xl font-bold text-gray-900 mb-4">About {deal.name}</h2>
-                    <div className="space-y-3">
+                  <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-5">About {deal.name}</h2>
+                    <div className="space-y-4">
                       {sections.overview.map((line, i) => (
-                        <p key={i} className="text-gray-700 text-base leading-7">{line}</p>
+                        <p key={i} className="text-gray-700 text-base leading-8">{line}</p>
                       ))}
                     </div>
                   </div>
                 )}
 
                 {sections.benefits.length > 0 && (
-                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                    <h2 className="text-xl font-bold text-gray-900 mb-5">What's Included</h2>
-                    <div className="space-y-3">
+                  <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Included</h2>
+                    <div className="space-y-4">
                       {sections.benefits.map((b, i) => (
                         <div key={i} className="flex items-start gap-3">
                           <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -239,16 +239,16 @@ export default async function OfferPage({ params }: PageProps) {
                 )}
 
                 {sections.steps.length > 0 && (
-                  <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">How to Claim This Deal</h2>
-                    <p className="text-gray-700 text-sm mb-6">3 simple steps — takes less than 2 minutes</p>
-                    <div className="space-y-5">
+                  <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">How to Claim This Deal</h2>
+                    <p className="text-gray-600 text-sm mb-7">3 simple steps — takes less than 2 minutes</p>
+                    <div className="space-y-6">
                       {sections.steps.map((step, i) => (
-                        <div key={i} className="flex items-start gap-4">
-                          <div className="w-8 h-8 rounded-xl bg-violet-600 text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                        <div key={i} className="flex items-start gap-5">
+                          <div className="w-9 h-9 rounded-xl bg-violet-600 text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
                             {i + 1}
                           </div>
-                          <div className="flex-1 pt-0.5">
+                          <div className="flex-1 pt-1">
                             <p className="text-gray-800 text-base font-medium leading-relaxed">{step}</p>
                           </div>
                         </div>
@@ -260,38 +260,38 @@ export default async function OfferPage({ params }: PageProps) {
             )}
 
             {/* Who is this for */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-5">Who Is This Deal For?</h2>
-              <div className="grid sm:grid-cols-3 gap-4">
+            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Who Is This Deal For?</h2>
+              <div className="grid sm:grid-cols-3 gap-5">
                 {[
                   { icon: Rocket, title: 'Early-Stage Startups', desc: 'Seed and pre-seed companies looking to move fast without overspending on tools.' },
                   { icon: Building2, title: 'Growing SaaS Teams', desc: 'Series A+ companies scaling their stack and optimizing software costs.' },
                   { icon: Users, title: 'Solo Founders', desc: 'Indie hackers and bootstrapped founders who need enterprise tools at startup prices.' },
                 ].map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                    <div className="w-9 h-9 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mb-3">
-                      <Icon className="w-4 h-4 text-violet-600" />
+                  <div key={title} className="bg-gray-50 border border-gray-100 rounded-2xl p-5">
+                    <div className="w-10 h-10 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center mb-4">
+                      <Icon className="w-5 h-5 text-violet-600" />
                     </div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-1">{title}</h3>
-                    <p className="text-xs text-gray-700 leading-relaxed">{desc}</p>
+                    <h3 className="text-sm font-bold text-gray-900 mb-1.5">{title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Mid-page CTA */}
-            <div className="bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl p-7 flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
-                <p className="text-white font-bold text-lg mb-1">
+                <p className="text-white font-bold text-xl mb-1.5">
                   Get {deal.value_label} off {deal.name}
                 </p>
-                <p className="text-white/75 text-sm">
+                <p className="text-white/75 text-base">
                   {deal.type === 'free' ? 'Free for all startups — claim instantly.' : deal.type === 'apply' ? 'Apply now — reviewed within 48 hours.' : 'Premium deal — upgrade once, unlock everything.'}
                 </p>
               </div>
               <Link
                 href={user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`}
-                className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-violet-600 font-bold px-6 py-3 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all text-sm whitespace-nowrap"
+                className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-violet-600 font-bold px-7 py-3.5 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all text-sm whitespace-nowrap"
               >
                 {user ? 'Claim Deal' : 'Sign Up & Claim'} <ArrowRight className="w-4 h-4" />
               </Link>
@@ -299,8 +299,8 @@ export default async function OfferPage({ params }: PageProps) {
 
             {/* Requirements */}
             {deal.requirements && (
-              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-6">
-                <h2 className="text-base font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-7">
+                <h2 className="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full bg-amber-200 text-amber-700 text-xs font-bold flex items-center justify-center">!</span>
                   Eligibility Requirements
                 </h2>
@@ -310,9 +310,9 @@ export default async function OfferPage({ params }: PageProps) {
 
             {/* FAQ */}
             {deal.faq && deal.faq.length > 0 && (
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
-                <h2 className="text-xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
-                <p className="text-gray-700 text-sm mb-6">Everything you need to know about this startup deal.</p>
+              <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
+                <p className="text-gray-600 text-sm mb-7">Everything you need to know about this startup deal.</p>
                 <FAQAccordion items={deal.faq} />
               </div>
             )}
@@ -324,29 +324,29 @@ export default async function OfferPage({ params }: PageProps) {
           </div>
 
           {/* ── SIDEBAR (desktop) ── */}
-          <div className="hidden lg:block lg:col-span-1 space-y-5">
+          <div className="hidden lg:block lg:col-span-1 space-y-6">
 
             {/* Quick summary card */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-gray-900">Deal Summary</h3>
-              <div className="space-y-3 text-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-md space-y-4">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide">Deal Summary</h3>
+              <div className="space-y-4 text-sm">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-700">Value</span>
+                  <span className="text-gray-600">Value</span>
                   <span className="font-bold text-emerald-600">{deal.value_label}</span>
                 </div>
-                <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                  <span className="text-gray-700">Access</span>
+                <div className="flex justify-between items-center border-t border-gray-100 pt-4">
+                  <span className="text-gray-600">Access</span>
                   <span className="font-semibold text-gray-800 capitalize">{deal.type}</span>
                 </div>
                 {deal.category && (
-                  <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                    <span className="text-gray-700">Category</span>
+                  <div className="flex justify-between items-center border-t border-gray-100 pt-4">
+                    <span className="text-gray-600">Category</span>
                     <span className="font-semibold text-gray-800">{deal.category}</span>
                   </div>
                 )}
                 {deal.expires_at && (
-                  <div className="flex justify-between items-center border-t border-gray-50 pt-3">
-                    <span className="text-gray-700">Expires</span>
+                  <div className="flex justify-between items-center border-t border-gray-100 pt-4">
+                    <span className="text-gray-600">Expires</span>
                     <span className="font-semibold text-red-500 text-xs">
                       {new Date(deal.expires_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
@@ -356,8 +356,8 @@ export default async function OfferPage({ params }: PageProps) {
             </div>
 
             {/* Browse more */}
-            <div className="bg-gray-50 border border-gray-100 rounded-xl p-4 text-center">
-              <p className="text-xs text-gray-700 font-medium mb-3">Looking for more startup deals?</p>
+            <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5 text-center">
+              <p className="text-sm text-gray-600 font-medium mb-3">Looking for more startup deals?</p>
               <Link href="/offers" className="inline-flex items-center gap-1.5 text-violet-600 text-sm font-semibold hover:underline">
                 Browse all offers <ArrowRight className="w-3.5 h-3.5" />
               </Link>

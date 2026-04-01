@@ -58,11 +58,11 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
   }
 
   return (
-    <div id="offer-cta" className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-6 space-y-5 shadow-card">
+    <div id="offer-cta" className="sticky top-24 bg-white border border-gray-100 rounded-2xl p-7 space-y-6 shadow-md">
       {/* Value */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-gray-700 font-medium">Deal value</span>
-        <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-xl">
+        <span className="text-sm text-gray-600 font-medium">Deal value</span>
+        <div className="flex items-center gap-1.5 text-emerald-600 font-bold text-2xl">
           <DollarSign className="w-5 h-5" />
           {deal.value_label}
         </div>

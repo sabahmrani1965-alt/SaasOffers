@@ -42,19 +42,19 @@ export function DealHighlights({ deal }: DealHighlightsProps) {
   ]
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-card">
-      <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Deal Highlights</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-md">
+      <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">Deal Highlights</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {highlights.map((h, i) => {
           const Icon = h.icon
           return (
-            <div key={i} className={`flex flex-col gap-2 p-3.5 rounded-xl border ${h.bg} ${h.border}`}>
-              <div className={`w-7 h-7 rounded-lg bg-white/70 flex items-center justify-center`}>
-                <Icon className={`w-4 h-4 ${h.color}`} />
+            <div key={i} className={`flex flex-col gap-3 p-5 rounded-2xl border ${h.bg} ${h.border}`}>
+              <div className={`w-9 h-9 rounded-xl bg-white/80 flex items-center justify-center shadow-sm`}>
+                <Icon className={`w-4.5 h-4.5 ${h.color}`} />
               </div>
               <div>
-                <div className={`text-sm font-bold ${h.color} leading-tight`}>{h.value}</div>
-                <div className="text-xs text-gray-700 mt-0.5">{h.label}</div>
+                <div className={`text-base font-bold ${h.color} leading-tight`}>{h.value}</div>
+                <div className="text-xs text-gray-500 mt-1 font-medium">{h.label}</div>
               </div>
             </div>
           )
