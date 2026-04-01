@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title,
       description: category.description,
-      url: `https://saas-offers.vercel.app/offers/category/${category.slug}`,
+      url: `https://saasoffers.tech/offers/category/${category.slug}`,
       siteName: 'SaaSOffers',
       type: 'website',
     },
     twitter: { card: 'summary_large_image', title, description: category.description },
-    alternates: { canonical: `https://saas-offers.vercel.app/offers/category/${category.slug}` },
+    alternates: { canonical: `https://saasoffers.tech/offers/category/${category.slug}` },
   }
 }
 
