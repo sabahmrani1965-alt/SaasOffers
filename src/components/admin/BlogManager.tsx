@@ -7,6 +7,44 @@ import { ConfirmModal } from './ConfirmModal'
 import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 import { Field, inputClass, selectClass, textareaClass } from './FormField'
+import { MarkdownEditor } from './MarkdownEditor'
+
+const BLOG_TEMPLATE = `## Introduction
+
+Give a brief overview of what this article covers and why it matters to startup founders.
+
+## The Problem
+
+Describe the challenge or pain point this post addresses.
+
+## Key Takeaways
+
+- Point 1
+- Point 2
+- Point 3
+
+## Deep Dive
+
+### Section 1
+
+Explain in detail...
+
+### Section 2
+
+Continue with more insights...
+
+## How to Get Started
+
+1. Step 1
+2. Step 2
+3. Step 3
+
+## Conclusion
+
+Summarize the key points and add a clear call to action.
+
+👉 [Browse all SaaS deals on SaaSOffers](https://saasoffers.tech/offers)
+`
 
 interface Post {
   id: string
@@ -23,7 +61,7 @@ interface Post {
 }
 
 const EMPTY: Partial<Post> = {
-  title: '', slug: '', excerpt: '', content: '', category: '',
+  title: '', slug: '', excerpt: '', content: BLOG_TEMPLATE, category: '',
   author: 'SaaSOffers Team', published: false, meta_title: '', meta_description: '',
 }
 
@@ -231,7 +269,7 @@ export function BlogManager() {
       )}
 
       {/* Create/Edit Modal */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editId ? 'Edit Post' : 'New Post'} size="xl">
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editId ? 'Edit Post' : 'New Post'} size="2xl">
         {/* Tabs */}
         <div className="flex gap-1 mb-6 bg-gray-800/50 rounded-xl p-1">
           {(['content', 'seo'] as const).map(t => (
@@ -272,8 +310,11 @@ export function BlogManager() {
             <Field label="Excerpt / Summary">
               <textarea value={form.excerpt || ''} onChange={e => handleFieldChange('excerpt', e.target.value)} placeholder="Short summary for listings…" rows={2} className={textareaClass} />
             </Field>
-            <Field label="Content" hint="Supports Markdown: # headings, **bold**, - lists, etc.">
-              <textarea value={form.content || ''} onChange={e => handleFieldChange('content', e.target.value)} placeholder={'# Title\n\nYour content here…\n\n**Key point:**\n- Item 1\n- Item 2'} rows={14} className={`${textareaClass} font-mono text-xs leading-relaxed`} />
+            <Field label="Content">
+              <MarkdownEditor
+                value={form.content || ''}
+                onChange={v => handleFieldChange('content', v)}
+              />
             </Field>
           </div>
         )}
