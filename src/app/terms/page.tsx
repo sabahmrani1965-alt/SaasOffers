@@ -44,7 +44,7 @@ export default function TermsPage() {
             },
             {
               title: '8. Contact',
-              content: 'For questions about these terms, contact us at legal@saasoffers.tech.',
+              content: 'For questions about these terms, contact us at ilyas@saasoffers.tech.',
             },
           ].map(section => (
             <div key={section.title}>

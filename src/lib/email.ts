@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM = process.env.RESEND_FROM_EMAIL || 'hello@saasoffers.tech'
+const FROM = process.env.RESEND_FROM_EMAIL || 'ilyas@saasoffers.tech'
 
 export async function sendWelcomeEmail(email: string) {
   try {

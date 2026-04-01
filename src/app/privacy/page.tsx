@@ -36,7 +36,7 @@ export default function PrivacyPage() {
             },
             {
               title: 'Your Rights',
-              content: 'You have the right to access, correct, or delete your personal data at any time. To request deletion of your account and associated data, contact us at privacy@saasoffers.tech.',
+              content: 'You have the right to access, correct, or delete your personal data at any time. To request deletion of your account and associated data, contact us at ilyas@saasoffers.tech.',
             },
             {
               title: 'Data Retention',
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
             },
             {
               title: 'Contact',
-              content: 'For privacy inquiries, contact us at privacy@saasoffers.tech.',
+              content: 'For privacy inquiries, contact us at ilyas@saasoffers.tech.',
             },
           ].map(section => (
             <div key={section.title}>
