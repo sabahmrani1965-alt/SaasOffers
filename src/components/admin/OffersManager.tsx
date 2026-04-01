@@ -337,9 +337,15 @@ export function OffersManager() {
           <Field label="Category">
             <input value={form.category || ''} onChange={e => handleFieldChange('category', e.target.value)} placeholder="Cloud Infrastructure" className={inputClass} />
           </Field>
-          <Field label="Logo URL" hint="e.g. https://logo.clearbit.com/notion.so — leave blank to use colored initials">
+          <Field label="Logo URL" hint="Leave blank to use colored initials">
             <div className="flex items-center gap-2">
               <input value={form.logo_url || ''} onChange={e => handleFieldChange('logo_url', e.target.value)} placeholder="https://logo.clearbit.com/company.com" className={`${inputClass} flex-1`} />
+              <ImageUploadField
+                value={form.logo_url || ''}
+                onChange={v => handleFieldChange('logo_url', v)}
+                folder="offer-logos"
+                inline
+              />
               {form.logo_url && (
                 <img src={form.logo_url} alt="" className="w-8 h-8 rounded-lg object-contain bg-white p-0.5 border border-white/10 flex-shrink-0" onError={e => { (e.target as HTMLImageElement).style.display = 'none' }} />
               )}
@@ -351,15 +357,6 @@ export function OffersManager() {
               <input value={form.logo_bg || ''} onChange={e => handleFieldChange('logo_bg', e.target.value)} placeholder="#7C3AED" className={`${inputClass} flex-1`} />
             </div>
           </Field>
-          <div className="col-span-2">
-            <ImageUploadField
-              label="Cover Image"
-              value={form.cover_image || ''}
-              onChange={v => handleFieldChange('cover_image', v)}
-              folder="offer-covers"
-              hint="Optional banner image shown on the offer detail page (recommended: 1200×600px)"
-            />
-          </div>
           <Field label="Affiliate / Redirect Link">
             <input value={form.affiliate_link || ''} onChange={e => handleFieldChange('affiliate_link', e.target.value)} placeholder="https://aws.amazon.com/activate" className={inputClass} />
           </Field>

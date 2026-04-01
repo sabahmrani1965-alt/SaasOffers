@@ -10,6 +10,7 @@ interface ImageUploadFieldProps {
   label?: string
   folder?: string
   hint?: string
+  inline?: boolean
 }
 
 export function ImageUploadField({
@@ -18,6 +19,7 @@ export function ImageUploadField({
   label,
   folder = 'uploads',
   hint,
+  inline = false,
 }: ImageUploadFieldProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
@@ -59,6 +61,31 @@ export function ImageUploadField({
     setDragOver(false)
     const file = e.dataTransfer.files?.[0]
     if (file) uploadFile(file)
+  }
+
+  // Inline mode: just a small upload button, no drag zone, no label
+  if (inline) {
+    return (
+      <>
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          disabled={uploading}
+          title="Upload logo image"
+          className="flex items-center gap-1.5 flex-shrink-0 bg-gray-700 hover:bg-gray-600 border border-white/10 text-gray-300 hover:text-white text-xs font-medium px-3 py-2 rounded-lg transition-colors disabled:opacity-50 whitespace-nowrap"
+        >
+          {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
+          {uploading ? 'Uploading…' : 'Upload'}
+        </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+      </>
+    )
   }
 
   return (
