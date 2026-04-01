@@ -227,7 +227,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section className="py-20 px-4 sm:px-6 bg-gray-50">
+      <section className="py-20 px-4 sm:px-6 bg-slate-50 border-t border-gray-100">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-end justify-between mb-10">
             <div>
@@ -280,7 +280,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-24 px-4 sm:px-6 bg-gray-50">
+      <section className="py-24 px-4 sm:px-6 bg-slate-50 border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 shadow-sm">
@@ -313,7 +313,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── PRICING ── */}
-      <section id="pricing" className="py-24 px-4 sm:px-6 bg-gray-50">
+      <section id="pricing" className="py-24 px-4 sm:px-6 bg-gradient-to-b from-white to-violet-50/60 border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
@@ -367,7 +367,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── STATS + TRUST ── */}
-      <section className="py-20 px-4 sm:px-6 bg-white border-y border-gray-100">
+      <section className="py-20 px-4 sm:px-6 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Trusted by thousands of startups</h2>
