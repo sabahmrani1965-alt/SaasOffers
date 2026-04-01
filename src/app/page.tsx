@@ -11,14 +11,14 @@ import {
 } from 'lucide-react'
 
 const LOGOS = [
-  { name: 'AWS',    color: '#FF9900' },
-  { name: 'Notion', color: '#000000' },
-  { name: 'Deel',   color: '#15CCAE' },
-  { name: 'Linear', color: '#5E6AD2' },
-  { name: 'Figma',  color: '#F24E1E' },
-  { name: 'Stripe', color: '#635BFF' },
-  { name: 'HubSpot',color: '#FF7A59' },
-  { name: 'Vercel', color: '#000000' },
+  { name: 'AWS',      src: 'https://cdn.simpleicons.org/amazonaws/FF9900' },
+  { name: 'Notion',   src: 'https://cdn.simpleicons.org/notion/000000' },
+  { name: 'Deel',     src: 'https://cdn.simpleicons.org/deel/15CCAE' },
+  { name: 'Linear',   src: 'https://cdn.simpleicons.org/linear/5E6AD2' },
+  { name: 'Figma',    src: 'https://cdn.simpleicons.org/figma/F24E1E' },
+  { name: 'Stripe',   src: 'https://cdn.simpleicons.org/stripe/635BFF' },
+  { name: 'HubSpot',  src: 'https://cdn.simpleicons.org/hubspot/FF7A59' },
+  { name: 'Vercel',   src: 'https://cdn.simpleicons.org/vercel/000000' },
 ]
 
 const BENEFITS = [
@@ -183,10 +183,11 @@ export default async function HomePage() {
           <p className="text-center text-xs text-gray-600 uppercase tracking-widest font-semibold mb-7">
             Exclusive deals from industry-leading tools
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
             {LOGOS.map(logo => (
-              <div key={logo.name} className="flex items-center gap-2 opacity-50 hover:opacity-90 transition-opacity cursor-default">
-                <div className="w-5 h-5 rounded-md flex-shrink-0" style={{ backgroundColor: logo.color }} />
+              <div key={logo.name} className="flex items-center gap-2.5 opacity-50 hover:opacity-100 transition-opacity cursor-default group">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={logo.src} alt={logo.name} width={22} height={22} className="flex-shrink-0" />
                 <span className="text-sm font-semibold text-gray-700">{logo.name}</span>
               </div>
             ))}
