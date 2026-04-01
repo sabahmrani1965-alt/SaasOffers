@@ -19,17 +19,19 @@ export function DealCard({ deal, className }: DealCardProps) {
         className
       )}
     >
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <div className="flex items-center gap-3">
-          <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="md" />
-          <div>
-            <h3 className="font-semibold text-gray-900 text-sm group-hover:text-violet-600 transition-colors">
+      <div className="flex items-start gap-3 mb-4">
+        <DealLogo name={deal.name} logo_url={deal.logo_url} logo_bg={deal.logo_bg} size="md" />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-semibold text-gray-900 text-sm group-hover:text-violet-600 transition-colors leading-tight">
               {deal.name}
             </h3>
-            {deal.category && <p className="text-xs text-gray-600 mt-0.5">{deal.category}</p>}
+            <div className="flex-shrink-0">
+              <DealBadge type={deal.type} />
+            </div>
           </div>
+          {deal.category && <p className="text-xs text-gray-500 mt-1">{deal.category}</p>}
         </div>
-        <DealBadge type={deal.type} />
       </div>
 
       <p className="text-sm text-gray-700 leading-relaxed mb-4 line-clamp-2">{deal.description}</p>
