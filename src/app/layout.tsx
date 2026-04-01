@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://saasoffers.com',
+    url: 'https://saasoffers.tech',
     siteName: 'SaaSOffers',
     title: 'SaaSOffers — $10,000+ in Startup Credits',
     description: 'Access exclusive SaaS deals and credits for your startup.',

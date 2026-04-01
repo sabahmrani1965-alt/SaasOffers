@@ -345,7 +345,7 @@ export function BlogManager() {
             <div className="bg-gray-800/50 rounded-xl p-4 space-y-1">
               <p className="text-xs text-gray-600 mb-3 font-medium uppercase tracking-wider">Search Preview</p>
               <div className="text-blue-400 text-sm font-medium">{form.meta_title || form.title || 'Post title'}</div>
-              <div className="text-emerald-600 text-xs">saasoffers.com/blog/{form.slug || 'post-slug'}</div>
+              <div className="text-emerald-600 text-xs">saasoffers.tech/blog/{form.slug || 'post-slug'}</div>
               <div className="text-gray-400 text-xs leading-relaxed">{form.meta_description || form.excerpt || 'Post description will appear here…'}</div>
             </div>
           </div>

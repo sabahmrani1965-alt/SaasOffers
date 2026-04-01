@@ -9,7 +9,7 @@ const FOOTER_LINKS = {
   ],
   Company: [
     { label: 'About', href: '/about' },
-    { label: 'Contact', href: 'mailto:hello@saasoffers.com' },
+    { label: 'Contact', href: 'mailto:hello@saasoffers.tech' },
   ],
   Legal: [
     { label: 'Terms of Service', href: '/terms' },
