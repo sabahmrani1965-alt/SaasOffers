@@ -8,6 +8,7 @@ import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 import { Field, inputClass, selectClass, textareaClass } from './FormField'
 import { MarkdownEditor } from './MarkdownEditor'
+import { ImageUploadField } from './ImageUploadField'
 
 const BLOG_TEMPLATE = `## Introduction
 
@@ -55,6 +56,7 @@ interface Post {
   category?: string
   author?: string
   published: boolean
+  cover_image?: string
   meta_title?: string
   meta_description?: string
   created_at: string
@@ -62,7 +64,7 @@ interface Post {
 
 const EMPTY: Partial<Post> = {
   title: '', slug: '', excerpt: '', content: BLOG_TEMPLATE, category: '',
-  author: 'SaaSOffers Team', published: false, meta_title: '', meta_description: '',
+  author: 'SaaSOffers Team', published: false, cover_image: '', meta_title: '', meta_description: '',
 }
 
 function slugify(s: string) {
@@ -310,6 +312,13 @@ export function BlogManager() {
             <Field label="Excerpt / Summary">
               <textarea value={form.excerpt || ''} onChange={e => handleFieldChange('excerpt', e.target.value)} placeholder="Short summary for listings…" rows={2} className={textareaClass} />
             </Field>
+            <ImageUploadField
+              label="Cover Image"
+              value={form.cover_image || ''}
+              onChange={v => handleFieldChange('cover_image', v)}
+              folder="blog-covers"
+              hint="Recommended: 1200×630px — used as the post hero and social preview image"
+            />
             <Field label="Content">
               <MarkdownEditor
                 value={form.content || ''}

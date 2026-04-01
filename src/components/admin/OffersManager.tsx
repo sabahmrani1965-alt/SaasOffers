@@ -8,6 +8,7 @@ import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 import { Field, inputClass, selectClass, textareaClass } from './FormField'
 import { MarkdownEditor, DEFAULT_TEMPLATE } from './MarkdownEditor'
+import { ImageUploadField } from './ImageUploadField'
 import { DealLogo } from '@/components/ui/DealLogo'
 
 interface Offer {
@@ -22,6 +23,7 @@ interface Offer {
   category?: string
   logo_bg?: string
   logo_url?: string
+  cover_image?: string
   requirements?: string
   affiliate_link?: string
   featured?: boolean
@@ -32,7 +34,7 @@ interface Offer {
 const EMPTY: Partial<Offer> = {
   name: '', slug: '', description: '', long_description: DEFAULT_TEMPLATE, value: 0,
   value_label: '', type: 'free', category: '', logo_bg: '#7C3AED', logo_url: '',
-  requirements: '', affiliate_link: '', featured: false,
+  cover_image: '', requirements: '', affiliate_link: '', featured: false,
 }
 
 function slugify(s: string) {
@@ -318,6 +320,15 @@ export function OffersManager() {
               <input value={form.logo_bg || ''} onChange={e => handleFieldChange('logo_bg', e.target.value)} placeholder="#7C3AED" className={`${inputClass} flex-1`} />
             </div>
           </Field>
+          <div className="col-span-2">
+            <ImageUploadField
+              label="Cover Image"
+              value={form.cover_image || ''}
+              onChange={v => handleFieldChange('cover_image', v)}
+              folder="offer-covers"
+              hint="Optional banner image shown on the offer detail page (recommended: 1200×600px)"
+            />
+          </div>
           <Field label="Affiliate / Redirect Link">
             <input value={form.affiliate_link || ''} onChange={e => handleFieldChange('affiliate_link', e.target.value)} placeholder="https://aws.amazon.com/activate" className={inputClass} />
           </Field>
