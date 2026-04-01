@@ -17,7 +17,6 @@ const LOGOS = [
   { name: 'Stripe',  src: '/logos/stripe.svg' },
   { name: 'HubSpot', src: '/logos/hubspot.svg' },
   { name: 'Vercel',  src: '/logos/vercel.png' },
-  { name: 'Linear',  src: '/logos/linear.svg' },
   { name: 'Deel',    src: '/logos/deel.svg' },
 ]
 
