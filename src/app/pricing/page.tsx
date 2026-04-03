@@ -258,38 +258,38 @@ export default function PricingPage() {
 
       {/* ── COMPARISON TABLE ── */}
       <section className="py-20 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-12 text-center">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-12 text-center">
             Everything you get
           </h2>
 
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <table className="w-full text-sm">
+            <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left py-4 px-6 font-semibold text-gray-500 text-xs uppercase tracking-wider">Feature</th>
-                  <th className="text-center py-4 px-4 font-semibold text-gray-500 text-xs uppercase tracking-wider">Free</th>
-                  <th className="text-center py-4 px-4 font-semibold text-xs uppercase tracking-wider text-violet-600">Premium</th>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-5 px-8 font-bold text-gray-700 text-sm uppercase tracking-wider">Feature</th>
+                  <th className="text-center py-5 px-6 font-bold text-gray-700 text-sm uppercase tracking-wider">Free</th>
+                  <th className="text-center py-5 px-6 font-bold text-sm uppercase tracking-wider text-violet-600">Premium</th>
                 </tr>
               </thead>
               <tbody>
                 {COMPARISON.map((row, i) => (
-                  <tr key={row.feature} className={i < COMPARISON.length - 1 ? 'border-b border-gray-50' : ''}>
-                    <td className="py-3.5 px-6 text-gray-700 font-medium">{row.feature}</td>
-                    <td className="py-3.5 px-4 text-center">
+                  <tr key={row.feature} className={i < COMPARISON.length - 1 ? 'border-b border-gray-100' : ''}>
+                    <td className="py-5 px-8 text-gray-900 font-semibold text-[15px]">{row.feature}</td>
+                    <td className="py-5 px-6 text-center">
                       {typeof row.free === 'boolean'
                         ? row.free
-                          ? <CheckCircle2 className="w-4 h-4 text-emerald-500 mx-auto" />
-                          : <X className="w-4 h-4 text-gray-300 mx-auto" />
-                        : <span className="text-gray-600">{row.free}</span>
+                          ? <CheckCircle2 className="w-5 h-5 text-emerald-500 mx-auto" />
+                          : <X className="w-5 h-5 text-gray-300 mx-auto" />
+                        : <span className="text-gray-700 font-medium text-[15px]">{row.free}</span>
                       }
                     </td>
-                    <td className="py-3.5 px-4 text-center">
+                    <td className="py-5 px-6 text-center">
                       {typeof row.premium === 'boolean'
                         ? row.premium
-                          ? <CheckCircle2 className="w-4 h-4 text-emerald-500 mx-auto" />
-                          : <X className="w-4 h-4 text-gray-300 mx-auto" />
-                        : <span className="text-violet-600 font-semibold">{row.premium}</span>
+                          ? <CheckCircle2 className="w-5 h-5 text-emerald-500 mx-auto" />
+                          : <X className="w-5 h-5 text-gray-300 mx-auto" />
+                        : <span className="text-violet-600 font-bold text-[15px]">{row.premium}</span>
                       }
                     </td>
                   </tr>
