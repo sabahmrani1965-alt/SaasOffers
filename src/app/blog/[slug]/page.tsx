@@ -322,7 +322,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       {/* ── Hero — moderate height, not full screen ── */}
       <div className={`bg-gradient-to-br ${gradient} pt-20`}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-white/70 mb-6">
@@ -373,7 +373,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* ── Body: 2-col grid ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
           {/* ── Article: 2/3 width ── */}

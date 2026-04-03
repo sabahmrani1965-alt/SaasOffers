@@ -127,7 +127,7 @@ export default function AboutPage() {
 
       {/* ── NUMBERS ── */}
       <section className="py-16 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
             {STATS.map(stat => {
               const Icon = stat.icon
@@ -165,7 +165,7 @@ export default function AboutPage() {
 
       {/* ── WHAT WE DO DIFFERENTLY ── */}
       <section className="py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-12 text-center">What We Do Differently</h2>
           <div className="space-y-8">
             {DIFFERENTIATORS.map(d => {
@@ -188,7 +188,7 @@ export default function AboutPage() {
 
       {/* ── VALUES ── */}
       <section className="py-20 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-12 text-center">What We Stand For</h2>
           <div className="grid sm:grid-cols-2 gap-6">
             {VALUES.map(v => {

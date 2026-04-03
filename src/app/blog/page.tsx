@@ -26,7 +26,7 @@ export default async function BlogPage() {
 
       {/* ── Hero header ── */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-12">
           <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
             <BookOpen className="w-3.5 h-3.5" />
             {posts.length} articles published
@@ -59,7 +59,7 @@ export default async function BlogPage() {
       </div>
 
       {/* ── Blog content ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 pb-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 pb-20">
         <BlogList posts={posts} />
       </div>
 
