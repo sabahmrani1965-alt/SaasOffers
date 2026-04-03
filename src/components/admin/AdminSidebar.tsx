@@ -5,12 +5,13 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import {
   LayoutDashboard, Package, FileText, Users,
-  Settings, ChevronRight, ExternalLink, ClipboardList, Zap
+  Settings, ChevronRight, ExternalLink, ClipboardList, Zap, ArrowLeftRight
 } from 'lucide-react'
 
 const NAV = [
   { href: '/admin', label: 'Overview', icon: LayoutDashboard, exact: true },
   { href: '/admin/offers', label: 'Offers', icon: Package },
+  { href: '/admin/comparisons', label: 'Comparisons', icon: ArrowLeftRight },
   { href: '/admin/applications', label: 'Applications', icon: ClipboardList },
   { href: '/admin/blog', label: 'Blog', icon: FileText },
   { href: '/admin/users', label: 'Users', icon: Users },
