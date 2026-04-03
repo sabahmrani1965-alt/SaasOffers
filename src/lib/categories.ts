@@ -14,7 +14,7 @@ export const CATEGORIES = [
     lightBg: 'bg-violet-50',
     lightText: 'text-violet-600',
     lightBorder: 'border-violet-100',
-    dbValues: ['AI & Data', 'AI', 'Data', 'Machine Learning'],
+    dbValues: ['AI & Data', 'AI', 'AI Tools', 'Data', 'Machine Learning', 'Analytics'],
   },
   {
     name: 'Marketing & Growth',
@@ -26,7 +26,7 @@ export const CATEGORIES = [
     lightBg: 'bg-emerald-50',
     lightText: 'text-emerald-600',
     lightBorder: 'border-emerald-100',
-    dbValues: ['Marketing', 'Marketing & Growth', 'Growth', 'SEO', 'Email Marketing'],
+    dbValues: ['Marketing', 'Marketing & Growth', 'Growth', 'SEO', 'Email Marketing', 'CRM & Marketing'],
   },
   {
     name: 'Sales & CRM',
@@ -38,7 +38,7 @@ export const CATEGORIES = [
     lightBg: 'bg-blue-50',
     lightText: 'text-blue-600',
     lightBorder: 'border-blue-100',
-    dbValues: ['Sales', 'Sales & CRM', 'CRM'],
+    dbValues: ['Sales', 'Sales & CRM', 'CRM', 'Customer Support'],
   },
   {
     name: 'Developer & IT',
@@ -50,7 +50,7 @@ export const CATEGORIES = [
     lightBg: 'bg-amber-50',
     lightText: 'text-amber-600',
     lightBorder: 'border-amber-100',
-    dbValues: ['Developer', 'Developer & IT', 'Infrastructure', 'DevOps', 'Cloud'],
+    dbValues: ['Developer', 'Developer & IT', 'Developer Tools', 'Infrastructure', 'DevOps', 'Cloud', 'Cloud & Infrastructure'],
   },
   {
     name: 'Operations & Productivity',
@@ -62,7 +62,7 @@ export const CATEGORIES = [
     lightBg: 'bg-purple-50',
     lightText: 'text-purple-600',
     lightBorder: 'border-purple-100',
-    dbValues: ['Operations', 'Operations & Productivity', 'Productivity', 'Project Management'],
+    dbValues: ['Operations', 'Operations & Productivity', 'Productivity', 'Project Management', 'Automation'],
   },
   {
     name: 'Finance & Legal',
@@ -86,7 +86,7 @@ export const CATEGORIES = [
     lightBg: 'bg-pink-50',
     lightText: 'text-pink-600',
     lightBorder: 'border-pink-100',
-    dbValues: ['HR', 'HR & People', 'People', 'Hiring', 'Payroll'],
+    dbValues: ['HR', 'HR & People', 'HR & Payroll', 'People', 'Hiring', 'Payroll'],
   },
   {
     name: 'Web & Design',
