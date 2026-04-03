@@ -26,7 +26,7 @@ const BENEFITS = [
     gradient: 'from-emerald-500 to-teal-500',
     bg: 'bg-emerald-50',
     title: 'Save thousands immediately',
-    description: 'Access $10,000+ in SaaS credits across 50+ tools. Stop paying full price for software your startup needs.',
+    description: 'Access $500,000+ in SaaS credits across 199+ tools. Stop paying full price for software your startup needs.',
   },
   {
     icon: Brain,
@@ -94,15 +94,15 @@ const PRICING = [
   {
     name: 'Premium', price: '$79', period: 'per year',
     description: 'Unlock the highest-value deals including AWS, Deel, and more.',
-    features: ['Everything in Free', 'AWS Activate ($5,000)', 'Deel credits ($1,500)', 'All premium-gated deals', '$10,000+ in potential savings', 'Priority support'],
+    features: ['Everything in Free', 'AWS Activate ($5,000)', 'Deel credits ($1,500)', 'All premium-gated deals', '$500,000+ in potential savings', 'Priority support'],
     cta: 'Upgrade to Premium', href: '/api/stripe/checkout', highlight: true,
   },
 ]
 
 const STATS = [
-  { value: '$50,000+', label: 'Savings unlocked' },
+  { value: '$500,000+', label: 'Savings unlocked' },
   { value: '2,000+',   label: 'Founders trust us' },
-  { value: '100+',     label: 'SaaS deals available' },
+  { value: '199+',     label: 'SaaS deals available' },
   { value: '4.9★',     label: 'Average rating' },
 ]
 
@@ -133,7 +133,7 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-gray-700 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            Access $10,000+ in exclusive SaaS credits from AWS, Notion, Deel, and 50+ more.
+            Access $500,000+ in exclusive SaaS credits from AWS, Notion, Deel, and 199+ more.
             Stop overpaying — start building with the stack the best startups use.
           </p>
 
@@ -165,7 +165,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="hidden sm:block w-px h-10 bg-gray-200" />
-            {[{ v: '100+', l: 'deals' }, { v: '$50k+', l: 'in savings' }, { v: '2k+', l: 'founders' }].map(s => (
+            {[{ v: '199+', l: 'deals' }, { v: '$500k+', l: 'in savings' }, { v: '2k+', l: 'founders' }].map(s => (
               <div key={s.l} className="text-center sm:text-left">
                 <div className="text-lg font-bold text-gray-900">{s.v}</div>
                 <div className="text-xs text-gray-600">{s.l}</div>
@@ -272,7 +272,7 @@ export default async function HomePage() {
           </div>
           <div className="text-center mt-10">
             <Link href="/offers" className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold px-7 py-3.5 rounded-xl transition-all duration-200 shadow-md shadow-violet-200 hover:shadow-lg hover:-translate-y-0.5 text-sm">
-              View all 100+ deals <ArrowRight className="w-4 h-4" />
+              View all 199+ deals <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

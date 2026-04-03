@@ -34,7 +34,7 @@ export function Footer() {
               <span className="font-bold text-gray-900 text-xl tracking-tight">SaaSOffers</span>
             </Link>
             <p className="text-gray-600 text-[15px] leading-relaxed max-w-xs">
-              The perks platform built for ambitious startups. Unlock $10,000+ in SaaS credits and build your product faster.
+              The perks platform built for ambitious startups. Unlock $500,000+ in SaaS credits and build your product faster.
             </p>
             <p className="text-gray-500 text-sm mt-8">© {new Date().getFullYear()} SaaSOffers. All rights reserved.</p>
           </div>

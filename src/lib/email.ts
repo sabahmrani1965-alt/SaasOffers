@@ -35,7 +35,7 @@ export async function sendPremiumUpgradeEmail(email: string) {
     await resend.emails.send({
       from: FROM,
       to: email,
-      subject: '🔓 You now have Premium access — $10,000+ in credits await',
+      subject: '🔓 You now have Premium access — $500,000+ in credits await',
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0f; color: #fff; padding: 40px; border-radius: 12px;">
           <h1 style="font-size: 28px; margin-bottom: 8px;">Premium Unlocked 🚀</h1>

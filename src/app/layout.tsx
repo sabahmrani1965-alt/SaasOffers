@@ -8,17 +8,17 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
-    default: 'SaaSOffers — $10,000+ in Startup Credits',
+    default: 'SaaSOffers — $500,000+ in Startup Credits',
     template: '%s | SaaSOffers',
   },
-  description: 'Access exclusive SaaS deals and credits for your startup. AWS, Notion, Deel and 50+ tools — save thousands on your stack.',
+  description: 'Access exclusive SaaS deals and credits for your startup. AWS, Notion, Deel and 199+ tools — save thousands on your stack.',
   keywords: ['startup deals', 'saas discounts', 'startup credits', 'aws activate', 'startup perks'],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://saasoffers.tech',
     siteName: 'SaaSOffers',
-    title: 'SaaSOffers — $10,000+ in Startup Credits',
+    title: 'SaaSOffers — $500,000+ in Startup Credits',
     description: 'Access exclusive SaaS deals and credits for your startup.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
