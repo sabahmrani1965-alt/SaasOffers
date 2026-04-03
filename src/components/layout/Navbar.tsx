@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/offers', label: 'Offers' },
   { href: '/compare', label: 'Compare' },
   { href: '/blog', label: 'Blog' },
+  { href: '/community', label: 'Community' },
   { href: '/#pricing', label: 'Pricing' },
   { href: '/partners', label: 'Partners' },
 ]
