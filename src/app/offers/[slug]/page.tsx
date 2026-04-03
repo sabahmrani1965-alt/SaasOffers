@@ -84,10 +84,16 @@ export default async function OfferPage({ params }: PageProps) {
     ...(deal.expires_at ? { priceValidUntil: deal.expires_at.slice(0, 10) } : {}),
   }
 
-  const faqJsonLd = deal.faq && deal.faq.length > 0 ? {
+  // Resolve FAQ: prefer structured faq column, fall back to parsing long_description
+  const resolvedFaq: { question: string; answer: string }[] =
+    deal.faq && deal.faq.length > 0
+      ? deal.faq
+      : parseFAQFromMarkdown(deal.long_description || '')
+
+  const faqJsonLd = resolvedFaq.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: deal.faq.map(item => ({
+    mainEntity: resolvedFaq.map(item => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: { '@type': 'Answer', text: item.answer },
@@ -104,7 +110,7 @@ export default async function OfferPage({ params }: PageProps) {
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
 
       {/* Mobile sticky CTA */}
-      <MobileCTABar deal={deal} user={user} isUnlocked={isUnlocked} />
+      <MobileCTABar deal={deal} user={user} isUnlocked={isUnlocked} isPremium={isPremium} />
 
       {/* ── HERO ── */}
       <div className="bg-white border-b border-gray-100 pt-[68px]">
@@ -162,17 +168,50 @@ export default async function OfferPage({ params }: PageProps) {
 
               {/* ── Mobile inline CTA (hidden on lg+) ── */}
               <div className="lg:hidden mb-5">
-                <Link
-                  href={user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`}
-                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold py-4 rounded-2xl shadow-md shadow-violet-200 text-sm"
-                >
-                  <Zap className="w-4 h-4" fill="white" />
-                  {deal.type === 'free' ? 'Unlock Free Deal' : deal.type === 'apply' ? `Apply for ${deal.name}` : 'Unlock Deal'}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <p className="text-center text-xs text-gray-500 mt-2">
-                  {deal.type === 'free' ? 'Free · No credit card required' : deal.type === 'apply' ? 'Reviewed within 48 hours' : 'Premium · $79/year, unlimited deals'}
-                </p>
+                {(() => {
+                  let ctaHref: string
+                  let ctaLabel: string
+                  let ctaSubtext: string
+
+                  if (deal.type === 'free') {
+                    // Free: direct access, no auth required
+                    ctaHref = user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`
+                    ctaLabel = 'Unlock Free Deal'
+                    ctaSubtext = 'Free · No credit card required'
+                  } else if (deal.type === 'apply') {
+                    // Apply: requires auth
+                    ctaHref = user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`
+                    ctaLabel = user ? `Apply for ${deal.name}` : 'Sign up to apply'
+                    ctaSubtext = 'Reviewed within 48 hours'
+                  } else {
+                    // Premium: requires auth + paid
+                    if (!user) {
+                      ctaHref = `/signup?redirect=/offers/${deal.slug}`
+                      ctaLabel = 'Sign up to unlock'
+                    } else if (!isPremium) {
+                      ctaHref = '/api/stripe/checkout'
+                      ctaLabel = 'Upgrade to Premium'
+                    } else {
+                      ctaHref = '#offer-cta'
+                      ctaLabel = 'Unlock Deal'
+                    }
+                    ctaSubtext = 'Premium · $79/year, unlimited deals'
+                  }
+
+                  return (
+                    <>
+                      <Link
+                        href={ctaHref}
+                        className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 text-white font-bold py-4 rounded-2xl shadow-md shadow-violet-200 text-sm"
+                      >
+                        <Zap className="w-4 h-4" fill="white" />
+                        {ctaLabel}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <p className="text-center text-xs text-gray-500 mt-2">{ctaSubtext}</p>
+                    </>
+                  )
+                })()}
               </div>
 
               {/* Trust row */}
@@ -204,7 +243,7 @@ export default async function OfferPage({ params }: PageProps) {
             {/* Rich markdown content (long-form SEO pages) */}
             {isRichMarkdown && deal.long_description && (
               <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
-                <MarkdownContent content={deal.long_description} />
+                <MarkdownContent content={deal.long_description} suppressFAQ={resolvedFaq.length > 0} />
               </div>
             )}
 
@@ -290,10 +329,23 @@ export default async function OfferPage({ params }: PageProps) {
                 </p>
               </div>
               <Link
-                href={user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`}
+                href={
+                  deal.type === 'free'
+                    ? (user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`)
+                    : deal.type === 'apply'
+                    ? (user ? '#offer-cta' : `/signup?redirect=/offers/${deal.slug}`)
+                    : !user
+                    ? `/signup?redirect=/offers/${deal.slug}`
+                    : !isPremium
+                    ? '/api/stripe/checkout'
+                    : '#offer-cta'
+                }
                 className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-violet-600 font-bold px-7 py-3.5 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all text-sm whitespace-nowrap"
               >
-                {user ? 'Claim Deal' : 'Sign Up & Claim'} <ArrowRight className="w-4 h-4" />
+                {deal.type === 'premium' && user && !isPremium
+                  ? 'Upgrade to Premium'
+                  : user ? 'Claim Deal' : 'Sign Up & Claim'
+                } <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
@@ -309,11 +361,11 @@ export default async function OfferPage({ params }: PageProps) {
             )}
 
             {/* FAQ */}
-            {deal.faq && deal.faq.length > 0 && (
+            {resolvedFaq.length > 0 && (
               <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-md">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Frequently Asked Questions</h2>
                 <p className="text-gray-600 text-sm mb-7">Everything you need to know about this startup deal.</p>
-                <FAQAccordion items={deal.faq} />
+                <FAQAccordion items={resolvedFaq} />
               </div>
             )}
 
@@ -371,6 +423,23 @@ export default async function OfferPage({ params }: PageProps) {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
+
+// Parse FAQ from long_description markdown (plain Q:/A: format)
+function parseFAQFromMarkdown(content: string): { question: string; answer: string }[] {
+  const items: { question: string; answer: string }[] = []
+  const regex = /^Q:\s*(.+?)\s*\nA:\s*([\s\S]+?)(?=\nQ:|\n\*\*Q:|$)/gm
+  let match
+  while ((match = regex.exec(content)) !== null) {
+    items.push({ question: match[1].trim(), answer: match[2].trim() })
+  }
+  if (items.length > 0) return items
+  // Fallback: bold **Q:** format
+  const boldRegex = /\*\*Q:\s*(.+?)\*\*\s*\n?A:\s*([\s\S]+?)(?=\n\*\*Q:|$)/g
+  while ((match = boldRegex.exec(content)) !== null) {
+    items.push({ question: match[1].trim(), answer: match[2].trim() })
+  }
+  return items
+}
 
 interface ParsedSections {
   overview: string[]

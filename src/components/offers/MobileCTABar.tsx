@@ -10,9 +10,10 @@ interface MobileCTABarProps {
   deal: Deal
   user: User | null
   isUnlocked: boolean
+  isPremium: boolean
 }
 
-export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
+export function MobileCTABar({ deal, user, isUnlocked, isPremium }: MobileCTABarProps) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -23,17 +24,6 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
 
   if (!visible) return null
 
-  const isPremiumDeal = deal.type === 'premium'
-  const needsSignup = !user
-
-  const label = isUnlocked
-    ? 'View in Dashboard'
-    : !user
-    ? 'Sign up to unlock'
-    : deal.type === 'apply'
-    ? `Apply for ${deal.name}`
-    : `Get ${deal.name}`
-
   const handleCheckout = async () => {
     try {
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
@@ -42,6 +32,49 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
       if (url) window.location.href = url
     } catch (e) {
       console.error('Checkout error:', e)
+    }
+  }
+
+  // Free: direct access, no auth needed
+  // Apply: requires auth
+  // Premium: requires auth + paid status
+
+  let label: string
+  let action: (() => void) | null = null
+  let href: string | null = null
+
+  if (isUnlocked) {
+    label = 'View in Dashboard'
+    href = '/dashboard'
+  } else if (deal.type === 'free') {
+    // Free: no auth required, scroll to CTA to unlock
+    if (!user) {
+      label = `Get ${deal.name}`
+      href = `/signup?redirect=/offers/${deal.slug}`
+    } else {
+      label = `Get ${deal.name}`
+      action = () => document.getElementById('offer-cta')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  } else if (deal.type === 'apply') {
+    // Apply: requires auth
+    if (!user) {
+      label = 'Sign up to apply'
+      href = `/signup?redirect=/offers/${deal.slug}`
+    } else {
+      label = `Apply for ${deal.name}`
+      action = () => document.getElementById('offer-cta')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  } else {
+    // Premium: requires auth + paid
+    if (!user) {
+      label = 'Sign up to unlock'
+      href = `/signup?redirect=/offers/${deal.slug}`
+    } else if (!isPremium) {
+      label = 'Upgrade to Premium'
+      action = handleCheckout
+    } else {
+      label = `Unlock ${deal.name}`
+      action = () => document.getElementById('offer-cta')?.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -56,22 +89,12 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
           {deal.value_label}
         </div>
       </div>
-      {needsSignup ? (
-        <Link
-          href={`/signup?redirect=/offers/${deal.slug}`}
-          className={btnClass}
-        >
+      {href ? (
+        <Link href={href} className={btnClass}>
           {label} <ArrowRight className="w-4 h-4" />
         </Link>
-      ) : isPremiumDeal ? (
-        <button onClick={handleCheckout} className={btnClass}>
-          {label} <ArrowRight className="w-4 h-4" />
-        </button>
       ) : (
-        <button
-          onClick={() => document.getElementById('offer-cta')?.scrollIntoView({ behavior: 'smooth' })}
-          className={btnClass}
-        >
+        <button onClick={action!} className={btnClass}>
           {label} <ArrowRight className="w-4 h-4" />
         </button>
       )}

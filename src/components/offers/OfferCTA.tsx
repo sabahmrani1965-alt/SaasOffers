@@ -93,84 +93,116 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
       {/* CTA logic */}
       {!isUnlocked && !showApplyForm && (
         <>
-          {/* Not logged in */}
-          {!user && (
-            <div className="space-y-3">
-              <Link
-                href={`/signup?redirect=/offers/${deal.slug}`}
-                className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
-                onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
-              >
-                Sign up to unlock
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <p className="text-center text-xs text-gray-700">
-                Already have an account?{' '}
-                <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
-              </p>
-            </div>
-          )}
-
-          {/* Free deal */}
-          {user && deal.type === 'free' && (
-            <Button
-              onClick={handleUnlock}
-              loading={loading}
-              className="w-full justify-center"
-              size="lg"
-            >
-              <Zap className="w-4 h-4 mr-1" fill="white" /> Unlock Free Deal
-            </Button>
-          )}
-
-          {/* Premium deal — not subscribed */}
-          {user && deal.type === 'premium' && !isPremium && (
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
-                <Lock className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />
-                This is a Premium deal. Upgrade to unlock.
-              </div>
+          {/* ── FREE: direct access, no auth required ── */}
+          {deal.type === 'free' && (
+            user ? (
               <Button
-                onClick={handleCheckout}
+                onClick={handleUnlock}
                 loading={loading}
                 className="w-full justify-center"
                 size="lg"
               >
-                Upgrade to Premium
+                <Zap className="w-4 h-4 mr-1" fill="white" /> Unlock Free Deal
               </Button>
-              <p className="text-center text-xs text-gray-700 font-medium">$79/year — unlimited deals</p>
-            </div>
-          )}
-
-          {/* Premium deal — subscribed */}
-          {user && deal.type === 'premium' && isPremium && (
-            <Button
-              onClick={handleUnlock}
-              loading={loading}
-              className="w-full justify-center"
-              size="lg"
-            >
-              Unlock Offer
-            </Button>
-          )}
-
-          {/* Apply deal */}
-          {user && deal.type === 'apply' && (
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
-                <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                This deal requires a short application — reviewed within 48h.
+            ) : (
+              <div className="space-y-3">
+                <Link
+                  href={deal.affiliate_link || `/signup?redirect=/offers/${deal.slug}`}
+                  target={deal.affiliate_link ? '_blank' : undefined}
+                  rel={deal.affiliate_link ? 'noopener noreferrer' : undefined}
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                  onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
+                >
+                  <Zap className="w-4 h-4" fill="white" /> Get Free Deal
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-center text-xs text-gray-700">
+                  Free · No account required.{' '}
+                  <Link href={`/signup?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Sign up</Link> to track your deals.
+                </p>
               </div>
-              <button
-                onClick={() => {
-                  setShowApplyForm(true)
-                  trackEvent('offer_cta_click', 'offers', deal.slug)
-                }}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+            )
+          )}
+
+          {/* ── APPLY: requires auth ── */}
+          {deal.type === 'apply' && (
+            !user ? (
+              <div className="space-y-3">
+                <Link
+                  href={`/signup?redirect=/offers/${deal.slug}`}
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                  onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
+                >
+                  Sign up to apply
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-center text-xs text-gray-700">
+                  Already have an account?{' '}
+                  <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
+                  <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                  This deal requires a short application — reviewed within 48h.
+                </div>
+                <button
+                  onClick={() => {
+                    setShowApplyForm(true)
+                    trackEvent('offer_cta_click', 'offers', deal.slug)
+                  }}
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                >
+                  Apply for {deal.name} <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            )
+          )}
+
+          {/* ── PREMIUM: requires auth + paid status ── */}
+          {deal.type === 'premium' && (
+            !user ? (
+              <div className="space-y-3">
+                <Link
+                  href={`/signup?redirect=/offers/${deal.slug}`}
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                  onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
+                >
+                  Sign up to unlock
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-center text-xs text-gray-700">
+                  Already have an account?{' '}
+                  <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
+                </p>
+              </div>
+            ) : !isPremium ? (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5">
+                  <Lock className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />
+                  This is a Premium deal. Upgrade to unlock.
+                </div>
+                <Button
+                  onClick={handleCheckout}
+                  loading={loading}
+                  className="w-full justify-center"
+                  size="lg"
+                >
+                  Upgrade to Premium
+                </Button>
+                <p className="text-center text-xs text-gray-700 font-medium">$79/year — unlimited deals</p>
+              </div>
+            ) : (
+              <Button
+                onClick={handleUnlock}
+                loading={loading}
+                className="w-full justify-center"
+                size="lg"
               >
-                Apply for {deal.name} <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+                Unlock Offer
+              </Button>
+            )
           )}
         </>
       )}
