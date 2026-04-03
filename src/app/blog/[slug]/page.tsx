@@ -265,7 +265,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     : COVER_GRADIENTS.default
 
   const postUrl = `https://saasoffers.tech/blog/${post.slug}`
-  const publishedDate = new Date(post.created_at).toISOString().split('T')[0]
+  const publishedDate = new Date(post.created_at).toISOString()
 
   // JSON-LD: Article schema
   const articleJsonLd = {
