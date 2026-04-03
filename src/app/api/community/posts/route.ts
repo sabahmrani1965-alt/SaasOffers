@@ -26,7 +26,7 @@ export async function GET(req: Request) {
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   // Fetch user emails for all posts
-  const userIds = [...new Set((posts || []).map((p: any) => p.user_id))]
+  const userIds = Array.from(new Set((posts || []).map((p: any) => p.user_id)))
   const { data: users } = await adminDb.from('users').select('id, email').in('id', userIds)
   const userMap: Record<string, string> = {}
   ;(users || []).forEach((u: any) => { userMap[u.id] = u.email })
