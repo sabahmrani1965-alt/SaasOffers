@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 
   let query = adminDb
     .from('community_posts')
-    .select('*, user:users(id, email)')
+    .select('*')
 
   if (category && category !== 'All') {
     query = query.eq('category', category)
@@ -22,9 +22,22 @@ export async function GET(req: Request) {
     query = query.order('pinned', { ascending: false }).order('created_at', { ascending: false })
   }
 
-  const { data, error } = await query.limit(50)
+  const { data: posts, error } = await query.limit(50)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json(data)
+
+  // Fetch user emails for all posts
+  const userIds = [...new Set((posts || []).map((p: any) => p.user_id))]
+  const { data: users } = await adminDb.from('users').select('id, email').in('id', userIds)
+  const userMap: Record<string, string> = {}
+  ;(users || []).forEach((u: any) => { userMap[u.id] = u.email })
+
+  // Attach user email to posts
+  const enriched = (posts || []).map((p: any) => ({
+    ...p,
+    user: { id: p.user_id, email: userMap[p.user_id] || 'anonymous' },
+  }))
+
+  return NextResponse.json(enriched)
 }
 
 export async function POST(req: Request) {
@@ -34,11 +47,9 @@ export async function POST(req: Request) {
 
   const adminDb = createAdminClient()
 
-  // Check premium status
   const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
 
-  // Insert using admin client to bypass RLS
   const body = await req.json()
   const { data, error } = await adminDb
     .from('community_posts')

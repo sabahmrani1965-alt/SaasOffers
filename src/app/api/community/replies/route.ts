@@ -8,14 +8,26 @@ export async function GET(req: Request) {
   const postId = searchParams.get('post_id')
   if (!postId) return NextResponse.json({ error: 'post_id required' }, { status: 400 })
 
-  const { data, error } = await adminDb
+  const { data: replies, error } = await adminDb
     .from('community_replies')
-    .select('*, user:users(id, email)')
+    .select('*')
     .eq('post_id', postId)
     .order('created_at', { ascending: true })
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json(data)
+
+  // Fetch user emails
+  const userIds = [...new Set((replies || []).map((r: any) => r.user_id))]
+  const { data: users } = await adminDb.from('users').select('id, email').in('id', userIds)
+  const userMap: Record<string, string> = {}
+  ;(users || []).forEach((u: any) => { userMap[u.id] = u.email })
+
+  const enriched = (replies || []).map((r: any) => ({
+    ...r,
+    user: { id: r.user_id, email: userMap[r.user_id] || 'anonymous' },
+  }))
+
+  return NextResponse.json(enriched)
 }
 
 export async function POST(req: Request) {
@@ -25,11 +37,9 @@ export async function POST(req: Request) {
 
   const adminDb = createAdminClient()
 
-  // Check premium
   const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
 
-  // Insert reply
   const body = await req.json()
   const { data, error } = await adminDb
     .from('community_replies')

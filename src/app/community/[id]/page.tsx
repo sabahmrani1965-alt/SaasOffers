@@ -19,16 +19,20 @@ export default async function ThreadPage({ params }: PageProps) {
   const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) redirect('/community')
 
-  const { data: post } = await supabase
+  const { data: postData } = await adminDb
     .from('community_posts')
-    .select('*, user:users(id, email)')
+    .select('*')
     .eq('id', params.id)
     .single()
 
-  if (!post) notFound()
+  if (!postData) notFound()
+
+  // Fetch post author email
+  const { data: postAuthor } = await adminDb.from('users').select('id, email').eq('id', postData.user_id).single()
+  const post = { ...postData, user: postAuthor ? { id: postAuthor.id, email: postAuthor.email } : { id: postData.user_id, email: 'anonymous' } }
 
   // Get user's upvotes for this thread
-  const { data: upvotes } = await supabase
+  const { data: upvotes } = await adminDb
     .from('community_upvotes')
     .select('post_id, reply_id')
     .eq('user_id', user.id)
