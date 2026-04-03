@@ -4,6 +4,7 @@ import { Zap } from 'lucide-react'
 const FOOTER_LINKS = {
   Product: [
     { label: 'Browse Offers', href: '/offers' },
+    { label: 'Compare Tools', href: '/compare' },
     { label: 'Pricing', href: '/#pricing' },
     { label: 'Blog', href: '/blog' },
   ],
