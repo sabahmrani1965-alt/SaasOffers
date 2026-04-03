@@ -107,7 +107,7 @@ export default function PartnersPage() {
           <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-emerald-400 rounded-full blur-[130px] opacity-[0.05]" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto text-center">
+        <div className="relative max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-2 rounded-full mb-8">
             <Building2 className="w-3.5 h-3.5" />
             For SaaS companies
@@ -142,7 +142,7 @@ export default function PartnersPage() {
 
       {/* ── STATS ── */}
       <section className="py-12 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {STATS.map(s => (
               <div key={s.label} className="text-center">
@@ -156,7 +156,7 @@ export default function PartnersPage() {
 
       {/* ── WHY PARTNER ── */}
       <section className="py-24 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-3">
               Why SaaS companies partner with us
@@ -185,7 +185,7 @@ export default function PartnersPage() {
 
       {/* ── HOW IT WORKS ── */}
       <section id="how-it-works" className="py-24 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-3">
               How it works
@@ -213,7 +213,7 @@ export default function PartnersPage() {
 
       {/* ── WHO SHOULD PARTNER ── */}
       <section className="py-24 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-3">
               Who should partner with SaaSOffers?
@@ -240,7 +240,7 @@ export default function PartnersPage() {
 
       {/* ── CURRENT PARTNERS ── */}
       <section className="py-16 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center">
           <p className="text-sm text-gray-500 font-semibold uppercase tracking-widest mb-6">Trusted by 199+ SaaS companies including</p>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-3">
             {['AWS', 'Google Cloud', 'OpenAI', 'Anthropic', 'Vercel', 'Supabase', 'Twilio', 'Segment', 'Datadog', 'HubSpot', 'Notion', 'Figma', 'Stripe', 'Chargebee', 'MongoDB', 'Mixpanel'].map(name => (

@@ -126,7 +126,7 @@ export function ThreadClient({ post, user, upvotedPostIds, upvotedReplyIds }: Pr
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         {/* Back */}
         <Link href="/community" className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 font-medium mb-6 transition-colors">

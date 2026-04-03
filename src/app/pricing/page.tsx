@@ -170,7 +170,7 @@ export default function PricingPage() {
 
       {/* ── PRICING CARDS ── */}
       <section className="pb-20 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
 
           {/* FREE CARD */}
           <div className="relative rounded-3xl p-8 border bg-white border-gray-100 shadow-card hover:shadow-card-hover transition-all h-full flex flex-col">
@@ -258,7 +258,7 @@ export default function PricingPage() {
 
       {/* ── COMPARISON TABLE ── */}
       <section className="py-20 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-12 text-center">
             Everything you get
           </h2>

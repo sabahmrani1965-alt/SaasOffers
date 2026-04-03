@@ -48,7 +48,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
