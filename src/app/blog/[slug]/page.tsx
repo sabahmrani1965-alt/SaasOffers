@@ -214,6 +214,41 @@ function inlineMarkdown(text: string): string {
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener">$1</a>')
 }
 
+// Extract FAQ items from blog content (### heading followed by paragraph answer)
+function extractFAQ(content: string): { question: string; answer: string }[] {
+  const items: { question: string; answer: string }[] = []
+  const lines = content.split('\n')
+  let inFaqSection = false
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
+    // Detect FAQ section start
+    if (line.match(/^##\s.*FAQ|^##\s.*Frequently Asked/i)) {
+      inFaqSection = true
+      continue
+    }
+    // Stop at next H2 that isn't FAQ
+    if (inFaqSection && line.match(/^##\s/) && !line.match(/FAQ|Frequently Asked/i)) {
+      break
+    }
+    // Capture H3 questions inside FAQ section
+    if (inFaqSection && line.startsWith('### ')) {
+      const question = line.slice(4).trim()
+      // Collect answer lines until next heading or empty section
+      const answerLines: string[] = []
+      let j = i + 1
+      while (j < lines.length && !lines[j].trim().startsWith('#')) {
+        if (lines[j].trim()) answerLines.push(lines[j].trim())
+        j++
+      }
+      if (answerLines.length > 0) {
+        items.push({ question, answer: answerLines.join(' ') })
+      }
+    }
+  }
+  return items
+}
+
 export default async function BlogPostPage({ params }: PageProps) {
   const [post, relatedPosts] = await Promise.all([
     getPost(params.slug),
@@ -230,9 +265,60 @@ export default async function BlogPostPage({ params }: PageProps) {
     : COVER_GRADIENTS.default
 
   const postUrl = `https://saasoffers.tech/blog/${post.slug}`
+  const publishedDate = new Date(post.created_at).toISOString().split('T')[0]
+
+  // JSON-LD: Article schema
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    author: {
+      '@type': 'Organization',
+      name: post.author || 'SaaSOffers',
+      url: 'https://saasoffers.tech',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SaaSOffers',
+      url: 'https://saasoffers.tech',
+      logo: { '@type': 'ImageObject', url: 'https://saasoffers.tech/icon.png' },
+    },
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    mainEntityOfPage: postUrl,
+    ...(post.image ? { image: post.image } : {}),
+  }
+
+  // JSON-LD: FAQ schema (extracted from content)
+  const faqItems = extractFAQ(post.content)
+  const faqJsonLd = faqItems.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  } : null
+
+  // JSON-LD: Breadcrumb schema
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://saasoffers.tech' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://saasoffers.tech/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: postUrl },
+    ],
+  }
 
   return (
     <div className="min-h-screen bg-white">
+      {/* JSON-LD Structured Data — rendered server-side */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
       {/* ── Hero — moderate height, not full screen ── */}
       <div className={`bg-gradient-to-br ${gradient} pt-20`}>
