@@ -3,12 +3,12 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(req: Request) {
-  const supabase = createClient()
+  const adminDb = createAdminClient()
   const { searchParams } = new URL(req.url)
   const category = searchParams.get('category')
   const sort = searchParams.get('sort') || 'newest'
 
-  let query = supabase
+  let query = adminDb
     .from('community_posts')
     .select('*, user:users(id, email)')
 
@@ -32,13 +32,15 @@ export async function POST(req: Request) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  // Check premium status
   const adminDb = createAdminClient()
+
+  // Check premium status
   const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
 
+  // Insert using admin client to bypass RLS
   const body = await req.json()
-  const { data, error } = await supabase
+  const { data, error } = await adminDb
     .from('community_posts')
     .insert({ user_id: user.id, title: body.title, body: body.body, category: body.category || 'General' })
     .select()
