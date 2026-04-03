@@ -6,6 +6,7 @@ import { SEED_DEALS } from '@/lib/seed-data'
 import { DealBadge } from '@/components/ui/DealBadge'
 import { Crown, Zap, ArrowRight, DollarSign, Lock } from 'lucide-react'
 import { UpgradeButton } from '@/components/UpgradeButton'
+import { DashboardNav } from '@/components/dashboard/DashboardNav'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -64,6 +65,9 @@ export default async function DashboardPage() {
             </UpgradeButton>
           )}
         </div>
+
+        {/* Dashboard Navigation */}
+        <DashboardNav />
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
