@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { DealCard } from '@/components/offers/DealCard'
-import { AIDealFinder } from '@/components/home/AIDealFinder'
 import { CATEGORIES } from '@/lib/categories'
 import {
   ArrowRight, CheckCircle2, Star, Users, Zap, BarChart3,
@@ -142,9 +141,8 @@ export default async function HomePage() {
             <Link href="/signup" className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-200 shadow-lg shadow-violet-200 hover:shadow-xl hover:shadow-violet-300 hover:-translate-y-0.5 text-base">
               Get Deals — It's Free <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="#ai-finder" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-violet-50 border border-gray-200 hover:border-violet-200 text-gray-700 hover:text-violet-600 font-medium px-8 py-4 rounded-2xl transition-all duration-200 text-base shadow-sm">
-              <Sparkles className="w-4 h-4 text-violet-400" />
-              Find Deals with AI
+            <Link href="/offers" className="inline-flex items-center justify-center gap-2 bg-white hover:bg-violet-50 border border-gray-200 hover:border-violet-200 text-gray-700 hover:text-violet-600 font-medium px-8 py-4 rounded-2xl transition-all duration-200 text-base shadow-sm">
+              Browse All Deals
             </Link>
           </div>
 
@@ -197,10 +195,7 @@ export default async function HomePage() {
       {/* ── NEW PARTNERS STRIP ── */}
       <NewPartnersStrip />
 
-      {/* ── AI DEAL FINDER ── */}
-      <div id="ai-finder">
-        <AIDealFinder />
-      </div>
+
 
       {/* ── BENEFITS ── */}
       <section className="py-24 px-4 sm:px-6 bg-white">
