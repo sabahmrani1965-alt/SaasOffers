@@ -38,9 +38,26 @@ export async function GET(request: NextRequest) {
             body: JSON.stringify({ email }),
           })
         }
+
+        // Apply referral code from cookie (set before Google OAuth redirect)
+        const refCode = request.cookies.get('ref_code')?.value
+        if (refCode) {
+          await fetch(`${origin}/api/referrals/apply`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              referral_code: refCode,
+              new_user_id: data.user.id,
+              new_user_email: data.user.email,
+            }),
+          })
+        }
       }
 
-      return NextResponse.redirect(`${origin}${next}`)
+      // Clear the ref_code cookie
+      const response = NextResponse.redirect(`${origin}${next}`)
+      response.cookies.set('ref_code', '', { maxAge: 0, path: '/' })
+      return response
     }
   }
 

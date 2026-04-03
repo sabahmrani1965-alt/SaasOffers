@@ -49,8 +49,9 @@ export async function POST(req: Request) {
 
   const adminDb = createAdminClient()
 
-  const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
-  if (!profile?.is_premium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
+  const { data: profile } = await adminDb.from('users').select('is_premium, premium_until').eq('id', user.id).single()
+  const isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date())
+  if (!isPremium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
 
   const body = await req.json()
 

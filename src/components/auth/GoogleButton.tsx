@@ -5,13 +5,20 @@ import { createClient } from '@/lib/supabase/client'
 
 interface GoogleButtonProps {
   label?: string
+  refCode?: string
 }
 
-export function GoogleButton({ label = 'Continue with Google' }: GoogleButtonProps) {
+export function GoogleButton({ label = 'Continue with Google', refCode }: GoogleButtonProps) {
   const [loading, setLoading] = useState(false)
 
   const handleGoogleLogin = async () => {
     setLoading(true)
+
+    // Store referral code in cookie before OAuth redirect
+    if (refCode) {
+      document.cookie = `ref_code=${refCode}; path=/; max-age=3600; samesite=lax`
+    }
+
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -19,7 +26,6 @@ export function GoogleButton({ label = 'Continue with Google' }: GoogleButtonPro
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
-    // No need to setLoading(false) — page will redirect
   }
 
   return (

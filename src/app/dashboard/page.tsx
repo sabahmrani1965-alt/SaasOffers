@@ -30,7 +30,7 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
-  const isPremium = profile?.is_premium ?? false
+  const isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date()) || false
 
   // Get unlocked deals
   const { data: unlockedRows } = await supabase

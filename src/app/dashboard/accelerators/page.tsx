@@ -22,13 +22,13 @@ export default async function AcceleratorsPage() {
 
   const adminDb = createAdminClient()
   const [{ data: profile }, { data: accelerators }, { data: statuses }, { data: saved }] = await Promise.all([
-    adminDb.from('users').select('is_premium').eq('id', user.id).single(),
+    adminDb.from('users').select('is_premium, premium_until').eq('id', user.id).single(),
     supabase.from('accelerators').select('*').order('deadline', { ascending: true }),
     supabase.from('user_accelerator_status').select('*').eq('user_id', user.id),
     supabase.from('user_saved_accelerators').select('*').eq('user_id', user.id),
   ])
 
-  const isPremium = profile?.is_premium ?? false
+  const isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date()) || false
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-20 px-4 sm:px-6">

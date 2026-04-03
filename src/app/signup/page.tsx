@@ -16,6 +16,7 @@ function SignupForm() {
   const [success, setSuccess] = useState(false)
   const searchParams = useSearchParams()
   const plan = searchParams.get('plan')
+  const refCode = searchParams.get('ref')
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,6 +32,15 @@ function SignupForm() {
     if (data.user) {
       await supabase.from('users').upsert({ id: data.user.id, email: data.user.email, is_premium: false })
       await fetch('/api/auth/welcome', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) })
+
+      // Apply referral if ref code present
+      if (refCode) {
+        await fetch('/api/referrals/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ referral_code: refCode, new_user_id: data.user.id, new_user_email: email }),
+        })
+      }
     }
     if (plan === 'premium' && data.user) {
       const res = await fetch('/api/stripe/checkout', { method: 'POST' })
@@ -77,7 +87,7 @@ function SignupForm() {
           </div>
 
           {/* Google */}
-          <GoogleButton label="Sign up with Google" />
+          <GoogleButton label="Sign up with Google" refCode={refCode || undefined} />
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">

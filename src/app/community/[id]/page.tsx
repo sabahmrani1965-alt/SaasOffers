@@ -16,8 +16,9 @@ export default async function ThreadPage({ params }: PageProps) {
   if (!user) redirect('/login?redirect=/community')
 
   const adminDb = createAdminClient()
-  const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
-  if (!profile?.is_premium) redirect('/community')
+  const { data: profile } = await adminDb.from('users').select('is_premium, premium_until').eq('id', user.id).single()
+  const isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date())
+  if (!isPremium) redirect('/community')
 
   const { data: postData } = await adminDb
     .from('community_posts')

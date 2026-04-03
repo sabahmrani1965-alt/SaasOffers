@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Zap, Rocket } from 'lucide-react'
+import { Zap, Rocket, Gift } from 'lucide-react'
 
 const TABS = [
   { href: '/dashboard', label: 'My Deals', icon: Zap },
   { href: '/dashboard/accelerators', label: 'Accelerators', icon: Rocket },
+  { href: '/dashboard/referrals', label: 'Referrals', icon: Gift },
 ]
 
 export function DashboardNav() {

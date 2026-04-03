@@ -17,8 +17,8 @@ export default async function CommunityPage() {
   let isPremium = false
   if (user) {
     const adminDb = createAdminClient()
-    const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
-    isPremium = profile?.is_premium ?? false
+    const { data: profile } = await adminDb.from('users').select('is_premium, premium_until').eq('id', user.id).single()
+    isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date()) || false
   }
 
   // Fetch user's upvotes for highlighting

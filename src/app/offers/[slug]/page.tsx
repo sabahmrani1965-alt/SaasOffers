@@ -65,10 +65,10 @@ export default async function OfferPage({ params }: PageProps) {
   if (user) {
     const adminDb = createAdminClient()
     const [{ data: profile }, { data: unlocked }] = await Promise.all([
-      adminDb.from('users').select('is_premium').eq('id', user.id).single(),
+      adminDb.from('users').select('is_premium, premium_until').eq('id', user.id).single(),
       supabase.from('unlocked_deals').select('*').eq('user_id', user.id).eq('deal_id', deal.id).single(),
     ])
-    isPremium = profile?.is_premium ?? false
+    isPremium = profile?.is_premium || (profile?.premium_until && new Date(profile.premium_until) > new Date()) || false
     isUnlocked = !!unlocked
   }
 
