@@ -160,12 +160,12 @@ function renderContent(content: string) {
         <div key={`table-${i}`} className="overflow-x-auto my-6 rounded-xl border border-gray-100">
           <table className="w-full text-sm">
             <thead className="bg-gray-50">
-              <tr>{rows[0]?.map((h, j) => <th key={j} className="px-4 py-3 text-left font-semibold text-gray-700 border-b border-gray-100">{h}</th>)}</tr>
+              <tr>{rows[0]?.map((h, j) => <th key={j} className="px-4 py-3 text-left font-semibold text-gray-700 border-b border-gray-100" dangerouslySetInnerHTML={{ __html: inlineMarkdown(h) }} />)}</tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
               {rows.slice(1).map((row, j) => (
                 <tr key={j} className="hover:bg-gray-50/50">
-                  {row.map((cell, k) => <td key={k} className="px-4 py-3 text-gray-700">{cell}</td>)}
+                  {row.map((cell, k) => <td key={k} className="px-4 py-3 text-gray-700" dangerouslySetInnerHTML={{ __html: inlineMarkdown(cell) }} />)}
                 </tr>
               ))}
             </tbody>
