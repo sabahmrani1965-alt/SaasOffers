@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { DealBadge } from '@/components/ui/DealBadge'
 import { Crown, Zap, ArrowRight, DollarSign, Lock } from 'lucide-react'
+import { UpgradeButton } from '@/components/UpgradeButton'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -55,13 +56,12 @@ export default async function DashboardPage() {
               Premium Member
             </div>
           ) : (
-            <Link
-              href="/api/stripe/checkout"
+            <UpgradeButton
               className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-violet-200"
             >
               <Zap className="w-4 h-4" fill="white" />
               Upgrade to Premium
-            </Link>
+            </UpgradeButton>
           )}
         </div>
 
@@ -208,12 +208,11 @@ export default async function DashboardPage() {
                 </h3>
                 <p className="text-white/80 text-sm">Unlock AWS ($5,000), Deel ($1,500) and all premium deals for just $79/year.</p>
               </div>
-              <Link
-                href="/api/stripe/checkout"
+              <UpgradeButton
                 className="flex-shrink-0 flex items-center gap-2 bg-white text-violet-700 hover:bg-violet-50 text-sm font-bold px-5 py-2.5 rounded-xl transition-all shadow-lg"
               >
                 Upgrade — $79/yr <ArrowRight className="w-4 h-4" />
-              </Link>
+              </UpgradeButton>
             </div>
           </div>
         )}

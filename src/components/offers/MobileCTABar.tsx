@@ -23,11 +23,8 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
 
   if (!visible) return null
 
-  const href = !user
-    ? `/signup?redirect=/offers/${deal.slug}`
-    : deal.type === 'premium'
-    ? '/api/stripe/checkout'
-    : null
+  const isPremiumDeal = deal.type === 'premium'
+  const needsSignup = !user
 
   const label = isUnlocked
     ? 'View in Dashboard'
@@ -36,6 +33,19 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
     : deal.type === 'apply'
     ? `Apply for ${deal.name}`
     : `Get ${deal.name}`
+
+  const handleCheckout = async () => {
+    try {
+      const res = await fetch('/api/stripe/checkout', { method: 'POST' })
+      const { url, error } = await res.json()
+      if (error) throw new Error(error)
+      if (url) window.location.href = url
+    } catch (e) {
+      console.error('Checkout error:', e)
+    }
+  }
+
+  const btnClass = "flex items-center gap-1.5 bg-gradient-to-r from-violet-600 to-pink-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-violet-200 flex-shrink-0"
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 shadow-lg px-4 py-3 flex items-center gap-3">
@@ -46,17 +56,21 @@ export function MobileCTABar({ deal, user, isUnlocked }: MobileCTABarProps) {
           {deal.value_label}
         </div>
       </div>
-      {href ? (
+      {needsSignup ? (
         <Link
-          href={href}
-          className="flex items-center gap-1.5 bg-gradient-to-r from-violet-600 to-pink-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-violet-200 flex-shrink-0"
+          href={`/signup?redirect=/offers/${deal.slug}`}
+          className={btnClass}
         >
           {label} <ArrowRight className="w-4 h-4" />
         </Link>
+      ) : isPremiumDeal ? (
+        <button onClick={handleCheckout} className={btnClass}>
+          {label} <ArrowRight className="w-4 h-4" />
+        </button>
       ) : (
         <button
           onClick={() => document.getElementById('offer-cta')?.scrollIntoView({ behavior: 'smooth' })}
-          className="flex items-center gap-1.5 bg-gradient-to-r from-violet-600 to-pink-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-violet-200 flex-shrink-0"
+          className={btnClass}
         >
           {label} <ArrowRight className="w-4 h-4" />
         </button>
