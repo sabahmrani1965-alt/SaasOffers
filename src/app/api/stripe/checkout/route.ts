@@ -7,7 +7,7 @@ async function handleCheckout() {
   const { data: { user }, error } = await supabase.auth.getUser()
 
   if (error || !user) {
-    return NextResponse.redirect(new URL('/login', process.env.NEXT_PUBLIC_SITE_URL || 'https://saasoffers.tech'))
+    return NextResponse.redirect(new URL('/signup?plan=premium', process.env.NEXT_PUBLIC_SITE_URL || 'https://saasoffers.tech'))
   }
 
   const session = await createCheckoutSession(user.id, user.email!)

@@ -95,7 +95,7 @@ const PRICING = [
     name: 'Premium', price: '$79', period: 'per year',
     description: 'Unlock the highest-value deals including AWS, Deel, and more.',
     features: ['Everything in Free', 'AWS Activate ($5,000)', 'Deel credits ($1,500)', 'All premium-gated deals', '$10,000+ in potential savings', 'Priority support'],
-    cta: 'Upgrade to Premium', href: '/signup?plan=premium', highlight: true,
+    cta: 'Upgrade to Premium', href: '/api/stripe/checkout', highlight: true,
   },
 ]
 
