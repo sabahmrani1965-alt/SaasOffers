@@ -6,6 +6,8 @@ import { UpgradeButton } from '@/components/UpgradeButton'
 import { DashboardNav } from '@/components/dashboard/DashboardNav'
 import { AcceleratorsClient } from '@/components/dashboard/AcceleratorsClient'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Accelerators',
   description: 'Browse and track startup accelerator applications',

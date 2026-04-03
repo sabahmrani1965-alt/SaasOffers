@@ -8,6 +8,8 @@ import { Crown, Zap, ArrowRight, DollarSign, Lock } from 'lucide-react'
 import { UpgradeButton } from '@/components/UpgradeButton'
 import { DashboardNav } from '@/components/dashboard/DashboardNav'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Dashboard',
   description: 'Your SaaSOffers dashboard',
