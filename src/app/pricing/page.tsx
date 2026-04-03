@@ -24,7 +24,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Is $79/year really worth it?',
-    a: 'One deal pays for the entire year. AWS Activate alone gives you $5,000 in credits \u2014 that is 63x the cost of Premium. Most founders save $10,000+ in their first month.',
+    a: 'One deal pays for the entire year. AWS Activate alone gives you $5,000 in credits — that is 63x the cost of Premium. Most founders save $10,000+ in their first month.',
   },
   {
     q: 'Do you offer refunds?',
@@ -36,7 +36,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Who is Premium for?',
-    a: 'Premium is for founders who are serious about building. If you are actively working on a startup and want access to the best tools, the strongest community, and the highest-value credits \u2014 Premium is built for you.',
+    a: 'Premium is for founders who are serious about building. If you are actively working on a startup and want access to the best tools, the strongest community, and the highest-value credits — Premium is built for you.',
   },
   {
     q: 'Can I use a promo code?',
@@ -66,7 +66,7 @@ const breadcrumbSchema = {
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Pricing \u2014 SaaSOffers',
+  name: 'Pricing — SaaSOffers',
   description: 'Start free with 100+ startup deals or upgrade to Premium for $79/year and unlock 199+ deals, $500,000+ in credits, accelerators directory, and private founder community.',
   url: 'https://saasoffers.tech/pricing',
   publisher: {
@@ -139,19 +139,6 @@ const PREMIUM_GROUPS = [
 
 export default function PricingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
-  const [promoCode, setPromoCode] = useState('')
-  const [promoApplied, setPromoApplied] = useState(false)
-  const [promoError, setPromoError] = useState('')
-
-  const handleApplyPromo = () => {
-    setPromoError('')
-    setPromoApplied(false)
-    if (promoCode.trim().toUpperCase() === 'GITEX50') {
-      setPromoApplied(true)
-    } else if (promoCode.trim()) {
-      setPromoError('Invalid promo code')
-    }
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -232,17 +219,9 @@ export default function PricingPage() {
             <div className="mb-6">
               <h3 className="text-lg font-bold text-white mb-1">Premium</h3>
               <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-4xl font-bold text-white">
-                  {promoApplied ? '$39.50' : '$79'}
-                </span>
+                <span className="text-4xl font-bold text-white">$79</span>
                 <span className="text-sm text-white/70">/ year</span>
               </div>
-              {promoApplied && (
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm text-white/50 line-through">$79/year</span>
-                  <span className="text-xs font-bold bg-white/20 text-white px-2 py-0.5 rounded-full">50% OFF</span>
-                </div>
-              )}
               <p className="text-sm text-white/80">Everything you need to build smarter</p>
               <p className="text-xs text-white/60 mt-1">Less than $7/month</p>
             </div>
@@ -251,7 +230,7 @@ export default function PricingPage() {
             <div className="space-y-5 mb-8 flex-1">
               {PREMIUM_GROUPS.map(group => (
                 <div key={group.label}>
-                  <p className="text-[11px] font-bold text-white/50 tracking-wider mb-2">
+                  <p className="text-xs font-bold text-white tracking-wider mb-2.5 bg-white/15 inline-block px-3 py-1 rounded-lg">
                     {group.emoji} {group.label}
                   </p>
                   <ul className="space-y-2">
@@ -270,34 +249,7 @@ export default function PricingPage() {
               Upgrade to Premium
             </UpgradeButton>
 
-            {/* Promo code */}
-            <div className="mt-4">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={promoCode}
-                  onChange={e => { setPromoCode(e.target.value); setPromoError(''); setPromoApplied(false) }}
-                  placeholder="Have a promo code?"
-                  className="flex-1 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm px-3 py-2 rounded-xl focus:outline-none focus:border-white/40"
-                />
-                <button
-                  onClick={handleApplyPromo}
-                  className="text-sm font-semibold text-white bg-white/15 hover:bg-white/25 px-4 py-2 rounded-xl border border-white/20 transition-colors"
-                >
-                  Apply
-                </button>
-              </div>
-              {promoApplied && (
-                <p className="text-xs text-emerald-300 mt-2 flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3" /> GITEX50 applied \u2014 50% off!
-                </p>
-              )}
-              {promoError && (
-                <p className="text-xs text-red-300 mt-2">{promoError}</p>
-              )}
-            </div>
-
-            <p className="text-center text-xs text-white/50 mt-3 flex items-center justify-center gap-1.5">
+            <p className="text-center text-xs text-white/50 mt-4 flex items-center justify-center gap-1.5">
               <Shield className="w-3.5 h-3.5" /> Secure payment via Stripe. Cancel anytime.
             </p>
           </div>
@@ -418,7 +370,7 @@ export default function PricingPage() {
                 Get Started Free
               </Link>
               <UpgradeButton className="inline-flex items-center justify-center gap-2 bg-white text-violet-600 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-base cursor-pointer">
-                Upgrade to Premium \u2014 $79/year
+                Upgrade to Premium — $79/year
               </UpgradeButton>
             </div>
           </div>
