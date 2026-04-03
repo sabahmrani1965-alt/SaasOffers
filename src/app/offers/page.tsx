@@ -78,7 +78,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
     <div className="min-h-screen bg-gray-50">
       {/* ── Header ── */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-10">
           <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-600 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
             <Zap className="w-3 h-3 fill-current" />
             {allDeals.length} deals · ${totalValue.toLocaleString()}+ in value
@@ -94,7 +94,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 pb-20 space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20 space-y-10">
 
         {/* ── Category Grid (shown when no category is selected) ── */}
         {!activeCategory && (

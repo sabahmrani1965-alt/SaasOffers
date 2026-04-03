@@ -73,7 +73,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
       {/* ── Hero ── */}
       <div className="bg-white border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-10">
 
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-gray-700 mb-6">
@@ -116,7 +116,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 pb-20 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 pb-20 space-y-8">
 
         {/* ── Type filter pills ── */}
         <div className="flex items-center gap-2 flex-wrap">

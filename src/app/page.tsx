@@ -121,7 +121,7 @@ export default async function HomePage() {
           <div className="absolute -top-20 -right-40 w-[600px] h-[600px] bg-pink-400 rounded-full blur-[130px] opacity-[0.06]" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-700 text-xs font-semibold px-4 py-2 rounded-full mb-8">
             <Sparkles className="w-3.5 h-3.5" />
             Trusted by 2,000+ startup founders
@@ -177,7 +177,7 @@ export default async function HomePage() {
 
       {/* ── LOGO BAR ── */}
       <section className="py-10 bg-gray-50 border-y border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="text-center text-xs text-gray-600 uppercase tracking-widest font-semibold mb-7">
             Exclusive deals from industry-leading tools
           </p>
@@ -199,7 +199,7 @@ export default async function HomePage() {
 
       {/* ── BENEFITS ── */}
       <section className="py-24 px-4 sm:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight mb-3">
               Why 2,000+ founders choose SaaSOffers
@@ -227,7 +227,7 @@ export default async function HomePage() {
 
       {/* ── CATEGORIES ── */}
       <section className="py-20 px-4 sm:px-6 bg-slate-50 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-10">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">Browse by Category</h2>
@@ -259,7 +259,7 @@ export default async function HomePage() {
 
       {/* ── FEATURED DEALS ── */}
       <section className="py-24 px-4 sm:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
               <Zap className="w-3 h-3 fill-current" /> Top Deals
@@ -280,7 +280,7 @@ export default async function HomePage() {
 
       {/* ── HOW IT WORKS ── */}
       <section className="py-24 px-4 sm:px-6 bg-slate-50 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4 shadow-sm">
               Simple Process
@@ -313,7 +313,7 @@ export default async function HomePage() {
 
       {/* ── PRICING ── */}
       <section id="pricing" className="py-24 px-4 sm:px-6 bg-gradient-to-b from-white to-violet-50/60 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-violet-50 border border-violet-100 text-violet-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
               Pricing
@@ -367,7 +367,7 @@ export default async function HomePage() {
 
       {/* ── STATS + TRUST ── */}
       <section className="py-20 px-4 sm:px-6 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Trusted by thousands of startups</h2>
             <p className="text-gray-700">Real numbers from real founders saving on their SaaS stack</p>
@@ -404,7 +404,7 @@ export default async function HomePage() {
 
       {/* ── FINAL CTA ── */}
       <section className="py-24 px-4 sm:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-pink-500 rounded-3xl p-12 sm:p-16 overflow-hidden text-center">
             <div className="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-72 h-72 bg-pink-400/20 rounded-full blur-3xl pointer-events-none" />
