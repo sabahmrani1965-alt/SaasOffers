@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: '/offers', label: 'Offers' },
   { href: '/blog', label: 'Blog' },
   { href: '/#pricing', label: 'Pricing' },
+  { href: '/partners', label: 'Partners' },
 ]
 
 export function Navbar() {
