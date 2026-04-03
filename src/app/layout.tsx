@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Analytics } from '@/components/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body>
         <Analytics />
         <VercelAnalytics />
+        <SpeedInsights />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
