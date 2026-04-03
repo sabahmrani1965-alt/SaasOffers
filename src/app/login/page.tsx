@@ -55,7 +55,7 @@ export default function LoginPage() {
               </div>
             </Link>
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Welcome back</h1>
-            <p className="text-gray-700 text-base mt-2">Sign in to your SaaSOffers account</p>
+            <p className="text-gray-900 text-base mt-2 font-medium">Sign in to your SaaSOffers account</p>
           </div>
 
           {/* Google */}
@@ -65,7 +65,7 @@ export default function LoginPage() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-100" />
             </div>
-            <div className="relative flex justify-center text-xs text-gray-600">
+            <div className="relative flex justify-center text-xs text-gray-700 font-medium">
               <span className="bg-white px-3">or sign in with email</span>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function LoginPage() {
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+              <label className="block text-sm font-bold text-gray-900 mb-2">Email</label>
               <div className="relative">
                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <input
@@ -88,7 +88,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+              <label className="block text-sm font-bold text-gray-900 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-600" />
                 <input
@@ -113,7 +113,7 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-700 mt-6">
+          <p className="text-center text-sm text-gray-900 font-medium mt-6">
             Don't have an account?{' '}
             <Link href="/signup" className="text-violet-600 font-semibold hover:text-violet-700 transition-colors">
               Sign up free

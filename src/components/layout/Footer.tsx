@@ -33,7 +33,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-gray-900 text-xl tracking-tight">SaaSOffers</span>
             </Link>
-            <p className="text-gray-600 text-[15px] leading-relaxed max-w-xs">
+            <p className="text-gray-700 text-[15px] leading-relaxed max-w-xs font-medium">
               The perks platform built for ambitious startups. Unlock $500,000+ in SaaS credits and build your product faster.
             </p>
             <p className="text-gray-500 text-sm mt-8">© {new Date().getFullYear()} SaaSOffers. All rights reserved.</p>
@@ -42,11 +42,11 @@ export function Footer() {
           {/* Link columns */}
           {Object.entries(FOOTER_LINKS).map(([section, links]) => (
             <div key={section}>
-              <h4 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">{section}</h4>
+              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-5">{section}</h4>
               <ul className="space-y-3.5">
                 {links.map(link => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-[15px] text-gray-700 hover:text-gray-900 transition-colors font-medium">
+                    <Link href={link.href} className="text-[15px] text-gray-900 hover:text-violet-600 transition-colors font-semibold">
                       {link.label}
                     </Link>
                   </li>
