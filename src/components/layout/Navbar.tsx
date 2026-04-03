@@ -86,10 +86,17 @@ export function Navbar() {
           )}
         </div>
 
-        {/* Mobile hamburger */}
-        <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-gray-700 hover:text-gray-900 transition-colors p-1">
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile CTA + hamburger */}
+        <div className="flex md:hidden items-center gap-3">
+          {!user && (
+            <Link href="/signup" className="text-sm font-semibold bg-gradient-to-r from-violet-600 to-pink-500 text-white px-4 py-2 rounded-xl shadow-md shadow-violet-200">
+              Sign Up
+            </Link>
+          )}
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-gray-700 hover:text-gray-900 transition-colors p-1">
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
