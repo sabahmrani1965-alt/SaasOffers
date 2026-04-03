@@ -9,6 +9,7 @@ import {
   Shield, Clock, Sparkles, Brain, TrendingUp, DollarSign,
   Search, MousePointerClick, Rocket,
 } from 'lucide-react'
+import { NewPartnersStrip } from '@/components/home/NewPartnersStrip'
 
 const LOGOS = [
   { name: 'AWS',     src: '/logos/aws.svg' },
@@ -192,6 +193,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── NEW PARTNERS STRIP ── */}
+      <NewPartnersStrip />
 
       {/* ── AI DEAL FINDER ── */}
       <div id="ai-finder">
