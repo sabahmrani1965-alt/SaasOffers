@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { Deal } from '@/types'
 import { DealBadge } from '@/components/ui/DealBadge'
@@ -62,8 +63,9 @@ export default async function OfferPage({ params }: PageProps) {
   let isUnlocked = false
 
   if (user) {
+    const adminDb = createAdminClient()
     const [{ data: profile }, { data: unlocked }] = await Promise.all([
-      supabase.from('users').select('is_premium').eq('id', user.id).single(),
+      adminDb.from('users').select('is_premium').eq('id', user.id).single(),
       supabase.from('unlocked_deals').select('*').eq('user_id', user.id).eq('deal_id', deal.id).single(),
     ])
     isPremium = profile?.is_premium ?? false

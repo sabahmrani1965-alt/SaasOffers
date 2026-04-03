@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { Crown, Zap } from 'lucide-react'
 import { UpgradeButton } from '@/components/UpgradeButton'
 import { DashboardNav } from '@/components/dashboard/DashboardNav'
@@ -19,8 +20,9 @@ export default async function AcceleratorsPage() {
 
   if (!user) redirect('/login')
 
+  const adminDb = createAdminClient()
   const [{ data: profile }, { data: accelerators }, { data: statuses }, { data: saved }] = await Promise.all([
-    supabase.from('users').select('is_premium').eq('id', user.id).single(),
+    adminDb.from('users').select('is_premium').eq('id', user.id).single(),
     supabase.from('accelerators').select('*').order('deadline', { ascending: true }),
     supabase.from('user_accelerator_status').select('*').eq('user_id', user.id),
     supabase.from('user_saved_accelerators').select('*').eq('user_id', user.id),

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { DealBadge } from '@/components/ui/DealBadge'
 import { Crown, Zap, ArrowRight, DollarSign, Lock } from 'lucide-react'
@@ -21,8 +22,9 @@ export default async function DashboardPage() {
 
   if (!user) redirect('/login')
 
-  // Get user profile
-  const { data: profile } = await supabase
+  // Get user profile using admin client to bypass RLS
+  const adminDb = createAdminClient()
+  const { data: profile } = await adminDb
     .from('users')
     .select('*')
     .eq('id', user.id)
