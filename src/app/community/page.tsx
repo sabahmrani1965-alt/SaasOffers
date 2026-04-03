@@ -1,6 +1,9 @@
 import { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { CommunityClient } from '@/components/community/CommunityClient'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Founder Community — SaaSOffers',
@@ -13,7 +16,8 @@ export default async function CommunityPage() {
 
   let isPremium = false
   if (user) {
-    const { data: profile } = await supabase.from('users').select('is_premium').eq('id', user.id).single()
+    const adminDb = createAdminClient()
+    const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
     isPremium = profile?.is_premium ?? false
   }
 

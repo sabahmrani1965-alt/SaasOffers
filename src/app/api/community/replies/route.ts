@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 export async function GET(req: Request) {
   const supabase = createClient()
@@ -22,7 +23,8 @@ export async function POST(req: Request) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { data: profile } = await supabase.from('users').select('is_premium').eq('id', user.id).single()
+  const adminDb = createAdminClient()
+  const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) return NextResponse.json({ error: 'Premium required' }, { status: 403 })
 
   const body = await req.json()

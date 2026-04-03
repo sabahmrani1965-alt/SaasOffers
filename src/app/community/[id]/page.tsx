@@ -1,6 +1,9 @@
 import { notFound, redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { ThreadClient } from '@/components/community/ThreadClient'
+
+export const dynamic = 'force-dynamic'
 
 interface PageProps {
   params: { id: string }
@@ -12,7 +15,8 @@ export default async function ThreadPage({ params }: PageProps) {
 
   if (!user) redirect('/login?redirect=/community')
 
-  const { data: profile } = await supabase.from('users').select('is_premium').eq('id', user.id).single()
+  const adminDb = createAdminClient()
+  const { data: profile } = await adminDb.from('users').select('is_premium').eq('id', user.id).single()
   if (!profile?.is_premium) redirect('/community')
 
   const { data: post } = await supabase
