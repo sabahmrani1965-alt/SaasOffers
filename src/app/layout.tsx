@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Analytics } from '@/components/Analytics'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body>
         <Analytics />
+        <VercelAnalytics />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
