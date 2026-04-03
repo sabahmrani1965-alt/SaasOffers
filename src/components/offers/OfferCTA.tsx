@@ -6,9 +6,8 @@ import { User } from '@supabase/supabase-js'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { DollarSign, Lock, CheckCircle2, ArrowRight, FileText, Shield, Zap } from 'lucide-react'
+import { DollarSign, Lock, CheckCircle2, ArrowRight, Shield, Zap } from 'lucide-react'
 import { trackEvent } from '@/components/Analytics'
-import { ApplyForm } from '@/components/offers/ApplyForm'
 
 interface OfferCTAProps {
   deal: Deal
@@ -20,7 +19,6 @@ interface OfferCTAProps {
 export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }: OfferCTAProps) {
   const [isUnlocked, setIsUnlocked] = useState(initialUnlocked)
   const [loading, setLoading] = useState(false)
-  const [showApplyForm, setShowApplyForm] = useState(false)
   const [error, setError] = useState('')
 
   const handleUnlock = async () => {
@@ -85,13 +83,8 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
         </div>
       )}
 
-      {/* Apply form (inline) */}
-      {showApplyForm && user && !isUnlocked && (
-        <ApplyForm deal={deal} user={user} />
-      )}
-
       {/* CTA logic */}
-      {!isUnlocked && !showApplyForm && (
+      {!isUnlocked && (
         <>
           {/* ── FREE: direct access, no auth required ── */}
           {deal.type === 'free' && (
@@ -104,12 +97,12 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
               >
                 <Zap className="w-4 h-4 mr-1" fill="white" /> Unlock Free Deal
               </Button>
-            ) : (
+            ) : deal.affiliate_link ? (
               <div className="space-y-3">
                 <Link
-                  href={deal.affiliate_link || `/signup?redirect=/offers/${deal.slug}`}
-                  target={deal.affiliate_link ? '_blank' : undefined}
-                  rel={deal.affiliate_link ? 'noopener noreferrer' : undefined}
+                  href={deal.affiliate_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
                   onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
                 >
@@ -121,10 +114,24 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
                   <Link href={`/signup?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Sign up</Link> to track your deals.
                 </p>
               </div>
+            ) : (
+              <div className="space-y-3">
+                <Link
+                  href={`/signup?redirect=/offers/${deal.slug}`}
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
+                  onClick={() => trackEvent('offer_cta_click', 'offers', deal.slug)}
+                >
+                  <Zap className="w-4 h-4" fill="white" /> Get Free Deal
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-center text-xs text-gray-700">
+                  Create a free account to access this deal.
+                </p>
+              </div>
             )
           )}
 
-          {/* ── APPLY: requires auth ── */}
+          {/* ── APPLY: requires auth, then go to link ── */}
           {deal.type === 'apply' && (
             !user ? (
               <div className="space-y-3">
@@ -141,22 +148,33 @@ export function OfferCTA({ deal, user, isPremium, isUnlocked: initialUnlocked }:
                   <Link href={`/login?redirect=/offers/${deal.slug}`} className="text-violet-600 font-semibold hover:underline">Log in</Link>
                 </p>
               </div>
-            ) : (
+            ) : deal.affiliate_link ? (
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs text-gray-700 font-medium bg-amber-50 border border-amber-100 rounded-lg px-3 py-2.5">
-                  <FileText className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
-                  This deal requires a short application — reviewed within 48h.
-                </div>
-                <button
+                <Link
+                  href={deal.affiliate_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
                   onClick={() => {
-                    setShowApplyForm(true)
+                    handleUnlock()
                     trackEvent('offer_cta_click', 'offers', deal.slug)
                   }}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-pink-500 hover:from-violet-700 hover:to-pink-600 text-white font-semibold py-3 rounded-xl transition-all text-sm shadow-md shadow-violet-200"
                 >
                   Apply for {deal.name} <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
+                <p className="text-center text-xs text-gray-700">
+                  You&apos;ll be redirected to {deal.name}&apos;s application page.
+                </p>
               </div>
+            ) : (
+              <Button
+                onClick={handleUnlock}
+                loading={loading}
+                className="w-full justify-center"
+                size="lg"
+              >
+                <Zap className="w-4 h-4 mr-1" fill="white" /> Unlock Offer
+              </Button>
             )
           )}
 
