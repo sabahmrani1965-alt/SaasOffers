@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {
   ArrowRight, Zap, Users, DollarSign, Clock, Heart,
   Shield, Eye, Rocket, CheckCircle2, Globe, Sparkles,
-  Target, Handshake, Twitter, Linkedin,
+  Target, Handshake, Instagram, Linkedin,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -233,16 +233,16 @@ export default function AboutPage() {
                 {/* Social links */}
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://twitter.com/saasoffers"
+                    href="https://www.instagram.com/lemilyas/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 hover:border-gray-200 transition-colors"
                   >
-                    <Twitter className="w-3.5 h-3.5" />
-                    Twitter
+                    <Instagram className="w-3.5 h-3.5" />
+                    Instagram
                   </a>
                   <a
-                    href="https://linkedin.com/in/saasoffers"
+                    href="https://www.linkedin.com/in/lemzouri-ilyas/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg bg-gray-50 border border-gray-100 hover:border-gray-200 transition-colors"
@@ -276,7 +276,7 @@ export default function AboutPage() {
                 Browse 199+ Free Deals <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/#pricing"
+                href="/pricing"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-xl transition-all text-base border border-white/20"
               >
                 Upgrade to Premium
