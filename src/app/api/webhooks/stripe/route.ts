@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No userId' }, { status: 400 })
     }
 
-    // Update is_premium = true
     const { error } = await supabase
       .from('users')
       .update({ is_premium: true })
@@ -50,20 +49,55 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'DB update failed' }, { status: 500 })
     }
 
-    // Send premium email
     if (userEmail) {
       await sendPremiumUpgradeEmail(userEmail)
     }
 
-    console.log(`✅ Premium activated for user ${userId}`)
+    console.log(`Premium activated for user ${userId}`)
   }
 
   if (event.type === 'customer.subscription.deleted') {
     const subscription = event.data.object as Stripe.Subscription
-    // Optionally revoke premium on cancellation
     const customerId = subscription.customer as string
-    // You'd look up the user by stripe_customer_id if you store it
-    console.log(`Subscription cancelled for customer ${customerId}`)
+
+    try {
+      const customer = await stripe.customers.retrieve(customerId)
+      if (!customer.deleted && customer.email) {
+        const { error } = await supabase
+          .from('users')
+          .update({ is_premium: false })
+          .eq('email', customer.email)
+
+        if (error) {
+          console.error('Failed to revoke premium:', error)
+        } else {
+          console.log(`Premium revoked for customer ${customerId} (${customer.email})`)
+        }
+      }
+    } catch (err) {
+      console.error('Failed to process subscription cancellation:', err)
+    }
+  }
+
+  if (event.type === 'customer.subscription.updated') {
+    const subscription = event.data.object as Stripe.Subscription
+    const customerId = subscription.customer as string
+
+    if (subscription.status === 'past_due' || subscription.status === 'unpaid' || subscription.status === 'canceled') {
+      try {
+        const customer = await stripe.customers.retrieve(customerId)
+        if (!customer.deleted && customer.email) {
+          await supabase
+            .from('users')
+            .update({ is_premium: false })
+            .eq('email', customer.email)
+
+          console.log(`Premium revoked (${subscription.status}) for ${customer.email}`)
+        }
+      } catch (err) {
+        console.error('Failed to process subscription update:', err)
+      }
+    }
   }
 
   return NextResponse.json({ received: true })

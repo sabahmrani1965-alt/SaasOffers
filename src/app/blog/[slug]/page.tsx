@@ -206,12 +206,23 @@ function renderContent(content: string) {
   return elements
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 function inlineMarkdown(text: string): string {
-  return text
+  // Escape HTML first to prevent XSS, then apply markdown formatting
+  const escaped = escapeHtml(text)
+  return escaped
     .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code class="px-1.5 py-0.5 rounded-md bg-gray-100 text-violet-600 font-mono text-[0.875em]">$1</code>')
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener">$1</a>')
+    .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener noreferrer">$1</a>')
 }
 
 // Extract FAQ items from blog content (### heading followed by paragraph answer)
