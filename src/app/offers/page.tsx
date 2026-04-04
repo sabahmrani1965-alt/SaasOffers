@@ -171,13 +171,8 @@ export default async function OffersPage({ searchParams }: PageProps) {
           </nav>
         )}
 
-        {/* ── Search + Filter bar ── */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <SearchBar />
-        </div>
-
-        {/* ── Special filter pills ── */}
-        <div className="flex items-center gap-2 flex-wrap -mt-4">
+        {/* ── Special filter pills + Search ── */}
+        <div className="flex items-center gap-2 flex-wrap">
           {SPECIAL_FILTERS.map(f => {
             const Icon = f.icon
             const isActive = activeFilter === f.value
@@ -202,6 +197,9 @@ export default async function OffersPage({ searchParams }: PageProps) {
             )
           })}
           <span className="text-xs text-gray-600 ml-2">{filtered.length} results</span>
+          <div className="ml-auto">
+            <SearchBar />
+          </div>
         </div>
 
         {/* ── Deals Grid ── */}
