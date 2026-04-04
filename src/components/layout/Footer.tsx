@@ -11,6 +11,7 @@ const FOOTER_LINKS = {
   Company: [
     { label: 'About', href: '/about' },
     { label: 'Partner With Us', href: '/partners' },
+    { label: 'Affiliate Program', href: '/affiliates' },
     { label: 'Contact', href: 'mailto:ilyas@saasoffers.tech' },
   ],
   Legal: [
