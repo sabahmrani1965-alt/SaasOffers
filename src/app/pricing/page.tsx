@@ -67,7 +67,7 @@ const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
   name: 'Pricing — SaaSOffers',
-  description: 'Start free with 100+ startup deals or upgrade to Premium for $79/year and unlock 199+ deals, $500,000+ in credits, accelerators directory, and private founder community.',
+  description: 'Start free with 100+ startup deals or upgrade to Premium for $79/year and unlock 500+ deals, $500,000+ in credits, accelerators directory, and private founder community.',
   url: 'https://saasoffers.tech/pricing',
   publisher: {
     '@type': 'Organization',
@@ -78,7 +78,7 @@ const articleSchema = {
 
 /* ── Comparison table rows ── */
 const COMPARISON = [
-  { feature: 'Deals access',          free: '100+ free deals',  premium: '199+ premium deals' },
+  { feature: 'Deals access',          free: '100+ free deals',  premium: '500+ premium deals' },
   { feature: 'Potential savings',      free: '~$10,000+',       premium: '$500,000+' },
   { feature: 'Accelerators directory', free: false,              premium: true },
   { feature: 'Application tracker',    free: false,              premium: true },
@@ -97,7 +97,7 @@ const PREMIUM_GROUPS = [
     emoji: '\uD83D\uDD13',
     label: 'DEALS',
     features: [
-      '199+ premium deals fully unlocked',
+      '500+ premium deals fully unlocked',
       '$500,000+ in potential savings',
       'Highest-value credits unlocked',
       'New premium deals every week',

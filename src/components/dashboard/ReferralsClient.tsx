@@ -44,7 +44,7 @@ export function ReferralsClient() {
 
   const handleShareEmail = () => {
     const subject = encodeURIComponent('Get $30 off SaaSOffers Premium')
-    const body = encodeURIComponent(`Hey! I've been using SaaSOffers to save on SaaS tools for my startup.\n\nSign up with my referral link and get $30 off Premium ($49 instead of $79):\n${referralLink}\n\nIt gives you access to 199+ deals worth $500,000+ in credits.`)
+    const body = encodeURIComponent(`Hey! I've been using SaaSOffers to save on SaaS tools for my startup.\n\nSign up with my referral link and get $30 off Premium ($49 instead of $79):\n${referralLink}\n\nIt gives you access to 500+ deals worth $500,000+ in credits.`)
     window.open(`mailto:?subject=${subject}&body=${body}`)
   }
 

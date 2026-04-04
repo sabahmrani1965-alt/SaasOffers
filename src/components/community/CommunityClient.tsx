@@ -146,7 +146,7 @@ export function CommunityClient({ user, isPremium, userUpvotes: initialUpvotes }
           <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm mb-8 text-left max-w-md mx-auto">
             <h3 className="font-bold text-gray-900 mb-3">What you get:</h3>
             <ul className="space-y-2 text-sm text-gray-700">
-              {['Ask questions to experienced founders', 'Share your stack and get feedback', 'Find co-founders and early hires', 'Get advice on fundraising and growth', 'Access to all 199+ premium deals'].map(t => (
+              {['Ask questions to experienced founders', 'Share your stack and get feedback', 'Find co-founders and early hires', 'Get advice on fundraising and growth', 'Access to all 500+ premium deals'].map(t => (
                 <li key={t} className="flex items-start gap-2">
                   <Zap className="w-3.5 h-3.5 text-violet-500 flex-shrink-0 mt-0.5" />{t}
                 </li>

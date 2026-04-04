@@ -46,7 +46,7 @@ const BENEFITS = [
 ]
 
 const STATS = [
-  { value: '199+', label: 'SaaS deals listed' },
+  { value: '500+', label: 'SaaS deals listed' },
   { value: '2,000+', label: 'Active founders' },
   { value: '$500K+', label: 'Total deal value' },
   { value: '13', label: 'SEO blog articles' },
@@ -241,7 +241,7 @@ export default function PartnersPage() {
       {/* ── CURRENT PARTNERS ── */}
       <section className="py-16 px-4 sm:px-6 bg-gray-50 border-y border-gray-100">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-sm text-gray-500 font-semibold uppercase tracking-widest mb-6">Trusted by 199+ SaaS companies including</p>
+          <p className="text-sm text-gray-500 font-semibold uppercase tracking-widest mb-6">Trusted by 500+ SaaS companies including</p>
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-3">
             {['AWS', 'Google Cloud', 'OpenAI', 'Anthropic', 'Vercel', 'Supabase', 'Twilio', 'Segment', 'Datadog', 'HubSpot', 'Notion', 'Figma', 'Stripe', 'Chargebee', 'MongoDB', 'Mixpanel'].map(name => (
               <span key={name} className="text-gray-400 font-semibold text-sm">{name}</span>
@@ -489,7 +489,7 @@ export default function PartnersPage() {
               Ready to reach 2,000+ startup founders?
             </h2>
             <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-              Join 199+ SaaS companies that list their startup deals on SaaSOffers. Free to list. No strings attached.
+              Join 500+ SaaS companies that list their startup deals on SaaSOffers. Free to list. No strings attached.
             </p>
             <a
               href="#apply"

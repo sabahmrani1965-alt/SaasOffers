@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const STATS = [
   { value: '2,000+', label: 'Founders', icon: Users },
-  { value: '199+', label: 'Verified Deals', icon: Zap },
+  { value: '500+', label: 'Verified Deals', icon: Zap },
   { value: '$500,000+', label: 'In Credits', icon: DollarSign },
   { value: '13+', label: 'Years Building', icon: Clock },
 ]
@@ -273,7 +273,7 @@ export default function AboutPage() {
                 className="inline-flex items-center justify-center gap-2 bg-white text-violet-600 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-base"
               >
                 <Zap className="w-4 h-4" fill="currentColor" />
-                Browse 199+ Free Deals <ArrowRight className="w-4 h-4" />
+                Browse 500+ Free Deals <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/pricing"

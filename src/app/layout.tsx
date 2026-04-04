@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: 'SaaSOffers — $500,000+ in Startup Credits',
     template: '%s | SaaSOffers',
   },
-  description: 'Access exclusive SaaS deals and credits for your startup. AWS, Notion, Deel and 199+ tools — save thousands on your stack.',
+  description: 'Access exclusive SaaS deals and credits for your startup. AWS, Notion, Deel and 500+ tools — save thousands on your stack.',
   keywords: ['startup deals', 'saas discounts', 'startup credits', 'aws activate', 'startup perks'],
   openGraph: {
     type: 'website',

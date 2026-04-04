@@ -87,7 +87,7 @@ export default async function ComparePage() {
         {/* CTA */}
         <div className="mt-14 bg-gradient-to-br from-violet-600 to-pink-500 rounded-2xl p-10 text-center">
           <h2 className="text-2xl font-bold text-white mb-3">Can&apos;t find your comparison?</h2>
-          <p className="text-white/80 mb-6">Browse all 199+ deals and find the right tools for your startup.</p>
+          <p className="text-white/80 mb-6">Browse all 500+ deals and find the right tools for your startup.</p>
           <Link
             href="/offers"
             className="inline-flex items-center gap-2 bg-white text-violet-600 font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm"
