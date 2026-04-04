@@ -70,6 +70,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 // ── Markdown renderer ────────────────────────────────────────────────────────
+function parseHeadingId(raw: string): { text: string; id: string } {
+  // Support explicit {#custom-id} at end of heading
+  const match = raw.match(/^(.+?)\s*\{#([a-z0-9-]+)\}\s*$/)
+  if (match) {
+    return { text: match[1].trim(), id: match[2] }
+  }
+  // Auto-generate from text
+  const id = raw.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  return { text: raw, id }
+}
+
 function renderContent(content: string) {
   const lines = content.split('\n')
   const elements: React.ReactNode[] = []
@@ -97,23 +108,23 @@ function renderContent(content: string) {
     // Headings
     if (line.startsWith('# ')) {
       flushList()
-      const text = line.slice(2)
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      elements.push(<h2 key={i} id={id} className="text-3xl font-bold text-gray-900 mt-10 mb-4 leading-tight">{text}</h2>)
+      const raw = line.slice(2)
+      const { text, id } = parseHeadingId(raw)
+      elements.push(<h2 key={i} id={id} className="text-3xl font-bold text-gray-900 mt-10 mb-4 leading-tight scroll-mt-24">{text}</h2>)
       i++; continue
     }
     if (line.startsWith('## ')) {
       flushList()
-      const text = line.slice(3)
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      elements.push(<h3 key={i} id={id} className="text-2xl font-bold text-gray-900 mt-8 mb-3 leading-tight">{text}</h3>)
+      const raw = line.slice(3)
+      const { text, id } = parseHeadingId(raw)
+      elements.push(<h3 key={i} id={id} className="text-2xl font-bold text-gray-900 mt-8 mb-3 leading-tight scroll-mt-24">{text}</h3>)
       i++; continue
     }
     if (line.startsWith('### ')) {
       flushList()
-      const text = line.slice(4)
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      elements.push(<h4 key={i} id={id} className="text-xl font-semibold text-gray-900 mt-6 mb-2">{text}</h4>)
+      const raw = line.slice(4)
+      const { text, id } = parseHeadingId(raw)
+      elements.push(<h4 key={i} id={id} className="text-xl font-semibold text-gray-900 mt-6 mb-2 scroll-mt-24">{text}</h4>)
       i++; continue
     }
 
