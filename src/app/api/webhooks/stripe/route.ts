@@ -53,6 +53,46 @@ export async function POST(request: NextRequest) {
       await sendPremiumUpgradeEmail(userEmail)
     }
 
+    // Referral reward: if this user was referred, grant $30 credit to referrer
+    const { data: userProfile } = await supabase
+      .from('users')
+      .select('referred_by')
+      .eq('id', userId)
+      .single()
+
+    if (userProfile?.referred_by) {
+      // Find the pending referral and mark as rewarded
+      const { data: referral } = await supabase
+        .from('referrals')
+        .select('id, referrer_id')
+        .eq('referred_id', userId)
+        .eq('status', 'pending')
+        .single()
+
+      if (referral) {
+        // Grant $30 credit (3000 cents) to the referrer
+        const { data: referrerProfile } = await supabase
+          .from('users')
+          .select('referral_credits')
+          .eq('id', referral.referrer_id)
+          .single()
+
+        const currentCredits = referrerProfile?.referral_credits || 0
+        await supabase
+          .from('users')
+          .update({ referral_credits: currentCredits + 3000 })
+          .eq('id', referral.referrer_id)
+
+        // Update referral status
+        await supabase
+          .from('referrals')
+          .update({ status: 'rewarded', rewarded_at: new Date().toISOString() })
+          .eq('id', referral.id)
+
+        console.log(`Referral reward: $30 credit granted to referrer ${referral.referrer_id}`)
+      }
+    }
+
     console.log(`Premium activated for user ${userId}`)
   }
 

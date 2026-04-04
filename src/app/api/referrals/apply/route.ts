@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 
+// This endpoint is called at signup — it only TRACKS the referral (pending).
+// The $30 reward is granted later when the referred user upgrades to Premium (via Stripe webhook).
+
 export async function POST(req: Request) {
   try {
     const { referral_code, new_user_id, new_user_email } = await req.json()
@@ -38,43 +41,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Already referred' }, { status: 409 })
     }
 
-    // Create referral record
+    // Create referral record as pending (reward happens when they upgrade)
     await adminDb.from('referrals').insert({
       referrer_id: referrer.id,
       referral_code: referral_code.toUpperCase(),
       referred_email: new_user_email || null,
       referred_id: new_user_id,
-      status: 'rewarded',
-      completed_at: new Date().toISOString(),
-      rewarded_at: new Date().toISOString(),
+      status: 'pending',
     })
 
-    // Grant 30 days premium to both users
-    const now = new Date()
-    const thirtyDays = 30 * 24 * 60 * 60 * 1000
-
-    // Referrer: extend or set premium_until
-    const { data: referrerProfile } = await adminDb
-      .from('users')
-      .select('premium_until')
-      .eq('id', referrer.id)
-      .single()
-
-    const referrerBase = referrerProfile?.premium_until && new Date(referrerProfile.premium_until) > now
-      ? new Date(referrerProfile.premium_until)
-      : now
-    const referrerNewExpiry = new Date(referrerBase.getTime() + thirtyDays)
-
+    // Store who referred this user (used at checkout to apply $30 discount)
     await adminDb
       .from('users')
-      .update({ premium_until: referrerNewExpiry.toISOString() })
-      .eq('id', referrer.id)
-
-    // Invitee: set premium_until to 30 days from now
-    const inviteeExpiry = new Date(now.getTime() + thirtyDays)
-    await adminDb
-      .from('users')
-      .update({ premium_until: inviteeExpiry.toISOString() })
+      .update({ referred_by: referral_code.toUpperCase() })
       .eq('id', new_user_id)
 
     return NextResponse.json({ success: true })

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { createCheckoutSession } from '@/lib/stripe'
 
 async function handleCheckout() {
@@ -10,7 +11,17 @@ async function handleCheckout() {
     return NextResponse.redirect(new URL('/signup?plan=premium', process.env.NEXT_PUBLIC_SITE_URL || 'https://saasoffers.tech'))
   }
 
-  const session = await createCheckoutSession(user.id, user.email!)
+  // Check if user was referred (eligible for $30 off)
+  const adminDb = createAdminClient()
+  const { data: profile } = await adminDb
+    .from('users')
+    .select('referred_by')
+    .eq('id', user.id)
+    .single()
+
+  const hasReferral = !!profile?.referred_by
+
+  const session = await createCheckoutSession(user.id, user.email!, hasReferral)
 
   if (session.url) {
     return NextResponse.redirect(session.url)
@@ -37,7 +48,17 @@ export async function POST() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const session = await createCheckoutSession(user.id, user.email!)
+    // Check if user was referred (eligible for $30 off)
+    const adminDb = createAdminClient()
+    const { data: profile } = await adminDb
+      .from('users')
+      .select('referred_by')
+      .eq('id', user.id)
+      .single()
+
+    const hasReferral = !!profile?.referred_by
+
+    const session = await createCheckoutSession(user.id, user.email!, hasReferral)
 
     return NextResponse.json({ url: session.url })
   } catch (err: any) {

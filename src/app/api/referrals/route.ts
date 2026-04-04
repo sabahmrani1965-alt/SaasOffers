@@ -18,14 +18,15 @@ export async function GET() {
 
   const adminDb = createAdminClient()
 
-  // Get or create referral code
+  // Get or create referral code + get credits
   const { data: profile } = await adminDb
     .from('users')
-    .select('referral_code')
+    .select('referral_code, referral_credits')
     .eq('id', user.id)
     .single()
 
   let referralCode = profile?.referral_code
+  const credits = profile?.referral_credits || 0
 
   if (!referralCode) {
     referralCode = generateCode()
@@ -43,7 +44,7 @@ export async function GET() {
     .order('created_at', { ascending: false })
 
   const allReferrals = referrals || []
-  const completed = allReferrals.filter(r => r.status === 'completed' || r.status === 'rewarded')
+  const pending = allReferrals.filter(r => r.status === 'pending')
   const rewarded = allReferrals.filter(r => r.status === 'rewarded')
 
   // Mask emails in referral list
@@ -57,10 +58,12 @@ export async function GET() {
 
   return NextResponse.json({
     referral_code: referralCode,
+    credits, // in cents
     stats: {
       invited: allReferrals.length,
-      joined: completed.length,
-      months_earned: rewarded.length,
+      signed_up: pending.length + rewarded.length,
+      upgraded: rewarded.length,
+      total_earned: rewarded.length * 30, // in dollars
     },
     referrals: list,
   })
