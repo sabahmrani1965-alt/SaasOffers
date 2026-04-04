@@ -4,8 +4,9 @@ import { createClient } from '@/lib/supabase/server'
 import { SEED_DEALS } from '@/lib/seed-data'
 import { CATEGORIES, getCategoryBySlug } from '@/lib/categories'
 import { DealCard } from '@/components/offers/DealCard'
+import { SearchBar } from '@/components/offers/SearchBar'
 import { Deal } from '@/types'
-import { Zap, Star, Lock, FileText, Sparkles, ChevronRight } from 'lucide-react'
+import { Zap, Star, Lock, FileText, Sparkles, ChevronRight, Search } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Browse SaaS Deals & Startup Credits | SaaSOffers',
@@ -25,7 +26,7 @@ const SPECIAL_FILTERS = [
 const DEALS_PER_PAGE = 42
 
 interface PageProps {
-  searchParams: { filter?: string; category?: string; page?: string }
+  searchParams: { filter?: string; category?: string; page?: string; q?: string }
 }
 
 function isNew(deal: Deal) {
@@ -67,8 +68,19 @@ export default async function OffersPage({ searchParams }: PageProps) {
     filtered = filtered.filter(d => isNew(d))
   }
 
+  // Search filter
+  const searchQuery = (searchParams.q || '').trim().toLowerCase()
+  if (searchQuery) {
+    filtered = filtered.filter(d =>
+      d.name.toLowerCase().includes(searchQuery) ||
+      d.description?.toLowerCase().includes(searchQuery) ||
+      d.category?.toLowerCase().includes(searchQuery) ||
+      d.value_label?.toLowerCase().includes(searchQuery)
+    )
+  }
+
   const totalValue = allDeals.reduce((sum, d) => sum + d.value, 0)
-  const isFiltered = !!activeCategory || !!activeFilter
+  const isFiltered = !!activeCategory || !!activeFilter || !!searchQuery
 
   // Pagination
   const currentPage = Math.max(1, parseInt(searchParams.page || '1'))
@@ -78,6 +90,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
   // Build pagination URL helper
   function pageUrl(page: number) {
     const params = new URLSearchParams()
+    if (searchQuery) params.set('q', searchQuery)
     if (activeCategory) params.set('category', activeCategory)
     if (activeFilter) params.set('filter', activeFilter)
     if (page > 1) params.set('page', String(page))
@@ -158,8 +171,13 @@ export default async function OffersPage({ searchParams }: PageProps) {
           </nav>
         )}
 
+        {/* ── Search + Filter bar ── */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <SearchBar />
+        </div>
+
         {/* ── Special filter pills ── */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap -mt-4">
           {SPECIAL_FILTERS.map(f => {
             const Icon = f.icon
             const isActive = activeFilter === f.value
