@@ -219,7 +219,7 @@ function inlineMarkdown(text: string): string {
   const links: string[] = []
 
   // Extract external links [text](https://...)
-  let processed = text.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, (_m, label, url) => {
+  let processed = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_m, label, url) => {
     const safeLabel = escapeHtml(label)
     const safeUrl = escapeHtml(url)
     links.push(`<a href="${safeUrl}" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`)
@@ -227,7 +227,7 @@ function inlineMarkdown(text: string): string {
   })
 
   // Extract internal links [text](/path)
-  processed = processed.replace(/\[(.+?)\]\((\/[^\s)]+)\)/g, (_m, label, url) => {
+  processed = processed.replace(/\[([^\]]+)\]\((\/[^\s)]+)\)/g, (_m, label, url) => {
     const safeLabel = escapeHtml(label)
     const safeUrl = escapeHtml(url)
     links.push(`<a href="${safeUrl}" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700">${safeLabel}</a>`)
