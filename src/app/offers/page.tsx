@@ -22,7 +22,7 @@ const SPECIAL_FILTERS = [
   { label: 'Apply', value: 'apply', icon: FileText },
 ]
 
-const DEALS_PER_PAGE = 24
+const DEALS_PER_PAGE = 42
 
 interface PageProps {
   searchParams: { filter?: string; category?: string; page?: string }
