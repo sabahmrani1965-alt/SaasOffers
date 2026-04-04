@@ -226,8 +226,8 @@ function inlineMarkdown(text: string): string {
     return `%%LINK${links.length - 1}%%`
   })
 
-  // Extract internal links [text](/path)
-  processed = processed.replace(/\[([^\]]+)\]\((\/[^\s)]+)\)/g, (_m, label, url) => {
+  // Extract internal links [text](/path) and anchor links [text](#anchor)
+  processed = processed.replace(/\[([^\]]+)\]\(([/#][^\s)]+)\)/g, (_m, label, url) => {
     const safeLabel = escapeHtml(label)
     const safeUrl = escapeHtml(url)
     links.push(`<a href="${safeUrl}" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700">${safeLabel}</a>`)
