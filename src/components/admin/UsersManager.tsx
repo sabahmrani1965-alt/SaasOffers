@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Search, Crown, ToggleLeft, ToggleRight } from 'lucide-react'
+import { Search, Crown, ToggleLeft, ToggleRight, Gift } from 'lucide-react'
 import { Badge } from './Badge'
 import { Table, Thead, Th, Tbody, Tr, Td } from './AdminTable'
 
@@ -11,6 +11,8 @@ interface User {
   is_premium: boolean
   is_admin: boolean
   created_at: string
+  referral_credits: number
+  referrals: { invited: number; earned: number }
 }
 
 export function UsersManager() {
@@ -94,7 +96,8 @@ export function UsersManager() {
             <Thead>
               <Th>User</Th>
               <Th>Plan</Th>
-              <Th>Role</Th>
+              <Th>Referrals</Th>
+              <Th>Credits</Th>
               <Th>Joined</Th>
               <Th className="text-right">Actions</Th>
             </Thead>
@@ -118,10 +121,23 @@ export function UsersManager() {
                     </Badge>
                   </Td>
                   <Td>
-                    {user.is_admin ? (
-                      <Badge variant="violet">Admin</Badge>
+                    {user.referrals.invited > 0 ? (
+                      <div className="flex items-center gap-1.5">
+                        <Gift className="w-3.5 h-3.5 text-violet-400" />
+                        <span className="text-gray-200 text-xs font-medium">{user.referrals.invited} invited</span>
+                        {user.referrals.earned > 0 && (
+                          <span className="text-emerald-400 text-xs font-medium">· {user.referrals.earned} paid</span>
+                        )}
+                      </div>
                     ) : (
-                      <span className="text-gray-600 text-xs">User</span>
+                      <span className="text-gray-600 text-xs">—</span>
+                    )}
+                  </Td>
+                  <Td>
+                    {(user.referral_credits || 0) > 0 ? (
+                      <span className="text-emerald-400 text-xs font-bold">${((user.referral_credits || 0) / 100).toFixed(0)}</span>
+                    ) : (
+                      <span className="text-gray-600 text-xs">$0</span>
                     )}
                   </Td>
                   <Td>

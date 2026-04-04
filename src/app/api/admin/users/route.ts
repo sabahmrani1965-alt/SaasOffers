@@ -30,6 +30,28 @@ export async function GET(req: NextRequest) {
   if (plan === 'free') query = query.eq('is_premium', false)
 
   const { data, count, error } = await query
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ data, count, page, limit })
+  if (error) return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 })
+
+  // Fetch referral counts for all users on this page
+  const userIds = (data || []).map((u: any) => u.id)
+  const { data: referralCounts } = await db
+    .from('referrals')
+    .select('referrer_id, status')
+    .in('referrer_id', userIds)
+
+  // Build referral stats per user
+  const referralStats: Record<string, { invited: number; earned: number }> = {}
+  ;(referralCounts || []).forEach((r: any) => {
+    if (!referralStats[r.referrer_id]) referralStats[r.referrer_id] = { invited: 0, earned: 0 }
+    referralStats[r.referrer_id].invited++
+    if (r.status === 'rewarded') referralStats[r.referrer_id].earned++
+  })
+
+  // Attach referral stats to users
+  const enriched = (data || []).map((u: any) => ({
+    ...u,
+    referrals: referralStats[u.id] || { invited: 0, earned: 0 },
+  }))
+
+  return NextResponse.json({ data: enriched, count, page, limit })
 }
