@@ -212,18 +212,43 @@ function escapeHtml(str: string): string {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
 }
 
 function inlineMarkdown(text: string): string {
-  // Escape HTML first to prevent XSS, then apply markdown formatting
-  const escaped = escapeHtml(text)
-  return escaped
+  // Extract markdown links first, replace with placeholders, then escape HTML, then restore links
+  const links: string[] = []
+
+  // Extract external links [text](https://...)
+  let processed = text.replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, (_m, label, url) => {
+    const safeLabel = escapeHtml(label)
+    const safeUrl = escapeHtml(url)
+    links.push(`<a href="${safeUrl}" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener noreferrer">${safeLabel}</a>`)
+    return `%%LINK${links.length - 1}%%`
+  })
+
+  // Extract internal links [text](/path)
+  processed = processed.replace(/\[(.+?)\]\((\/[^\s)]+)\)/g, (_m, label, url) => {
+    const safeLabel = escapeHtml(label)
+    const safeUrl = escapeHtml(url)
+    links.push(`<a href="${safeUrl}" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700">${safeLabel}</a>`)
+    return `%%LINK${links.length - 1}%%`
+  })
+
+  // Now escape HTML on the remaining text
+  processed = escapeHtml(processed)
+
+  // Apply markdown formatting
+  processed = processed
     .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code class="px-1.5 py-0.5 rounded-md bg-gray-100 text-violet-600 font-mono text-[0.875em]">$1</code>')
-    .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700" target="_blank" rel="noopener noreferrer">$1</a>')
-    .replace(/\[(.+?)\]\((\/[^\s)]+)\)/g, '<a href="$2" class="text-violet-600 font-medium underline underline-offset-2 hover:text-violet-700">$1</a>')
+
+  // Restore links
+  links.forEach((link, i) => {
+    processed = processed.replace(`%%LINK${i}%%`, link)
+  })
+
+  return processed
 }
 
 // Extract FAQ items from blog content (### heading followed by paragraph answer)
