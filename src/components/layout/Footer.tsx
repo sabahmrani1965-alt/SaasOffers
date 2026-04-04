@@ -6,6 +6,7 @@ const FOOTER_LINKS = {
     { label: 'Browse Offers', href: '/offers' },
     { label: 'Compare Tools', href: '/compare' },
     { label: 'Pricing', href: '/pricing' },
+    { label: 'Community', href: '/community' },
     { label: 'Blog', href: '/blog' },
   ],
   Company: [
