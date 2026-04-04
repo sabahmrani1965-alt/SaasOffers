@@ -71,10 +71,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ── Markdown renderer ────────────────────────────────────────────────────────
 function parseHeadingId(raw: string): { text: string; id: string } {
-  // Support explicit {#custom-id} at end of heading
-  const match = raw.match(/^(.+?)\s*\{#([a-z0-9-]+)\}\s*$/)
+  // Support explicit {#custom-id} anywhere in heading
+  const match = raw.match(/\{#([a-z0-9-]+)\}/)
   if (match) {
-    return { text: match[1].trim(), id: match[2] }
+    const text = raw.replace(/\s*\{#[a-z0-9-]+\}\s*/g, ' ').trim()
+    return { text, id: match[1] }
   }
   // Auto-generate from text
   const id = raw.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
