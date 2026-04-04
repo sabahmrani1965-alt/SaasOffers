@@ -22,8 +22,10 @@ const SPECIAL_FILTERS = [
   { label: 'Apply', value: 'apply', icon: FileText },
 ]
 
+const DEALS_PER_PAGE = 24
+
 interface PageProps {
-  searchParams: { filter?: string; category?: string }
+  searchParams: { filter?: string; category?: string; page?: string }
 }
 
 function isNew(deal: Deal) {
@@ -67,6 +69,21 @@ export default async function OffersPage({ searchParams }: PageProps) {
 
   const totalValue = allDeals.reduce((sum, d) => sum + d.value, 0)
   const isFiltered = !!activeCategory || !!activeFilter
+
+  // Pagination
+  const currentPage = Math.max(1, parseInt(searchParams.page || '1'))
+  const totalPages = Math.ceil(filtered.length / DEALS_PER_PAGE)
+  const paginatedDeals = filtered.slice((currentPage - 1) * DEALS_PER_PAGE, currentPage * DEALS_PER_PAGE)
+
+  // Build pagination URL helper
+  function pageUrl(page: number) {
+    const params = new URLSearchParams()
+    if (activeCategory) params.set('category', activeCategory)
+    if (activeFilter) params.set('filter', activeFilter)
+    if (page > 1) params.set('page', String(page))
+    const qs = params.toString()
+    return `/offers${qs ? `?${qs}` : ''}`
+  }
 
   // Deal counts per category
   const categoryCounts = CATEGORIES.map(cat => ({
@@ -181,9 +198,63 @@ export default async function OffersPage({ searchParams }: PageProps) {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map(deal => <DealCard key={deal.slug} deal={deal} />)}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {paginatedDeals.map(deal => <DealCard key={deal.slug} deal={deal} />)}
+            </div>
+
+            {/* ── Pagination ── */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 pt-8">
+                {currentPage > 1 && (
+                  <Link
+                    href={pageUrl(currentPage - 1)}
+                    className="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-gray-300 hover:text-gray-900 transition-all shadow-sm"
+                  >
+                    Previous
+                  </Link>
+                )}
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter(p => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 2)
+                  .reduce<(number | string)[]>((acc, p, i, arr) => {
+                    if (i > 0 && p - (arr[i - 1] as number) > 1) acc.push('...')
+                    acc.push(p)
+                    return acc
+                  }, [])
+                  .map((p, i) =>
+                    typeof p === 'string' ? (
+                      <span key={`dots-${i}`} className="px-2 text-gray-400 text-sm">...</span>
+                    ) : (
+                      <Link
+                        key={p}
+                        href={pageUrl(p)}
+                        className={`w-10 h-10 rounded-xl text-sm font-semibold flex items-center justify-center transition-all shadow-sm ${
+                          p === currentPage
+                            ? 'bg-violet-600 text-white shadow-violet-200'
+                            : 'bg-white border border-gray-200 text-gray-700 hover:border-gray-300 hover:text-gray-900'
+                        }`}
+                      >
+                        {p}
+                      </Link>
+                    )
+                  )}
+
+                {currentPage < totalPages && (
+                  <Link
+                    href={pageUrl(currentPage + 1)}
+                    className="px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-700 bg-white border border-gray-200 hover:border-gray-300 hover:text-gray-900 transition-all shadow-sm"
+                  >
+                    Next
+                  </Link>
+                )}
+              </div>
+            )}
+
+            <p className="text-center text-xs text-gray-500">
+              Showing {(currentPage - 1) * DEALS_PER_PAGE + 1}–{Math.min(currentPage * DEALS_PER_PAGE, filtered.length)} of {filtered.length} deals
+            </p>
+          </>
         )}
       </div>
     </div>
