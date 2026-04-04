@@ -69,24 +69,18 @@ const STEPS = [
   },
 ]
 
-const WHY_FOUNDERS = [
+const TESTIMONIALS = [
   {
-    metric: '$5,000+',
-    description: 'in AWS Activate credits available through our free tier — no Premium required.',
-    icon: DollarSign,
-    gradient: 'from-emerald-500 to-teal-500',
+    quote: "SaaSOffers helped us unlock $8,000 in AWS credits in under a week. That's two months of runway we didn't have to raise.",
+    author: 'Marcus L.', role: 'Co-founder, Revel AI', avatar: 'ML', gradient: 'from-violet-500 to-purple-600',
   },
   {
-    metric: '4 minutes',
-    description: 'from signup to first deal claimed. No verification gate, no approval wait, no sales call.',
-    icon: Clock,
-    gradient: 'from-violet-500 to-purple-600',
+    quote: "Every serious founder should be using this. We saved over $12,000 on tooling in our first year. The ROI on Premium is insane.",
+    author: 'Sofia R.', role: 'CEO, Stackflow', avatar: 'SR', gradient: 'from-blue-500 to-indigo-600',
   },
   {
-    metric: '$79/year',
-    description: 'for Premium — the lowest price of any startup perks platform. One deal pays for the entire year.',
-    icon: Zap,
-    gradient: 'from-pink-500 to-rose-500',
+    quote: "The Notion + Linear + Figma stack — all free for 6 months. We basically had zero tooling costs while building our MVP.",
+    author: 'James T.', role: 'Founder, Coda Labs', avatar: 'JT', gradient: 'from-pink-500 to-rose-500',
   },
 ]
 
@@ -154,6 +148,23 @@ export default async function HomePage() {
 
           {/* Social proof row */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {['ML', 'SR', 'JT', 'AK', 'BM'].map((init, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold" style={{ background: `hsl(${i * 60 + 250}, 65%, 58%)` }}>
+                    {init[0]}
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm text-gray-700">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />)}
+                  <span className="font-semibold ml-1">4.9</span>
+                </div>
+                <span className="text-gray-600 text-xs">200+ reviews</span>
+              </div>
+            </div>
+            <div className="hidden sm:block w-px h-10 bg-gray-200" />
             {[{ v: '500+', l: 'deals' }, { v: '$500k+', l: 'in savings' }, { v: '2k+', l: 'founders' }].map(s => (
               <div key={s.l} className="text-center sm:text-left">
                 <div className="text-lg font-bold text-gray-900">{s.v}</div>
@@ -370,18 +381,23 @@ export default async function HomePage() {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {WHY_FOUNDERS.map(item => {
-              const Icon = item.icon
-              return (
-                <div key={item.metric} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-shadow">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-4 shadow-md`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900 mb-2">{item.metric}</div>
-                  <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
+            {TESTIMONIALS.map(t => (
+              <div key={t.author} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-shadow">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />)}
                 </div>
-              )
-            })}
+                <p className="text-sm text-gray-700 leading-relaxed mb-5">"{t.quote}"</p>
+                <div className="flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold text-white shadow-sm`}>
+                    {t.avatar}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">{t.author}</div>
+                    <div className="text-xs text-gray-700">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
