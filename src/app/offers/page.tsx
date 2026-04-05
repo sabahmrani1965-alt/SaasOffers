@@ -72,10 +72,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
   const searchQuery = (searchParams.q || '').trim().toLowerCase()
   if (searchQuery) {
     filtered = filtered.filter(d =>
-      d.name.toLowerCase().includes(searchQuery) ||
-      d.description?.toLowerCase().includes(searchQuery) ||
-      d.category?.toLowerCase().includes(searchQuery) ||
-      d.value_label?.toLowerCase().includes(searchQuery)
+      d.name.toLowerCase().includes(searchQuery)
     )
   }
 
