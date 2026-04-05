@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
     )
     const { data: profile } = await adminClient
       .from('users')
-      .select('is_admin')
+      .select('is_admin, admin_role')
       .eq('id', user.id)
       .single()
 
@@ -54,6 +54,17 @@ export async function updateSession(request: NextRequest) {
       const url = request.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
+    }
+
+    // Restrict offers-only admins to /admin/offers
+    const adminRole = profile.admin_role || 'super'
+    if (adminRole === 'offers') {
+      const path = request.nextUrl.pathname
+      if (path !== '/admin/offers' && !path.startsWith('/admin/offers/')) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/admin/offers'
+        return NextResponse.redirect(url)
+      }
     }
   }
 

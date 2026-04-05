@@ -9,17 +9,22 @@ import {
 } from 'lucide-react'
 
 const NAV = [
-  { href: '/admin', label: 'Overview', icon: LayoutDashboard, exact: true },
-  { href: '/admin/offers', label: 'Offers', icon: Package },
-  { href: '/admin/comparisons', label: 'Comparisons', icon: ArrowLeftRight },
-  { href: '/admin/applications', label: 'Applications', icon: ClipboardList },
-  { href: '/admin/blog', label: 'Blog', icon: FileText },
-  { href: '/admin/users', label: 'Users', icon: Users },
-  { href: '/admin/settings', label: 'Settings', icon: Settings },
+  { href: '/admin', label: 'Overview', icon: LayoutDashboard, exact: true, roles: ['super'] },
+  { href: '/admin/offers', label: 'Offers', icon: Package, roles: ['super', 'offers'] },
+  { href: '/admin/comparisons', label: 'Comparisons', icon: ArrowLeftRight, roles: ['super'] },
+  { href: '/admin/applications', label: 'Applications', icon: ClipboardList, roles: ['super'] },
+  { href: '/admin/blog', label: 'Blog', icon: FileText, roles: ['super'] },
+  { href: '/admin/users', label: 'Users', icon: Users, roles: ['super'] },
+  { href: '/admin/settings', label: 'Settings', icon: Settings, roles: ['super'] },
 ]
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  role: string
+}
+
+export function AdminSidebar({ role }: AdminSidebarProps) {
   const pathname = usePathname()
+  const visibleNav = NAV.filter(item => item.roles.includes(role))
 
   return (
     <aside className="w-60 flex-shrink-0 bg-gray-950 border-r border-white/5 flex flex-col">
@@ -39,7 +44,7 @@ export function AdminSidebar() {
       {/* Nav */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         <p className="text-[10px] font-semibold text-gray-600 uppercase tracking-widest px-3 mb-2">Menu</p>
-        {NAV.map(item => {
+        {visibleNav.map(item => {
           const Icon = item.icon
           const active = item.exact ? pathname === item.href : pathname.startsWith(item.href)
           return (

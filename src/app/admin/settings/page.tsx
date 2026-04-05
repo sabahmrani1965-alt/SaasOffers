@@ -7,7 +7,7 @@ import { Shield, Database, Key, Globe, RefreshCw } from 'lucide-react'
 export const dynamic = 'force-dynamic'
 
 export default async function AdminSettingsPage() {
-  const user = await requireAdmin()
+  const { user } = await requireAdmin()
   const db = createAdminClient()
 
   const [

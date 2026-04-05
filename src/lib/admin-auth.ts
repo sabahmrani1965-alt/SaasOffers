@@ -10,10 +10,10 @@ export async function requireAdmin() {
   const admin = createAdminClient()
   const { data: profile } = await admin
     .from('users')
-    .select('is_admin')
+    .select('is_admin, admin_role')
     .eq('id', user.id)
     .single()
 
   if (!profile?.is_admin) redirect('/')
-  return user
+  return { user, role: profile.admin_role || 'super' }
 }
